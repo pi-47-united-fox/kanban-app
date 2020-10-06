@@ -1,0 +1,270 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700&display=swap");
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+body, textarea, button {
+  font-family: 'Poppins', sans-serif;
+  background-image: url("../assets/img/asfalt-light.png");
+  background-color: #5bab40;
+}
+
+header nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #519839;
+  padding: 10px;
+}
+
+header nav .logo {
+  font-weight: 700;
+  font-size: 1.5rem;
+  text-decoration: line-through;
+}
+
+header nav .nav-items {
+  color: white;
+  display: flex;
+  align-items: center;
+  margin: 0 1rem;
+}
+
+header nav .nav-items a {
+  color: white;
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+header nav .nav-items .avatar {
+  width: 30px;
+  border-radius: 50%;
+}
+
+main {
+  width: 100%;
+}
+
+main .board {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+}
+
+main .board .board-sec_blank {
+  background-color: rgba(235, 236, 240, 0.9) !important;
+}
+
+main .board .board-sec_blank__add {
+  padding: 10px;
+  text-align: center;
+  border: dashed #898989 0.1rem;
+  border-radius: 5px;
+}
+
+main .board .board-sec {
+  border-radius: 5px;
+  background-color: #ebecf0;
+  width: 280px;
+  padding: 5px;
+  margin: 20px;
+  font-weight: 400;
+  height: fit-content;
+  max-height: 85vh;
+  overflow: auto;
+}
+
+main .board .board-sec::-webkit-scrollbar {
+  width: 0.3em;
+  height: 0.3em;
+}
+
+main .board .board-sec::-webkit-scrollbar-thumb {
+  background: #519839;
+}
+
+main .board .board-sec::-webkit-scrollbar-track {
+  background: #a8cc9c;
+}
+
+main .board .board-sec {
+  scrollbar-face-color: #519839;
+  scrollbar-track-color: #a8cc9c;
+}
+
+main .board .board-sec__title {
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+  padding: 0 15px 5px;
+}
+
+main .board .board-sec__title a {
+  color: #898989;
+}
+
+main .board .board-sec__card {
+  border-radius: 5px;
+  background-color: white;
+  margin-bottom: 10px;
+  padding: 10px 7px;
+  box-shadow: 0px 1px 7px 0px #d4d4d4;
+}
+
+main .board .board-sec__card:hover {
+  background-color: #f7f7f7;
+  cursor: pointer;
+}
+
+main .board .board-sec__card:hover .card__main > i {
+  visibility: visible;
+}
+
+main .board .board-sec__card .card__main {
+  padding-bottom: 20px;
+  line-height: 1.5rem;
+  font-weight: 400;
+  font-size: 0.9rem;
+  color: #343434;
+  position: relative;
+}
+
+main .board .board-sec__card .card__main i {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 0.3rem;
+  border-radius: 5px;
+  visibility: hidden;
+}
+
+main .board .board-sec__card .card__main i:hover {
+  background-color: #dcdee5;
+}
+
+main .board .board-sec__card .card__main p {
+  max-width: 96%;
+}
+
+main .board .board-sec__card .card__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: small;
+  color: #898989;
+}
+
+main .board .board-sec__card .card__bottom__author {
+  padding: 5px;
+  box-sizing: content-box;
+  border-radius: 5px;
+}
+
+main .board .board-sec__card .card__bottom__author:hover {
+  background-color: #dcdee5;
+}
+
+main .board .board-sec__bottom {
+  border-radius: 5px;
+  padding: 10px 7px;
+  color: #898989;
+  font-weight: 200;
+}
+
+main .board .board-sec__bottom:hover {
+  background-color: #dcdee5;
+}
+
+main .board .board-sec__bottom-add {
+  margin-bottom: 5px;
+}
+
+main .board .board-sec__bottom-add .fas {
+  transform: scale(1.2);
+  margin-left: 15px;
+}
+
+main .board .board-sec__bottom-add button {
+  color: white;
+  padding: 5px 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  background-color: #519839;
+}
+
+main .board .board-sec__bottom-add button:hover {
+  background-color: #3d732b;
+  cursor: pointer;
+}
+
+main .board .board-sec__add-card form textarea {
+  border-radius: 5px;
+  background-color: white;
+  margin-bottom: 10px;
+  padding: 10px 7px;
+  box-shadow: 0px 1px 7px 0px #d4d4d4;
+  font-size: 1rem;
+  border: none;
+  outline: none;
+  resize: none;
+  height: 5rem;
+  min-width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+main .board .board-sec__add-card form textarea:active, main .board .board-sec__add-card form textarea:focus {
+  border: none;
+  outline: none;
+}
+/*# sourceMappingURL=main.css.map */
