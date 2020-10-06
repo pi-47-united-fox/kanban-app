@@ -32,7 +32,8 @@ _Request Body_
 
 {
     "title" : "Mengerjakan Kanban APP",
-    "category" : "Backlog",    
+    "category" : "Backlog",
+    "UserId" : 1   
 }
 
 
@@ -47,6 +48,7 @@ _Response (201)_
     "category" : "Backlog",
     "createdAt": "2020-03-20T07:15:12.149Z",
     "updatedAt": "2020-03-20T07:15:12.149Z",
+    "UserId" : 1
   },
   
 
@@ -89,6 +91,7 @@ _Response (201)_
     "category" : "Backlog",
     "createdAt": "2020-03-20T07:15:12.149Z",
     "updatedAt": "2020-03-20T07:15:12.149Z",
+    "UserId" : 1
   },
   {
     "id" : 2,
@@ -96,6 +99,7 @@ _Response (201)_
     "category" : "todo",
     "createdAt": "2020-03-20T07:15:12.149Z",
     "updatedAt": "2020-03-20T07:15:12.149Z",
+    "UserId" : 1
   },
   {
     "id" : 3,
@@ -103,6 +107,7 @@ _Response (201)_
     "category" : "doing",
     "createdAt": "2020-03-20T07:15:12.149Z",
     "updatedAt": "2020-03-20T07:15:12.149Z",
+    "UserId" : 1
   },
   {
     "id" : 4,
@@ -110,6 +115,7 @@ _Response (201)_
     "category" : "done",
     "createdAt": "2020-03-20T07:15:12.149Z",
     "updatedAt": "2020-03-20T07:15:12.149Z",
+    "UserId" : 1
   },
 ]
 
@@ -151,6 +157,7 @@ _Response (200)_
     "category" : "done",
     "createdAt": "2020-03-20T07:15:12.149Z",
     "updatedAt": "2020-03-20T07:15:12.149Z",
+    "UserId" : 1
   },
 
 ```
@@ -198,6 +205,7 @@ _Response (200)_
     "category" : "done",
     "createdAt": "2020-03-20T07:15:12.149Z",
     "updatedAt": "2020-03-20T07:15:12.149Z",
+    "UserId" : 1
   },
   
 
@@ -251,6 +259,7 @@ _Response (200)_
     "category" : "todo",
     "createdAt": "2020-03-20T07:15:12.149Z",
     "updatedAt": "2020-03-20T07:15:12.149Z",
+    "UserId" : 1
   },
   
 
