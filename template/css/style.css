@@ -2,10 +2,10 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background: #f9f9f9;
 }
-.bgc {
-}
+
 .logo {
-  height: 5%;
+  height: 50px;
+  padding: 10px;
 }
 .navbar {
   display: flex;
@@ -99,5 +99,61 @@ body {
   color: #898989;
 }
 
-.info-status {
+.icon {
+  display: flex;
+  justify-content: flex-end;
+  padding: 5px;
+  margin-top: 20px;
+
 }
+
+
+.login{
+  background-color: #7453b8;
+  display: flex;
+  width: 350px;
+  height: 400px;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 20px;
+  
+}
+
+.text{
+  border-radius: 10px;
+  width: 300px;
+  padding: 10px;
+  border-width: 0;
+  
+}
+
+.label{
+  color: white;
+  font-size: large;
+}
+
+.input{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+
+.btn-login{
+margin-top: 30px;
+background-color: white;
+width: 50%;
+height: 40px;
+border-radius: 10px;
+border-width: 0;
+}
+
+
+.login-box{
+  margin-top: 40px;
+  }
+
+  .scroll{
+    overflow: scroll;
+    height: 500px;
+  }

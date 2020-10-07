@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>KANBAN</title>
+
+</head>
+
+<body>
+
+    <div id="app">
+        {{ message }}
+    </div>
+    <div class="container">
+        <div class="navbar">
+            <div>
+                <img class="logo" src="./asset/logo.svg" alt="">
+            </div>
+            <div> log out</div>
+        </div>
+    </div>
+    <div style="background: #F9F9F9;"></div>
+    <div class="container">
+        <div class="bgc">
+            <div class="board">
+                <div class="header">
+                    <div class="he-l"></div>
+                    <div class="he-r">
+                        <button class="add-btn" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Add
+                            Project</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- --------------------------------------->
+
+            <div class="info"></div>
+            <div>
+                <div class="grid">
+                    <div class="grid-task">
+                        <div class=" task-title">Backlog</div>
+                        <div class="scroll">
+                            <div class="card">
+                                <div>Create Server Kanban </div>
+                                <div style="margin-top: 10px;">
+                                    <div class="info">reyand@oneil </div>
+                                    <div class="info">18 Ocktober 2020, 09.10 </div>
+                                </div>
+                                <div class="icon">
+                                    <img style="height: 20px;" src="./asset/edit.svg" alt="">
+                                    <img onclick="" role="button" style="height: 20px; margin-left: 10px;"
+                                        src="./asset/delete.svg" alt="">
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div>Create Server Kanban </div>
+                                <div style="margin-top: 10px;">
+                                    <div class="info">reyand@oneil </div>
+                                    <div class="info">18 Ocktober 2020, 09.10 </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div>Create Server Kanban </div>
+                                <div style="margin-top: 10px;">
+                                    <div class="info">reyand@oneil </div>
+                                    <div class="info">18 Ocktober 2020, 09.10 </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div>Create Server Kanban </div>
+                                <div style="margin-top: 10px;">
+                                    <div class="info">reyand@oneil </div>
+                                    <div class="info">18 Ocktober 2020, 09.10 </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div>Create Server Kanban </div>
+                                <div style="margin-top: 10px;">
+                                    <div class="info">reyand@oneil </div>
+                                    <div class="info">18 Ocktober 2020, 09.10 </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ------------------- -->
+
+
+                    <div class="grid-task">
+                        <div class=" task-title">Todo</div>
+                        <div class="card">
+                            <div>Create Server Kanban </div>
+                            <div style="margin-top: 10px;">
+                                <div class="info">reyand@oneil </div>
+                                <div class="info">18 Ocktober 2020, 09.10 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ------------------- -->
+
+
+                    <div class="grid-task">
+                        <div class=" task-title">Doing</div>
+                        <div class="card">
+                            <div>Create Server Kanban </div>
+                            <div style="margin-top: 10px;">
+                                <!-- <div class="info-status">hight</div> -->
+                                <div class="info">reyand@oneil </div>
+                                <div class="info">18 Ocktober 2020, 09.10 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ------------------- -->
+
+
+                    <div class="grid-task">
+                        <div class=" task-title">Done</div>
+                        <div class="card">
+                            <div>Create Server Kanban </div>
+                            <div style="margin-top: 10px;">
+                                <div class="info">reyand@oneil </div>
+                                <div class="info">18 Ocktober 2020, 09.10 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- LOGIN PAGE -->
+
+    <center>
+        <div id="login" class="login">
+            <img class="logo" src="./asset/logo-white.svg" alt="">
+
+            <div id="login-box" class="login-box">
+                <div class="input">
+                    <label for="" class="label">Email</label>
+                    <input type="email" class="text" placeholder="Your Email">
+                </div>
+                <div class="input">
+                    <label for="" class="label">Password</label>
+                    <input type="email" class="text" placeholder="*******">
+                </div>
+                <div>
+                    <button class="btn-login">login</button>
+                </div>
+                <div class="container">
+                    <a href="" style="color: white;">don't have account ?</a>
+                </div>
+            </div>
+        </div>
+    </center>
+
+    <br>
+    <!-- REGISTER PAGE -->
+    <center>
+        <div id="login" class="login">
+            <img class="logo" src="./asset//logo-white.svg" alt="">
+
+            <div id="login-box" class="login-box">
+                <div class="input">
+                    <label for="" class="label">Email</label>
+                    <input type="email" class="text" placeholder="Your Email">
+                </div>
+                <div class="input">
+                    <label for="" class="label">Password</label>
+                    <input type="email" class="text" placeholder="*******">
+                </div>
+                <div>
+                    <button class="btn-login">Register</button>
+                </div>
+            </div>
+        </div>
+    </center>
+
+
+    <!-- ADD MODAL -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Create Task</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Title:</label>
+                            <input type="text" class="form-control" id="title">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="">Close</button>
+                    <button type="submit" class="btn btn-primary" id="btn-addTodo"
+                        style="background-color: #7453b8;">Create Task</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+        </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+        </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+        </script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="./main.js"></script>
+</body>
+
+</html>
