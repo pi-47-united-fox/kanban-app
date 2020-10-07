@@ -1,0 +1,59 @@
+#main-kanban {
+	display: flex;
+	justify-content: center;
+}
+
+.task-box {
+	height: 500px;
+	width: 350px;
+	margin: 50px 20px;
+	padding: 10px;
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+}
+
+.task-category {
+	height: 40px;
+}
+
+.task-list {
+	height: 450px;
+    overflow-y: scroll;
+}
+
+/* .task-add {
+    align-self: flex-end;
+} */
+
+.task-add div input,
+.task-add div a {
+	font-size: 0.6em;
+	height: 25px;
+}
+.task-add div input {
+	width: 240px;
+}
+
+.task {
+	margin: 10px 3px;
+	border-radius: 10px;
+	padding: 10px;
+	font-size: 0.8em;
+}
+
+.title {
+	text-align: center;
+}
+
+.task-detail {
+    font-size: 0.7em;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.task-options i {
+    width: 200px;
+    height: 200px;
+}
