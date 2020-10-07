@@ -1,47 +1,24 @@
-const { User } = require('../models/index')
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
-const secret = process.env.SECRET
+const { Task } = require('../models')
 
-
-class UserController {
-    static register(req, res, next) {
-        let user = {
-            email: req.body.email,
-            password: req.body.password
-        }
-        User.create(user)
-            .then(data => {
-                return res.status(201).json(data)
-            })
-            .catch(err => {
-                return next(err)
-            })
-    }
-    static login(req, res, next) {
-        console.log('ini login controller');
-        let user = {
-            email: req.body.email,
-            password: req.body.password
-        }
-        console.log(user);
-        User.findOne({
-            where: {
-                email: user.email
+const authorization = (req, res, next) => {
+    console.log(req.userData);
+    const { id } = req.params
+    const userData = req.userData.id
+    Task.findByPk(id)
+        .then(data => {
+            if (data && data.userId === userData) {
+                next()
+            } else {
+                return res.status(400).json({
+                    message: 'Data not found'
+                })
             }
         })
-            .then(data => {
-                if (data && bcrypt.compareSync(user.password, data.password)) {
-                    var access_token = jwt.sign({ id: data.id, email: data.email }, secret)
-                    res.status(200).json({ access_token })
-                } else {
-                    res.status(400).json({ message: 'Invalid email or password' })
-                }
-            })
-            .catch(err => {
-                return next(err)
-            })
-    }
+        .catch(err => {
+            res.status(500).json({ message: err.message })
+        })
+
 }
 
-module.exports = UserController
+module.exports = authorization
+
