@@ -36,7 +36,8 @@ This Kanban App has:
   2. GET /tasks/:id
   3. POST /tasks/
   4. PUT /tasks/:id
-  5. DELETE /tasks/:id
+  5. PATCH /tasks/:id
+  6. DELETE /tasks/:id
 
 &nbsp;
 
@@ -183,6 +184,8 @@ description:
 
 Request:
 - headers: access_token (string)
+- params: 
+  - id: "integer" required
 - body: 
 ```json 
 {
@@ -214,18 +217,54 @@ Response:
 }
 ```
 
-### 5. DELETE /todos/:id
+## 5. PATCH /tasks/:id
+description: 
+  edit/update only tasks category from user logedin in organization who have a permissions
+
+Request:
+- headers: access_token (string)
+- params: 
+  - id: "integer" required
+- body: 
+```json 
+{
+    "category": "Todo"
+}
+```
+
+Response:
+
+- status: 201
+- body:
+
+```json
+{
+    "id": 5,
+    "title": "Learn Python From YT",
+    "category": "Todo",
+    "UserId": 3,
+    "updatedAt": "2020-10-06T12:58:45.482Z",
+    "createdAt": "2020-10-06T12:58:45.482Z"
+}
+```
+- status: 403
+- body:
+```json
+{
+  "message": "You dont have access"
+}
+```
+
+### 6. DELETE /todos/:id
 description:
   delete tasks by (task) id
 
 Request:
-
 - headers: access_token (string)
 - params: 
   - id: "integer" required
 
 Response:
-
 - status: 200
 - body:
 

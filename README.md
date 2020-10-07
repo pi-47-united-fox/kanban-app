@@ -16,7 +16,8 @@ Bagus Rizki Setiawan - United-Fox
   2. GET /tasks/:id
   3. POST /tasks/
   4. PUT /tasks/:id
-  5. DELETE /tasks/:id
+  5. PATCH /tasks/:id
+  6. DELETE /tasks/:id
 ```
 See the RestAPI-doc.md for complete documentation
 

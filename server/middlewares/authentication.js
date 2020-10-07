@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
         where: {email: encoded.email}
     }).then((result) => {
         if (result) {
-            // console.log ('success authen')
+            console.log ('success authen')
             req.userData = encoded
             // console.log (encoded)
             next()

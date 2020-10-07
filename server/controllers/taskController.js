@@ -1,19 +1,22 @@
-const {Task} = require('../models');
+const {Task, User} = require('../models');
 
 class TaskController {
     // Success
     static getAllTasksC (req, res, next) {
-        Task.findAll()
-            .then((result) => {
+        // console.log ('masuk get all')
+        Task.findAll({include: User})
+        .then((result) => {
                 res.status(200).json(result)
-            }).catch((err) => {
-                next(err)
-            });
+        }).catch((err) => {
+            next(err)
+        });
     }
 
     // Success
     static findTaskC (req, res, next) {
-        Task.findByPk(req.params.id).then((result) => {
+        Task.findByPk(req.params.id, {
+            include: User
+        }).then((result) => {
             res.status(200).json(result)
         }).catch((err) => {
             next(err)
@@ -35,7 +38,7 @@ class TaskController {
 
     // SUCCESS
     static editTaskC (req, res, next) {
-        console.log ('masuk', req.params.id)
+        // console.log ('masuk', req.params.id)
         Task.update({
             title: req.body.title,
             category: req.body.category
@@ -51,9 +54,25 @@ class TaskController {
         });
     }
 
+    // SUCCESS
+    static editTaskCategoyC (req, res, next) {
+        Task.update({
+            category: req.body.category
+        },{
+            where: {
+                id: req.params.id
+            },
+            returning: true
+        }).then((result) => {
+            res.status(200).json(result[1][0])
+        }).catch((err) => {
+            next(err)
+        });
+    }
+
     // Success
     static deleteTaskC (req, res, next) {
-        console.log ('masuk delete')
+        // console.log ('masuk delete')
         Task.destroy({
             where: {
                 id: req.params.id
