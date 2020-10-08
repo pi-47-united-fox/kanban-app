@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BanBen - Kanban App</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+
+    <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+</head>
+
+<body>
+    <div id="app">
+        <!-- NAVIGATION --------------------------------------------------------------------------------------->
+        <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="#">
+                    <img src="./img/logo.png" width="133" height="40">
+                </a>
+
+                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+                    data-target="navbarBasicExample">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+
+            <div id="navbarBasicExample" class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item">
+                        Home
+                    </a>
+                </div>
+
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <div class="buttons">
+                            <a class="button is-primary">
+                                <strong>Sign up</strong>
+                            </a>
+                            <a class="button is-light">
+                                Log in
+                            </a>
+                            <a class="button is-dark">
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!------------------------------------------------>
+        <section class="container is-widescreen">
+            <section id="header-home">
+                <div>
+                    <h1 class="title">
+                        Welcome Back!
+                    </h1>
+                    <p class="subtitle">
+                        Don't <em>mben-mben.</em> <strong>Do it now!</strong>
+                    </p>
+                </div>
+            </section>
+            <section id="kanban-board">
+                <div class="columns">
+                    <!--- Backlog -->
+                    <div class="column" id="board-group">
+                        <div class="panel is-warning">
+                            <div id="kanban-title">
+                                <p class="panel-heading">
+                                    <i class="fas fa-thumbtack"></i>
+                                    Backlog
+                                </p>
+                            </div>
+                            <div class="kanban-tasks">
+                                <!--- EMPTY TASK-->
+                                <div class="kanban-task">
+                                    <div class="panel-block">
+                                        <div class="notification">
+                                            <div class="content">
+                                                <i class="fas fa-bed"></i>
+                                                <strong>This task is empty.</strong> Start adding a new task!
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--- END OF EMPTY TASK-->
+                                <div class="kanban-task">
+                                    <div class="panel-block">
+                                        <div class="notification is-warning is-light">
+                                            <div class="content">
+                                                <div class="post-references">
+                                                    <div>
+                                                        <p><i class="fas fa-user"> </i>
+                                                            <strong>alimulkhakim@gmail.com</strong></p>
+                                                    </div>
+                                                    <div>
+                                                        <p><i class="far fa-calendar-alt"> </i> 17 Oct, 2020</p>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    Primar lorem ipsum dolor sit amet, consectetur
+                                                    adipiscing elit lorem ipsum dolor. <strong>Pellentesque risus
+                                                        mi</strong>,
+                                                    tempus
+                                                    quis placerat
+                                                    ut, porta nec nulla.
+                                                </div>
+                                            </div>
+                                            <div class="actions">
+                                                <span class="icon has-text-info">
+                                                    <i class="fas fa-edit"></i>
+                                                </span>
+                                                <span class="icon has-text-success">
+                                                    <i class="fas fa-thumbs-up"></i>
+                                                </span>
+                                                <span class="icon has-text-warning">
+                                                    <i class="fas fa-thumbs-down"></i>
+                                                </span>
+                                                <span class="icon has-text-danger">
+                                                    <i class="fas fa-trash"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="kanban-task">
+                                    <div class="panel-block">
+                                        <div class="notification is-warning is-light">
+                                            <div class="content">
+                                                <div class="post-references">
+                                                    <div>
+                                                        <p><i class="fas fa-user"> </i>
+                                                            <strong>alimulkhakim@gmail.com</strong></p>
+                                                    </div>
+                                                    <div>
+                                                        <p><i class="far fa-calendar-alt"> </i> 17 Oct, 2020</p>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    Primar lorem ipsum dolor sit amet, consectetur
+                                                    adipiscing elit lorem ipsum dolor. <strong>Pellentesque risus
+                                                        mi</strong>,
+                                                    tempus
+                                                    quis placerat
+                                                    ut, porta nec nulla.
+                                                </div>
+                                            </div>
+                                            <div class="actions">
+                                                <span class="icon has-text-info">
+                                                    <i class="fas fa-edit"></i>
+                                                </span>
+                                                <span class="icon has-text-success">
+                                                    <i class="fas fa-thumbs-up"></i>
+                                                </span>
+                                                <span class="icon has-text-warning">
+                                                    <i class="fas fa-thumbs-down"></i>
+                                                </span>
+                                                <span class="icon has-text-danger">
+                                                    <i class="fas fa-trash"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="btn-add-task">
+                                <div class="panel-block">
+                                    <button class="button is-warning is-outlined is-fullwidth">
+                                        <i class="fas fa-plus-circle"> </i>
+                                        Add new Task
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--- Backlog End  -->
+                    <!--- Todo -->
+                    <div class="column" id="board-group">
+                        <div class="panel is-success">
+                            <div id="kanban-title">
+                                <p class="panel-heading">
+                                    <i class="fas fa-check-double"></i>
+                                    Todo
+                                </p>
+                            </div>
+                            <div class="kanban-tasks">
+                                <!--- EMPTY TASK-->
+                                <div class="kanban-task">
+                                    <div class="panel-block">
+                                        <div class="notification">
+                                            <div class="content">
+                                                <i class="fas fa-bed"></i>
+                                                <strong>This task is empty.</strong> Start adding a new task!
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--- END OF EMPTY TASK-->
+                                <div class="kanban-task">
+                                    <div class="panel-block">
+                                        <div class="notification is-success is-light">
+                                            <div class="content">
+                                                <div class="post-references">
+                                                    <div>
+                                                        <p><i class="fas fa-user"> </i>
+                                                            <strong>alimulkhakim@gmail.com</strong></p>
+                                                    </div>
+                                                    <div>
+                                                        <p><i class="far fa-calendar-alt"> </i> 17 Oct, 2020</p>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    Primar lorem ipsum dolor sit amet, consectetur
+                                                    adipiscing elit lorem ipsum dolor. <strong>Pellentesque risus
+                                                        mi</strong>,
+                                                    tempus
+                                                    quis placerat
+                                                    ut, porta nec nulla.
+                                                </div>
+                                            </div>
+                                            <div class="actions">
+                                                <span class="icon has-text-info">
+                                                    <i class="fas fa-edit"></i>
+                                                </span>
+                                                <span class="icon has-text-success">
+                                                    <i class="fas fa-thumbs-up"></i>
+                                                </span>
+                                                <span class="icon has-text-warning">
+                                                    <i class="fas fa-thumbs-down"></i>
+                                                </span>
+                                                <span class="icon has-text-danger">
+                                                    <i class="fas fa-trash"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="kanban-task">
+                                    <div class="panel-block">
+                                        <div class="notification is-success is-light">
+                                            <div class="content">
+                                                <div class="post-references">
+                                                    <div>
+                                                        <p><i class="fas fa-user"> </i>
+                                                            <strong>alimulkhakim@gmail.com</strong></p>
+                                                    </div>
+                                                    <div>
+                                                        <p><i class="far fa-calendar-alt"> </i> 17 Oct, 2020</p>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    Primar lorem ipsum dolor sit amet, consectetur
+                                                    adipiscing elit lorem ipsum dolor. <strong>Pellentesque risus
+                                                        mi</strong>,
+                                                    tempus
+                                                    quis placerat
+                                                    ut, porta nec nulla.
+                                                </div>
+                                            </div>
+                                            <div class="actions">
+                                                <span class="icon has-text-info">
+                                                    <i class="fas fa-edit"></i>
+                                                </span>
+                                                <span class="icon has-text-success">
+                                                    <i class="fas fa-thumbs-up"></i>
+                                                </span>
+                                                <span class="icon has-text-warning">
+                                                    <i class="fas fa-thumbs-down"></i>
+                                                </span>
+                                                <span class="icon has-text-danger">
+                                                    <i class="fas fa-trash"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="btn-add-task">
+                                <div class="panel-block">
+                                    <button class="button is-success is-outlined is-fullwidth">
+                                        <i class="fas fa-plus-circle"> </i>
+                                        Add new Task
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--- Todo End  -->
+                    <!--- Doing -->
+                    <div class="column" id="board-group">
+                        <div class="panel is-link">
+                            <div id="kanban-title">
+                                <p class="panel-heading">
+                                    <i class="fas fa-rocket"></i>
+                                    Doing
+                                </p>
+                            </div>
+                            <div class="kanban-tasks">
+                                <!--- EMPTY TASK-->
+                                <div class="kanban-task">
+                                    <div class="panel-block">
+                                        <div class="notification">
+                                            <div class="content">
+                                                <i class="fas fa-bed"></i>
+                                                <strong>This task is empty.</strong> Start adding a new task!
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--- END OF EMPTY TASK-->
+                                <div class="kanban-task">
+                                    <div class="panel-block">
+                                        <div class="notification is-link is-light">
+                                            <div class="content">
+                                                <div class="post-references">
+                                                    <div>
+                                                        <p><i class="fas fa-user"> </i>
+                                                            <strong>alimulkhakim@gmail.com</strong></p>
+                                                    </div>
+                                                    <div>
+                                                        <p><i class="far fa-calendar-alt"> </i> 17 Oct, 2020</p>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    Primar lorem ipsum dolor sit amet, consectetur
+                                                    adipiscing elit lorem ipsum dolor. <strong>Pellentesque risus
+                                                        mi</strong>,
+                                                    tempus
+                                                    quis placerat
+                                                    ut, porta nec nulla.
+                                                </div>
+                                            </div>
+                                            <div class="actions">
+                                                <span class="icon has-text-info">
+                                                    <i class="fas fa-edit"></i>
+                                                </span>
+                                                <span class="icon has-text-success">
+                                                    <i class="fas fa-thumbs-up"></i>
+                                                </span>
+                                                <span class="icon has-text-warning">
+                                                    <i class="fas fa-thumbs-down"></i>
+                                                </span>
+                                                <span class="icon has-text-danger">
+                                                    <i class="fas fa-trash"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="kanban-task">
+                                    <div class="panel-block">
+                                        <div class="notification is-link is-light">
+                                            <div class="content">
+                                                <div class="post-references">
+                                                    <div>
+                                                        <p><i class="fas fa-user"> </i>
+                                                            <strong>alimulkhakim@gmail.com</strong></p>
+                                                    </div>
+                                                    <div>
+                                                        <p><i class="far fa-calendar-alt"> </i> 17 Oct, 2020</p>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    Primar lorem ipsum dolor sit amet, consectetur
+                                                    adipiscing elit lorem ipsum dolor. <strong>Pellentesque risus
+                                                        mi</strong>,
+                                                    tempus
+                                                    quis placerat
+                                                    ut, porta nec nulla.
+                                                </div>
+                                            </div>
+                                            <div class="actions">
+                                                <span class="icon has-text-info">
+                                                    <i class="fas fa-edit"></i>
+                                                </span>
+                                                <span class="icon has-text-success">
+                                                    <i class="fas fa-thumbs-up"></i>
+                                                </span>
+                                                <span class="icon has-text-warning">
+                                                    <i class="fas fa-thumbs-down"></i>
+                                                </span>
+                                                <span class="icon has-text-danger">
+                                                    <i class="fas fa-trash"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="btn-add-task">
+                                <div class="panel-block">
+                                    <button class="button is-link is-outlined is-fullwidth">
+                                        <i class="fas fa-plus-circle"> </i>
+                                        <p> Add new Task</p>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--- Doing End  -->
+                    <!--- Completed -->
+                    <div class="column" id="board-group">
+                        <div class="panel is-primary">
+                            <div id="kanban-title">
+                                <p class="panel-heading">
+                                    <i class="fas fa-award"></i>
+                                    Completed
+                                </p>
+                            </div>
+                            <div class="kanban-tasks">
+                                <!--- EMPTY TASK-->
+                                <div class="kanban-task">
+                                    <div class="panel-block">
+                                        <div class="notification">
+                                            <div class="content">
+                                                <i class="fas fa-bed"></i>
+                                                <strong>This task is empty.</strong> Start adding a new task!
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--- END OF EMPTY TASK-->
+                                <div class="kanban-task">
+                                    <div class="panel-block">
+                                        <div class="notification is-primary is-light">
+                                            <div class="content">
+                                                <div class="post-references">
+                                                    <div>
+                                                        <p><i class="fas fa-user"> </i>
+                                                            <strong>alimulkhakim@gmail.com</strong></p>
+                                                    </div>
+                                                    <div>
+                                                        <p><i class="far fa-calendar-alt"> </i> 17 Oct, 2020</p>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    Primar lorem ipsum dolor sit amet, consectetur
+                                                    adipiscing elit lorem ipsum dolor. <strong>Pellentesque risus
+                                                        mi</strong>,
+                                                    tempus
+                                                    quis placerat
+                                                    ut, porta nec nulla.
+                                                </div>
+                                            </div>
+                                            <div class="actions">
+                                                <span class="icon has-text-info">
+                                                    <i class="fas fa-edit"></i>
+                                                </span>
+                                                <span class="icon has-text-success">
+                                                    <i class="fas fa-thumbs-up"></i>
+                                                </span>
+                                                <span class="icon has-text-warning">
+                                                    <i class="fas fa-thumbs-down"></i>
+                                                </span>
+                                                <span class="icon has-text-danger">
+                                                    <i class="fas fa-trash"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="kanban-task">
+                                    <div class="panel-block">
+                                        <div class="notification is-primary is-light">
+                                            <div class="content">
+                                                <div class="post-references">
+                                                    <div>
+                                                        <p><i class="fas fa-user"> </i>
+                                                            <strong>alimulkhakim@gmail.com</strong></p>
+                                                    </div>
+                                                    <div>
+                                                        <p><i class="far fa-calendar-alt"> </i> 17 Oct, 2020</p>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    Primar lorem ipsum dolor sit amet, consectetur
+                                                    adipiscing elit lorem ipsum dolor. <strong>Pellentesque risus
+                                                        mi</strong>,
+                                                    tempus
+                                                    quis placerat
+                                                    ut, porta nec nulla.
+                                                </div>
+                                            </div>
+                                            <div class="actions">
+                                                <span class="icon has-text-info">
+                                                    <i class="fas fa-edit"></i>
+                                                </span>
+                                                <span class="icon has-text-success">
+                                                    <i class="fas fa-thumbs-up"></i>
+                                                </span>
+                                                <span class="icon has-text-warning">
+                                                    <i class="fas fa-thumbs-down"></i>
+                                                </span>
+                                                <span class="icon has-text-danger">
+                                                    <i class="fas fa-trash"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="btn-add-task">
+                                <div class="panel-block">
+                                    <button class="button is-primary is-outlined is-fullwidth">
+                                        <i class="fas fa-plus-circle"> </i>
+                                        <p> Add new Task</p>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--- Completed End  -->
+                </div>
+            </section>
+            <!---END OF BOARD-->
+
+            <!---REGISTER -->
+            <div class="columns">
+                <div class="column is-three-fifths is-offset-one-fifth">
+                    <div class="box">
+                        <div class="logo-form">
+                            <img src="./img/benban.png" alt="">
+                        </div>
+                        <h1 class="title">Sign Up</h1>
+                        <form>
+                            <div class="field">
+                                <p class="control has-icons-left has-icons-right">
+                                    <input class="input" type="email" placeholder="Email">
+                                    <span class="icon is-small is-left">
+                                        <i class="fas fa-envelope"></i>
+                                    </span>
+                                    <span class="icon is-small is-right">
+                                        <i class="fas fa-check"></i>
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="field">
+                                <p class="control has-icons-left">
+                                    <input class="input" type="password" placeholder="Password">
+                                    <span class="icon is-small is-left">
+                                        <i class="fas fa-lock"></i>
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="field is-grouped">
+                                <p class="control">
+                                    <a class="button is-primary">
+                                        Sign Up
+                                    </a>
+                                </p>
+                                <p class="control">
+                                    <a class="button is-light">
+                                        Cancel
+                                    </a>
+                                </p>
+                                <!-- button google sign in -->
+                                <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!---SIGNIN -->
+            <div class="columns">
+                <div class="column is-three-fifths is-offset-one-fifth">
+                    <div class="box">
+                        <div class="logo-form">
+                            <img src="./img/benban.png" alt="">
+                        </div>
+                        <h1 class="title">Login</h1>
+                        <form>
+                            <div class="field">
+                                <p class="control has-icons-left has-icons-right">
+                                    <input v-model="emailLogin" class="input" type="email" placeholder="Email">
+                                    <span class="icon is-small is-left">
+                                        <i class="fas fa-envelope"></i>
+                                    </span>
+                                    <span class="icon is-small is-right">
+                                        <i class="fas fa-check"></i>
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="field">
+                                <p class="control has-icons-left">
+                                    <input v-model="passwordLogin" class="input" type="password" placeholder="Password">
+                                    <span class="icon is-small is-left">
+                                        <i class="fas fa-lock"></i>
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="field is-grouped">
+                                <p class="control">
+                                    <a v-on:click="login" class="button is-primary">
+                                        Sign In
+                                    </a>
+                                </p>
+                                <p class="control">
+                                    <a class="button is-light">
+                                        Cancel
+                                    </a>
+                                </p>
+                                <!-- button google sign in -->
+                                <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!---ADD TASK -->
+            <div class="columns">
+                <div class="column is-three-fifths is-offset-one-fifth">
+                    <div class="box">
+                        <h1 class="title">Add a new task</h1>
+                        <form>
+                            <div class="field">
+                                <div class="select">
+                                    <select>
+                                        <option value="Backlog">Backlog</option>
+                                        <option value="Todo">Todo</option>
+                                        <option value="Doing">Doing</option>
+                                        <option value="Completed">Completed</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <p class="control has-icons-left">
+                                    <textarea class="textarea" placeholder="Start a new mission here.."></textarea>
+                                </p>
+                            </div>
+                            <div class="field is-grouped">
+                                <p class="control">
+                                    <a class="button is-primary">
+                                        Sign In
+                                    </a>
+                                </p>
+                                <p class="control">
+                                    <a class="button is-light">
+                                        Cancel
+                                    </a>
+                                </p>
+                                <!-- button google sign in -->
+                                <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./main.js"></script>
+
+</body>
+
+</html>
