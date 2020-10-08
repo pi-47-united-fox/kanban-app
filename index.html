@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+<body >
+    <div id="app"> 
+        <!-- NAVBAR -->
+        <div v-if="page==`home`" class="home-page">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container "> 
+                    <a class="navbar-brand" href="#">Kanban</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                    </button>
+                
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Separated link</a>
+                            </div>
+                            </li>
+                            <li class="nav-item">
+                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                            </li>
+                        </ul> 
+                        <button class="btn btn-primary my-2 my-sm-0 mr-4" @click="fetchData()">Reload Data</button>
+                        <button class="btn btn-outline-success my-2 my-sm-0" @click="addCategoryform = !addCategoryform"type="submit">Add Category</button>
+                        <button class="btn btn-danger my-2 my-sm-0" @click="logout()">logout</button>
+                    </div> 
+                </div>
+            </nav> 
+            
+            <div v-if="addCategoryform" class="pop-up">
+                <div class="card pop-up-form">
+                    <div class="card-header">
+                    Add New Category
+                    </div>
+                    <div class="card-body">
+                    <h5 class="card-title"></h5>
+                    <form class="form ">
+                        <div class="form-row mx-sm-3 mb-2 ">
+                            <label for="form-category-name" class="mr-3">New Category Name</label>
+                            <input type="text" name="form-category-name" id="">
+                        </div><br>
+                        <div class=""> 
+                            <a href="#" class="btn btn-primary mr-2">Add Category</a>
+                            <a href="#" @onClick="addCategoryform = !addCategoryform" class="btn btn-danger">Cancel</a>
+                        </div>
+                    </form> 
+                    </div>
+                </div> 
+            </div>
+
+            <div class="board-container"> 
+                <div class="board ">
+                    <div v-for="category in categories" class="card category-container">  
+                        <div class="card-header">
+                            {{category.name}}
+                            <a class="btn btn-primary float-right">+</a>
+                        </div> 
+ 
+                        <div class="card-body" id="task-container">  
+                            <div v-if="task.CategoryId == category.id" v-for="task in tasks" class="card task-container mb-2">  
+                                <div  class="card-header text-center">
+                                    <b> {{task.title}} </b>
+                                </div>  
+                                <div class="card-body">  
+                                    <p>{{task.description}}</p> 
+                                    <p>{{ users[users.findIndex(el => el.id === task.UserId)].email }}</p>
+                                    
+                                </div>
+                            </div>  
+                        </div>
+                    </div>   
+                </div>
+            </div> 
+        </div>
+
+        <div v-if="page==`login`"  class="login-page">
+            
+
+            <div id="login">
+                <h3 class="text-center text-white pt-5">Kanban - Project Management</h3>
+                <div class="container">
+                    <div id="login-row" class="row justify-content-center align-items-center">
+                        <div id="login-column" class="col-md-6">
+                            <div id="login-box" class="col-md-12">
+                                <form id="login-form"  @submit.prevent=""  class="form" action="" method="post">
+                                    <h3 class="text-center text-info">Login</h3>
+                                    <div class="form-group">
+                                        <label for="email" class="text-info">Username:</label><br>
+                                        <input v-model="emailFormLogin" type="email" name="email" id="email-login" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password" class="text-info">Password:</label><br>
+                                        <input v-model="passwordFormLogin" type="text" name="password" id="password-login" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="remember-me" class="text-info"><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
+                                        <input type="submit" class="btn btn-info btn-md" @click="login" value="Login">
+                                    </div>
+                                    <div id="register-link" class="text-right">
+                                        <a href="#" class="text-info">Register here</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="./main.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+</html>
