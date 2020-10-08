@@ -18,10 +18,6 @@ module.exports = (sequelize, DataTypes) => {
   User.init({
     email: {
       type: DataTypes.STRING,
-      validate: {
-        isEmail: true,
-        notEmpty: true
-      },
       unique: {
         args: true,
         msg: 'Email required'
@@ -30,12 +26,13 @@ module.exports = (sequelize, DataTypes) => {
     },
     password: {
       type: DataTypes.STRING,
-      validate: {
-        notEmpty: true
-      }
     },
 
-    organization: DataTypes.STRING
+    organization: {
+      type:DataTypes.STRING,
+      defaultValue: 'Hactiv8'
+
+    }
   }, {
     sequelize,
     modelName: 'User',

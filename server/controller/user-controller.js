@@ -1,7 +1,8 @@
 const { User } = require('../models')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const SECRET = process.argv.env
+const SECRET = process.env.SECRET
+;
 class UserController {
     static register(req, res, next) {
         let user = {
@@ -28,6 +29,7 @@ class UserController {
             }
         })
             .then(data => {
+                console.log(SECRET);
                 if (data && bcrypt.compareSync(user.password, data.password)) {
                     let access_token = jwt.sign({ id: data.id, email: data.email }, SECRET)
                     return res.status(200).json({ access_token })

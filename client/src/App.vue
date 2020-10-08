@@ -1,38 +1,76 @@
 <template>
-  <div id="app">
-    <navbar />
-    <Home />
-    <LoginPage />
-    <RegisterPage />
+  <div>
+    <Navbar v-if="isLogin" @emitLogout="logout"></Navbar>
+    <Home v-if="isLogin"></Home>
+    <LoginPage
+      v-if="!isLogin && !isRegister"
+      @emitLogin="login"
+      @emitMovePageRegister="mrp"
+    >
+    </LoginPage>
+    <RegisterPage
+      v-if="!isLogin && isRegister"
+      @emitRegister="register"
+      @emitMovePageLogin="mlp"
+    >
+    </RegisterPage>
   </div>
 </template>
 
 <script>
-import navbar from "./components/navbar";
+import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
-import LoginPage from "./pages/Login";
-import RegisterPage from "./pages/Register";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 
 export default {
   name: "Kanban",
   components: {
-    navbar,
+    Navbar,
     Home,
     LoginPage,
     RegisterPage,
+  },
+  data() {
+    return {
+      isLogin: false,
+      isRegister: false,
+    };
+  },
+  methods: {
+    mlp(){
+      console.log('ini mlp');
+      this.isLogin = false;
+      this.isRegister = false;
+    },
+    logout() {
+      this.isLogin = false;
+    },
+    login() {
+      this.isLogin = true;
+    },
+    register() {
+      this.isLogin = false;
+      this.isRegister = false;
+    },
+    mrp() {
+      console.log("ini di App MTR page");
+      this.isRegister = true;
+      this.isLogin = false;
+    },
+  },
+  created() {
+    console.log("jalanin created");
+    if (localStorage.access_token) {
+      this.isLogin = true;
+    } else {
+      this.isLogin = false;
+    }
   },
 };
 </script>
 
 <style>
-/* #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-} */
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background: #f9f9f9;
@@ -95,7 +133,9 @@ body {
   align-items: center;
   justify-content: center;
 }
-
+a {
+  cursor: pointer;
+}
 .icon-btn {
   height: 20px;
   margin-right: 10px;
@@ -170,6 +210,7 @@ body {
 }
 
 .login {
+  margin-top: 80px;
   background-color: #7453b8;
   display: flex;
   width: 350px;
@@ -177,6 +218,8 @@ body {
   flex-direction: column;
   padding: 20px;
   border-radius: 20px;
+  box-shadow: 10px 14px 36px -4px rgba(184, 184, 184, 1);
+
 }
 
 .text {
@@ -219,4 +262,3 @@ body {
   display: none;
 }
 </style>
-

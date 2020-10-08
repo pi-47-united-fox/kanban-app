@@ -5,7 +5,7 @@
         <div>
           <img class="logo" src="../assets/logo.svg" alt="" />
         </div>
-        <button class="logout-btn">Logout</button>
+        <button class="logout-btn" @click="logOut">Logout</button>
       </div>
     </div>
   </div>
@@ -14,11 +14,19 @@
 <script>
 export default {
   name: "Navbar",
+  methods: {
+    logOut() {
+      localStorage.clear();
+      this.$emit("emitLogout");
+
+
+    },
+  },
 };
 </script>
 
 <style scope>
-.navbar {
+.container {
   position: sticky;
 }
 </style>

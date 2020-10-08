@@ -4,11 +4,12 @@ const app = express()
 const PORT = 4000
 const errHendler = require('./middleware/errHendler')
 const router = require('./router')
+const cors = require('cors')
 
+app.use(cors())
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-
 app.use('/', router)
 app.use(errHendler)
 

@@ -19,58 +19,54 @@
           <div class="grid">
             <div class="grid-task">
               <div class="task-title">Backlog</div>
-              <div class="scroll">
-                <card />
-                <card />
-                <card />
-                <card />
-                <card />
-                <card />
-
-              </div>
+              <div class="scroll"></div>
             </div>
             <!-- ------------------- -->
             <div class="grid-task">
               <div class="task-title">Todo</div>
-              <div class="scroll">
-                <card />
-              </div>
+              <div class="scroll"></div>
             </div>
             <!-- ------------------- -->
             <div class="grid-task">
               <div class="task-title">Doing</div>
-              <div class="scroll">
-                <card />
-              </div>
+              <div class="scroll"></div>
             </div>
             <!-- ------------------- -->
             <div class="grid-task">
               <div class="task-title">Done</div>
               <div class="scroll">
-                <card />
+                <Card></Card>
+                <Card></Card>
+                <Card></Card>
+                <Card></Card>
+                <Card></Card>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <addMmodal v-show="isAddModalVisible" @close="closeModal" />
   </div>
 </template>
 
 <script>
-import card from "../components/card";
-import addMmodal from "../components/add-modal";
+// import Category from "../components/category";
+import Card from "../components/card";
 export default {
   name: "Home",
   components: {
-    card,
-    addMmodal,
+    Card,
+    // Category,
   },
   data() {
     return {
       isAddModalVisible: false,
+      task: [],
+      // category: [BackLog, Todo, Doing, Done],
     };
+  },
+  created() {
+    console.log(`Masuk created home`);
   },
   methods: {
     showModal() {
@@ -79,10 +75,21 @@ export default {
     closeModal() {
       this.isAddModalVisible = false;
     },
+    fetchTask() {
+      axios({
+        method: "GET",
+        url: "http://localhost:4000/tasks",
+      })
+        .then(({ data }) => {
+          this.task = data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
 };
 </script>
 
 <style>
-
 </style>
