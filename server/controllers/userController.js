@@ -5,12 +5,13 @@ const { comparePassword } = require('../helper/bcrypt')
 class UserController {
     static async register(req, res, next) {
         const { name, email, password } = req.body
-
+        console.log(req.body)
         try {
             let user = await User.findOne({ where: { email: email } })
             if (user) {
-                res.status(400).json({
-                    message: 'email has been register !'
+                throw ({
+                    message: 'email has been register !',
+                    statusCode: 400
                 })
             } else {
 
@@ -31,7 +32,7 @@ class UserController {
             }
         }
         catch (err) {
-            res.status(500).json(err)
+            next(err)
         }
     }
     static async login(req, res, next) {
@@ -40,16 +41,18 @@ class UserController {
         try {
             let user = await User.findOne({ where: { email: email } })
             if (!user) {
-                res.status(400).json({
+                throw ({
                     name: "unauthorized",
-                    message: 'wrong email/password !'
+                    message: 'wrong email/password !',
+                    statusCode: 400
                 })
             } else {
                 let pass = comparePassword(password, user.password)
                 if (!pass) {
-                    res.status(400).json({
+                    throw ({
                         name: "unauthorized",
-                        message: 'wrong email/password !'
+                        message: 'wrong email/password !',
+                        statusCode: 400
                     })
                 } else {
                     let access_token = signToken({
@@ -62,7 +65,7 @@ class UserController {
                 }
             }
         } catch (err) {
-            res.status(500).json(err)
+            next(err)
         }
 
 

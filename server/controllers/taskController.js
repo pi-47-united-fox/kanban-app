@@ -6,11 +6,11 @@ class TaskController {
 
         console.log(req.userData)
         try {
-            res.send(req.userData.name)
+
             let task = await Task.findAll({ include: [User] })
             res.status(200).json(task)
         } catch (err) {
-            res.status(500).json(err)
+            next(err)
         }
 
     }
@@ -23,21 +23,29 @@ class TaskController {
                 category: category,
                 UserId: req.userData.id
             }
-            let data = await Task.create(value)
-            res.status(200).json(data)
+            let data = await Task.create(value, { include: [User] })
+            res.status(200).json({
+                id: data.id,
+                title: data.title,
+                category: data.category,
+                createdAt: data.createdAt,
+                User: {
+                    name: req.userData.name
+                }
+            })
 
         } catch (err) {
-            res.status(500).json(err)
+            next(err)
         }
     }
     static async getTaskById(req, res, next) {
         try {
-            let data = await Task.findByPk(req.params.id)
+            let data = await Task.findByPk(req.params.id, { include: [User] })
             res.status(200).json(data)
 
         }
         catch (err) {
-            res.status(500).json(err)
+            next(err)
         }
 
     }
@@ -53,10 +61,11 @@ class TaskController {
                 where: { id: req.params.id },
                 returning: true
             })
+
             res.status(200).json(data[1][0])
 
         } catch (err) {
-            res.status(500).json(err)
+            next(err)
         }
 
     }
@@ -70,7 +79,7 @@ class TaskController {
             res.status(200).json(data[1][0])
 
         } catch (err) {
-            res.status(500).json(err)
+            next(err)
         }
 
     }
@@ -91,7 +100,7 @@ class TaskController {
                 })
             }
         } catch (err) {
-            res.status(500).json(err)
+            next(err)
         }
     }
 }
