@@ -10,8 +10,8 @@ This app has the following features:
 - POST /login
 - POST /register
 - POST /googleLogin
-- GET /kanban
-- POST /kanban
+- GET /tasks
+- POST /tasks
 
 
 ### POST /register 
@@ -23,6 +23,7 @@ Not Needed
 _Request Body_
 ```json
     {
+        "name": "Safrul",
         "email": "safrul@mail.com",
         "password": 123456, 
     }
@@ -31,6 +32,7 @@ _Response (200)_
 ```json
     {
         "id": 1,
+        "name": "Safrul",
         "email": "safrul@mail.com",
         "organization": "Hacktiv8"
     }
@@ -107,8 +109,8 @@ _Response (500 - Internal Server Error)_
   "message": "Internal Server Error."
 }
 ```
-### GET /kanban
-> Get all kanbans
+### GET /tasks
+> Get all tasks
 
 _Request Header_
 ```json
@@ -129,14 +131,14 @@ _Response (200)_
         "title": "Todo App",
         "description": "Deploy on heroku and firebase",
         "category": "todo",
-        "assigned to": "Safrul"
+        "assigned_to": "Safrul"
     },
     {
         "id": 2,
         "title": "Kanban App",
         "description": "Write API doc",
-        "status": "backlog",
-        "assigned to": "Safrul"
+        "category": "backlog",
+        "assigned_to": "Safrul"
     }
 ]
 ```
@@ -153,8 +155,8 @@ _Response (500 - Internal Server Error)_
 }
 ```
 
-### POST /kanban
-> Create a new kanban
+### POST /tasks
+> Create a new task
 
 _Request Header_
 ```json
@@ -167,7 +169,8 @@ _Request Body_
 {
     "title": "Kanban App",
     "description": "Config server database and models",
-    "status": "backlog",
+    "category": "backlog",
+    "assigned_to": "Andi"
 }
 ```
 
@@ -177,7 +180,8 @@ _Response (201 - Created)_
     "id": 3,
     "title": "Kanban App",
     "description": "Config server database and models",
-    "status": "backlog"
+    "category": "backlog",
+    "assigned_to": "Andi"
 }
 
 ```
