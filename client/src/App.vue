@@ -5,7 +5,9 @@
         <RegisterForm></RegisterForm>
         <KanbanBoard
             :allTasks="allTasks"
+            @refetchTasks="fetchTasks"
         ></KanbanBoard>
+        <AddTaskForm @refetchTasks="fetchTasks"></AddTaskForm>
 
 
     </div>
@@ -17,6 +19,7 @@ import Navbar from "./components/Navbar"
 import LoginForm from "./components/LoginForm"
 import RegisterForm from "./components/RegisterForm"
 import KanbanBoard from "./components/KanbanBoard"
+import AddTaskForm from "./components/AddTaskForm"
 
 export default {
     name: "App",
@@ -30,7 +33,8 @@ export default {
         Navbar,
         LoginForm,
         RegisterForm,
-        KanbanBoard
+        KanbanBoard,
+        AddTaskForm
     },
     methods: {
         fetchTasks() {

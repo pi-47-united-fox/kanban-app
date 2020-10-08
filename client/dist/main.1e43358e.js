@@ -11432,6 +11432,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+
+var _axios = _interopRequireDefault(require("axios"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //
 //
 //
@@ -11471,7 +11476,61 @@ exports.default = void 0;
 //
 var _default = {
   name: "TaskBacklog",
-  props: ['backlog']
+  props: ['backlog'],
+  methods: {
+    upgradeTask: function upgradeTask(id) {
+      var _this = this;
+
+      (0, _axios.default)({
+        method: "PATCH",
+        url: "http://localhost:3000/tasks/up/".concat(id),
+        headers: {
+          'access_token': localStorage.access_token
+        }
+      }).then(function (_ref) {
+        var data = _ref.data;
+
+        _this.$emit('refetchTasks');
+
+        console.log(data.message);
+      }).catch(function (err) {
+        console.log(err);
+      });
+    },
+    downgradeTask: function downgradeTask(id) {
+      var _this2 = this;
+
+      (0, _axios.default)({
+        method: "PATCH",
+        url: "http://localhost:3000/tasks/down/".concat(id),
+        headers: {
+          'access_token': localStorage.access_token
+        }
+      }).then(function (_ref2) {
+        var data = _ref2.data;
+
+        _this2.$emit('refetchTasks');
+
+        console.log(data.message);
+      }).catch(function (err) {
+        console.log(err);
+      });
+    },
+    deleteTask: function deleteTask(id) {
+      (0, _axios.default)({
+        method: "DELETE",
+        url: "http://localhost:3000/tasks/".concat(id),
+        headers: {
+          'access_token': localStorage.access_token
+        }
+      }).then(function (_ref3) {
+        var data = _ref3.data;
+        console.log(data.message);
+      }).catch(function (err) {
+        console.log(err);
+      });
+    }
+  }
 };
 exports.default = _default;
         var $ac95bd = exports.default || module.exports;
@@ -11516,7 +11575,48 @@ exports.default = _default;
           ])
         ]),
         _vm._v(" "),
-        _vm._m(0)
+        _c("div", { staticClass: "actions" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass: "icon has-text-success",
+              on: {
+                click: function($event) {
+                  return _vm.upgradeTask(_vm.backlog.id)
+                }
+              }
+            },
+            [_c("i", { staticClass: "fas fa-thumbs-up" })]
+          ),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass: "icon has-text-warning",
+              on: {
+                click: function($event) {
+                  return _vm.downgradeTask(_vm.backlog.id)
+                }
+              }
+            },
+            [_c("i", { staticClass: "fas fa-thumbs-down" })]
+          ),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass: "icon has-text-danger",
+              on: {
+                click: function($event) {
+                  return _vm.deleteTask(_vm.backlog.id)
+                }
+              }
+            },
+            [_c("i", { staticClass: "fas fa-trash" })]
+          )
+        ])
       ])
     ])
   ])
@@ -11526,22 +11626,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "actions" }, [
-      _c("span", { staticClass: "icon has-text-info" }, [
-        _c("i", { staticClass: "fas fa-edit" })
-      ]),
-      _vm._v(" "),
-      _c("span", { staticClass: "icon has-text-success" }, [
-        _c("i", { staticClass: "fas fa-thumbs-up" })
-      ]),
-      _vm._v(" "),
-      _c("span", { staticClass: "icon has-text-warning" }, [
-        _c("i", { staticClass: "fas fa-thumbs-down" })
-      ]),
-      _vm._v(" "),
-      _c("span", { staticClass: "icon has-text-danger" }, [
-        _c("i", { staticClass: "fas fa-trash" })
-      ])
+    return _c("span", { staticClass: "icon has-text-info" }, [
+      _c("i", { staticClass: "fas fa-edit" })
     ])
   }
 ]
@@ -11577,13 +11663,18 @@ render._withStripped = true
       
       }
     })();
-},{"_css_loader":"../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/TaskTodo.vue":[function(require,module,exports) {
+},{"axios":"node_modules/axios/index.js","_css_loader":"../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/TaskTodo.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+
+var _axios = _interopRequireDefault(require("axios"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //
 //
 //
@@ -11623,7 +11714,51 @@ exports.default = void 0;
 //
 var _default = {
   name: "TaskTodo",
-  props: ['todo']
+  props: ['todo'],
+  methods: {
+    upgradeTask: function upgradeTask(id) {
+      (0, _axios.default)({
+        method: "PATCH",
+        url: "http://localhost:3000/tasks/up/".concat(id),
+        headers: {
+          'access_token': localStorage.access_token
+        }
+      }).then(function (_ref) {
+        var data = _ref.data;
+        console.log(data.message);
+      }).catch(function (err) {
+        console.log(err);
+      });
+    },
+    downgradeTask: function downgradeTask(id) {
+      (0, _axios.default)({
+        method: "PATCH",
+        url: "http://localhost:3000/tasks/down/".concat(id),
+        headers: {
+          'access_token': localStorage.access_token
+        }
+      }).then(function (_ref2) {
+        var data = _ref2.data;
+        console.log(data.message);
+      }).catch(function (err) {
+        console.log(err);
+      });
+    },
+    deleteTask: function deleteTask(id) {
+      (0, _axios.default)({
+        method: "DELETE",
+        url: "http://localhost:3000/tasks/".concat(id),
+        headers: {
+          'access_token': localStorage.access_token
+        }
+      }).then(function (_ref3) {
+        var data = _ref3.data;
+        console.log(data.message);
+      }).catch(function (err) {
+        console.log(err);
+      });
+    }
+  }
 };
 exports.default = _default;
         var $282ed2 = exports.default || module.exports;
@@ -11668,7 +11803,48 @@ exports.default = _default;
           ])
         ]),
         _vm._v(" "),
-        _vm._m(0)
+        _c("div", { staticClass: "actions" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass: "icon has-text-success",
+              on: {
+                click: function($event) {
+                  return _vm.upgradeTask(_vm.todo.id)
+                }
+              }
+            },
+            [_c("i", { staticClass: "fas fa-thumbs-up" })]
+          ),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass: "icon has-text-warning",
+              on: {
+                click: function($event) {
+                  return _vm.downgradeTask(_vm.todo.id)
+                }
+              }
+            },
+            [_c("i", { staticClass: "fas fa-thumbs-down" })]
+          ),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass: "icon has-text-danger",
+              on: {
+                click: function($event) {
+                  return _vm.deleteTask(_vm.todo.id)
+                }
+              }
+            },
+            [_c("i", { staticClass: "fas fa-trash" })]
+          )
+        ])
       ])
     ])
   ])
@@ -11678,22 +11854,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "actions" }, [
-      _c("span", { staticClass: "icon has-text-info" }, [
-        _c("i", { staticClass: "fas fa-edit" })
-      ]),
-      _vm._v(" "),
-      _c("span", { staticClass: "icon has-text-success" }, [
-        _c("i", { staticClass: "fas fa-thumbs-up" })
-      ]),
-      _vm._v(" "),
-      _c("span", { staticClass: "icon has-text-warning" }, [
-        _c("i", { staticClass: "fas fa-thumbs-down" })
-      ]),
-      _vm._v(" "),
-      _c("span", { staticClass: "icon has-text-danger" }, [
-        _c("i", { staticClass: "fas fa-trash" })
-      ])
+    return _c("span", { staticClass: "icon has-text-info" }, [
+      _c("i", { staticClass: "fas fa-edit" })
     ])
   }
 ]
@@ -11729,13 +11891,18 @@ render._withStripped = true
       
       }
     })();
-},{"_css_loader":"../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/TaskDoing.vue":[function(require,module,exports) {
+},{"axios":"node_modules/axios/index.js","_css_loader":"../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/TaskDoing.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+
+var _axios = _interopRequireDefault(require("axios"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //
 //
 //
@@ -11775,7 +11942,51 @@ exports.default = void 0;
 //
 var _default = {
   name: "TaskDoing",
-  props: ['doing']
+  props: ['doing'],
+  methods: {
+    upgradeTask: function upgradeTask(id) {
+      (0, _axios.default)({
+        method: "PATCH",
+        url: "http://localhost:3000/tasks/up/".concat(id),
+        headers: {
+          'access_token': localStorage.access_token
+        }
+      }).then(function (_ref) {
+        var data = _ref.data;
+        console.log(data.message);
+      }).catch(function (err) {
+        console.log(err);
+      });
+    },
+    downgradeTask: function downgradeTask(id) {
+      (0, _axios.default)({
+        method: "PATCH",
+        url: "http://localhost:3000/tasks/down/".concat(id),
+        headers: {
+          'access_token': localStorage.access_token
+        }
+      }).then(function (_ref2) {
+        var data = _ref2.data;
+        console.log(data.message);
+      }).catch(function (err) {
+        console.log(err);
+      });
+    },
+    deleteTask: function deleteTask(id) {
+      (0, _axios.default)({
+        method: "DELETE",
+        url: "http://localhost:3000/tasks/".concat(id),
+        headers: {
+          'access_token': localStorage.access_token
+        }
+      }).then(function (_ref3) {
+        var data = _ref3.data;
+        console.log(data.message);
+      }).catch(function (err) {
+        console.log(err);
+      });
+    }
+  }
 };
 exports.default = _default;
         var $3cdd29 = exports.default || module.exports;
@@ -11820,7 +12031,48 @@ exports.default = _default;
           ])
         ]),
         _vm._v(" "),
-        _vm._m(0)
+        _c("div", { staticClass: "actions" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass: "icon has-text-success",
+              on: {
+                click: function($event) {
+                  return _vm.upgradeTask(_vm.doing.id)
+                }
+              }
+            },
+            [_c("i", { staticClass: "fas fa-thumbs-up" })]
+          ),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass: "icon has-text-warning",
+              on: {
+                click: function($event) {
+                  return _vm.downgradeTask(_vm.doing.id)
+                }
+              }
+            },
+            [_c("i", { staticClass: "fas fa-thumbs-down" })]
+          ),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass: "icon has-text-danger",
+              on: {
+                click: function($event) {
+                  return _vm.deleteTask(_vm.doing.id)
+                }
+              }
+            },
+            [_c("i", { staticClass: "fas fa-trash" })]
+          )
+        ])
       ])
     ])
   ])
@@ -11830,22 +12082,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "actions" }, [
-      _c("span", { staticClass: "icon has-text-info" }, [
-        _c("i", { staticClass: "fas fa-edit" })
-      ]),
-      _vm._v(" "),
-      _c("span", { staticClass: "icon has-text-success" }, [
-        _c("i", { staticClass: "fas fa-thumbs-up" })
-      ]),
-      _vm._v(" "),
-      _c("span", { staticClass: "icon has-text-warning" }, [
-        _c("i", { staticClass: "fas fa-thumbs-down" })
-      ]),
-      _vm._v(" "),
-      _c("span", { staticClass: "icon has-text-danger" }, [
-        _c("i", { staticClass: "fas fa-trash" })
-      ])
+    return _c("span", { staticClass: "icon has-text-info" }, [
+      _c("i", { staticClass: "fas fa-edit" })
     ])
   }
 ]
@@ -11881,13 +12119,18 @@ render._withStripped = true
       
       }
     })();
-},{"_css_loader":"../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/TaskCompleted.vue":[function(require,module,exports) {
+},{"axios":"node_modules/axios/index.js","_css_loader":"../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/TaskCompleted.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+
+var _axios = _interopRequireDefault(require("axios"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //
 //
 //
@@ -11927,7 +12170,51 @@ exports.default = void 0;
 //
 var _default = {
   name: 'TaskCompleted',
-  props: ['completed']
+  props: ['completed'],
+  methods: {
+    upgradeTask: function upgradeTask(id) {
+      (0, _axios.default)({
+        method: "PATCH",
+        url: "http://localhost:3000/tasks/up/".concat(id),
+        headers: {
+          'access_token': localStorage.access_token
+        }
+      }).then(function (_ref) {
+        var data = _ref.data;
+        console.log(data.message);
+      }).catch(function (err) {
+        console.log(err);
+      });
+    },
+    downgradeTask: function downgradeTask(id) {
+      (0, _axios.default)({
+        method: "PATCH",
+        url: "http://localhost:3000/tasks/down/".concat(id),
+        headers: {
+          'access_token': localStorage.access_token
+        }
+      }).then(function (_ref2) {
+        var data = _ref2.data;
+        console.log(data.message);
+      }).catch(function (err) {
+        console.log(err);
+      });
+    },
+    deleteTask: function deleteTask(id) {
+      (0, _axios.default)({
+        method: "DELETE",
+        url: "http://localhost:3000/tasks/".concat(id),
+        headers: {
+          'access_token': localStorage.access_token
+        }
+      }).then(function (_ref3) {
+        var data = _ref3.data;
+        console.log(data.message);
+      }).catch(function (err) {
+        console.log(err);
+      });
+    }
+  }
 };
 exports.default = _default;
         var $b84e10 = exports.default || module.exports;
@@ -11972,7 +12259,48 @@ exports.default = _default;
           ])
         ]),
         _vm._v(" "),
-        _vm._m(0)
+        _c("div", { staticClass: "actions" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass: "icon has-text-success",
+              on: {
+                click: function($event) {
+                  return _vm.upgradeTask(_vm.completed.id)
+                }
+              }
+            },
+            [_c("i", { staticClass: "fas fa-thumbs-up" })]
+          ),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass: "icon has-text-warning",
+              on: {
+                click: function($event) {
+                  return _vm.downgradeTask(_vm.completed.id)
+                }
+              }
+            },
+            [_c("i", { staticClass: "fas fa-thumbs-down" })]
+          ),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass: "icon has-text-danger",
+              on: {
+                click: function($event) {
+                  return _vm.deleteTask(_vm.completed.id)
+                }
+              }
+            },
+            [_c("i", { staticClass: "fas fa-trash" })]
+          )
+        ])
       ])
     ])
   ])
@@ -11982,22 +12310,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "actions" }, [
-      _c("span", { staticClass: "icon has-text-info" }, [
-        _c("i", { staticClass: "fas fa-edit" })
-      ]),
-      _vm._v(" "),
-      _c("span", { staticClass: "icon has-text-success" }, [
-        _c("i", { staticClass: "fas fa-thumbs-up" })
-      ]),
-      _vm._v(" "),
-      _c("span", { staticClass: "icon has-text-warning" }, [
-        _c("i", { staticClass: "fas fa-thumbs-down" })
-      ]),
-      _vm._v(" "),
-      _c("span", { staticClass: "icon has-text-danger" }, [
-        _c("i", { staticClass: "fas fa-trash" })
-      ])
+    return _c("span", { staticClass: "icon has-text-info" }, [
+      _c("i", { staticClass: "fas fa-edit" })
     ])
   }
 ]
@@ -12033,7 +12347,7 @@ render._withStripped = true
       
       }
     })();
-},{"_css_loader":"../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/KanbanBoard.vue":[function(require,module,exports) {
+},{"axios":"node_modules/axios/index.js","_css_loader":"../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/KanbanBoard.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12230,6 +12544,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
 var _default = {
   name: 'KanbanBoard',
   props: ['allTasks'],
@@ -12243,6 +12558,11 @@ var _default = {
     return {
       newTask: ''
     };
+  },
+  methods: {
+    refetchTask: function refetchTask() {
+      this.$emit('refetchTasks');
+    }
   }
 };
 exports.default = _default;
@@ -12276,7 +12596,8 @@ exports.default = _default;
                 _vm._l(_vm.allTasks.backlog, function(backlog) {
                   return _c("TaskBacklog", {
                     key: backlog.id,
-                    attrs: { backlog: backlog }
+                    attrs: { backlog: backlog },
+                    on: { refetchTask: _vm.refetchTask }
                   })
                 })
               ],
@@ -12614,7 +12935,235 @@ render._withStripped = true
       
       }
     })();
-},{"../components/TaskBacklog":"src/components/TaskBacklog.vue","../components/TaskTodo":"src/components/TaskTodo.vue","../components/TaskDoing":"src/components/TaskDoing.vue","../components/TaskCompleted":"src/components/TaskCompleted.vue","_css_loader":"../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/App.vue":[function(require,module,exports) {
+},{"../components/TaskBacklog":"src/components/TaskBacklog.vue","../components/TaskTodo":"src/components/TaskTodo.vue","../components/TaskDoing":"src/components/TaskDoing.vue","../components/TaskCompleted":"src/components/TaskCompleted.vue","_css_loader":"../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/AddTaskForm.vue":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _axios = _interopRequireDefault(require("axios"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = {
+  name: "AddTaskForm",
+  data: function data() {
+    return {
+      taskCategory: '',
+      taskText: ''
+    };
+  },
+  methods: {
+    addTask: function addTask() {
+      var _this = this;
+
+      (0, _axios.default)({
+        method: "POST",
+        url: "http://localhost:3000/tasks",
+        headers: {
+          'access_token': localStorage.access_token
+        },
+        data: {
+          title: this.taskText,
+          category: this.taskCategory
+        }
+      }).then(function (_ref) {
+        var data = _ref.data;
+
+        _this.$emit('refetchTasks');
+
+        console.log(data.message);
+      }).catch(function (err) {
+        console.log(err);
+      });
+    }
+  }
+};
+exports.default = _default;
+        var $d5058f = exports.default || module.exports;
+      
+      if (typeof $d5058f === 'function') {
+        $d5058f = $d5058f.options;
+      }
+    
+        /* template */
+        Object.assign($d5058f, (function () {
+          var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "columns" }, [
+    _c("div", { staticClass: "column is-three-fifths is-offset-one-fifth" }, [
+      _c("div", { staticClass: "box" }, [
+        _c("h1", { staticClass: "title" }, [_vm._v("Add a new task")]),
+        _vm._v(" "),
+        _c("form", [
+          _c("div", { staticClass: "field" }, [
+            _c("div", { staticClass: "select" }, [
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.taskCategory,
+                      expression: "taskCategory"
+                    }
+                  ],
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.taskCategory = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
+                  }
+                },
+                [
+                  _c("option", { attrs: { value: "Backlog" } }, [
+                    _vm._v("Backlog")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Todo" } }, [_vm._v("Todo")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Doing" } }, [
+                    _vm._v("Doing")
+                  ]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "Completed" } }, [
+                    _vm._v("Completed")
+                  ])
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "field" }, [
+            _c("p", { staticClass: "control has-icons-left" }, [
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.taskText,
+                    expression: "taskText"
+                  }
+                ],
+                staticClass: "textarea",
+                attrs: { placeholder: "Start a new mission here.." },
+                domProps: { value: _vm.taskText },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.taskText = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "field is-grouped" }, [
+            _c("p", { staticClass: "control" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "button is-primary",
+                  on: { click: _vm.addTask }
+                },
+                [
+                  _vm._v(
+                    "\n                              Save\n                          "
+                  )
+                ]
+              )
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+          return {
+            render: render,
+            staticRenderFns: staticRenderFns,
+            _compiled: true,
+            _scopeId: null,
+            functional: undefined
+          };
+        })());
+      
+    /* hot reload */
+    (function () {
+      if (module.hot) {
+        var api = require('vue-hot-reload-api');
+        api.install(require('vue'));
+        if (api.compatible) {
+          module.hot.accept();
+          if (!module.hot.data) {
+            api.createRecord('$d5058f', $d5058f);
+          } else {
+            api.reload('$d5058f', $d5058f);
+          }
+        }
+
+        
+        var reloadCSS = require('_css_loader');
+        module.hot.dispose(reloadCSS);
+        module.hot.accept(reloadCSS);
+      
+      }
+    })();
+},{"axios":"node_modules/axios/index.js","_css_loader":"../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/App.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12632,8 +13181,12 @@ var _RegisterForm = _interopRequireDefault(require("./components/RegisterForm"))
 
 var _KanbanBoard = _interopRequireDefault(require("./components/KanbanBoard"));
 
+var _AddTaskForm = _interopRequireDefault(require("./components/AddTaskForm"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
+//
 //
 //
 //
@@ -12659,7 +13212,8 @@ var _default = {
     Navbar: _Navbar.default,
     LoginForm: _LoginForm.default,
     RegisterForm: _RegisterForm.default,
-    KanbanBoard: _KanbanBoard.default
+    KanbanBoard: _KanbanBoard.default,
+    AddTaskForm: _AddTaskForm.default
   },
   methods: {
     fetchTasks: function fetchTasks() {
@@ -12703,7 +13257,12 @@ exports.default = _default;
       _vm._v(" "),
       _c("RegisterForm"),
       _vm._v(" "),
-      _c("KanbanBoard", { attrs: { allTasks: _vm.allTasks } })
+      _c("KanbanBoard", {
+        attrs: { allTasks: _vm.allTasks },
+        on: { refetchTasks: _vm.fetchTasks }
+      }),
+      _vm._v(" "),
+      _c("AddTaskForm", { on: { refetchTasks: _vm.fetchTasks } })
     ],
     1
   )
@@ -12741,7 +13300,7 @@ render._withStripped = true
       
       }
     })();
-},{"axios":"node_modules/axios/index.js","./components/Navbar":"src/components/Navbar.vue","./components/LoginForm":"src/components/LoginForm.vue","./components/RegisterForm":"src/components/RegisterForm.vue","./components/KanbanBoard":"src/components/KanbanBoard.vue","_css_loader":"../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/main.js":[function(require,module,exports) {
+},{"axios":"node_modules/axios/index.js","./components/Navbar":"src/components/Navbar.vue","./components/LoginForm":"src/components/LoginForm.vue","./components/RegisterForm":"src/components/RegisterForm.vue","./components/KanbanBoard":"src/components/KanbanBoard.vue","./components/AddTaskForm":"src/components/AddTaskForm.vue","_css_loader":"../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/main.js":[function(require,module,exports) {
 "use strict";
 
 var _vue = _interopRequireDefault(require("vue"));
@@ -12783,7 +13342,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40113" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36191" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -97,7 +97,7 @@ class TaskController {
             }
         })
             .then(data => {
-                if(data.UserId !== req.headers.id) {
+                if(data.UserId !== req.userData.id) {
                     res.status(401).json({
                         message: "You do not have an access."
                     })

@@ -39,6 +39,7 @@
                                     v-for="backlog in allTasks.backlog"
                                     :key="backlog.id"
                                     :backlog="backlog"
+                                    @refetchTask="refetchTask"
                                 ></TaskBacklog>
                                 
                             </div>
@@ -196,6 +197,11 @@ export default {
         return {
             newTask: ''
 
+        }
+    },
+    methods: {
+        refetchTask() {
+           this.$emit('refetchTasks')
         }
     }
 };
