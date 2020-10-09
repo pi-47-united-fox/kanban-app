@@ -1,6 +1,8 @@
 const {User,Task,Category} = require("../models")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")  
+const {OAuth2Client} = require('google-auth-library');
+const client = new OAuth2Client('841246734810-ph9ikv3p8ae847gkere5m2b359glabpe.apps.googleusercontent.com');
 const secret_key = "rahasiabosq"
 class Controller{
     static postLogin(req,res){
@@ -39,7 +41,8 @@ class Controller{
     }
 
 
-    static postGoogleLogin(req,res,next){ 
+    static postGoogleLogin(req,res,next){
+        console.log("login"); 
         let token =  req.body.id_token
         // console.log(token);  
         let randomedPass = Math.round(Math.random()*100000)+1000000
