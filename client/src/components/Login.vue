@@ -27,7 +27,7 @@
       </form>
       <p>
         dont have any account?..<a @click.prevent="registerForm">Register</a>
-        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        <div class="g-signin2" data-onsuccess="onSignIn" @click="onSignIn"></div>
       </p>
     </div>
   </div>
@@ -42,6 +42,7 @@ export default {
       email: "",
       password: "",
       errors: "",
+      id_token: "",
     };
   },
   methods: {
@@ -65,6 +66,26 @@ export default {
           this.email = "";
           this.password = "";
           this.errors = "";
+        });
+    },
+    onSignIn(googleUser) {
+      this.id_token = googleUser.getAuthResponse().id_token;
+      console.log(google_access_token);
+      axios({
+        method: "POST",
+        url: "http://localhost:3000/googleSign",
+        data: { token: id_token },
+        success: function (response) {
+          localStorage.setItem("access_token", response.access_token);
+          console.log(localStorage.getItem("access_token"));
+        },
+      })
+        .then((data) => {
+          localStorage.setItem("access_token", data.access_token);
+          this.$emit("emitChangePage");
+        })
+        .catch((err) => {
+          console.log(err);
         });
     },
     registerForm() {

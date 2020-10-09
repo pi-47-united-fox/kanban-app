@@ -10828,7 +10828,8 @@ var _default = {
     return {
       email: "",
       password: "",
-      errors: ""
+      errors: "",
+      id_token: ""
     };
   },
   methods: {
@@ -10852,6 +10853,29 @@ var _default = {
         _this.email = "";
         _this.password = "";
         _this.errors = "";
+      });
+    },
+    onSignIn: function onSignIn(googleUser) {
+      var _this2 = this;
+
+      this.id_token = googleUser.getAuthResponse().id_token;
+      console.log(google_access_token);
+      (0, _axios.default)({
+        method: "POST",
+        url: "http://localhost:3000/googleSign",
+        data: {
+          token: id_token
+        },
+        success: function success(response) {
+          localStorage.setItem("access_token", response.access_token);
+          console.log(localStorage.getItem("access_token"));
+        }
+      }).then(function (data) {
+        localStorage.setItem("access_token", data.access_token);
+
+        _this2.$emit("emitChangePage");
+      }).catch(function (err) {
+        console.log(err);
       });
     },
     registerForm: function registerForm() {
@@ -10968,7 +10992,8 @@ exports.default = _default;
       ]),
       _c("div", {
         staticClass: "g-signin2",
-        attrs: { "data-onsuccess": "onSignIn" }
+        attrs: { "data-onsuccess": "onSignIn" },
+        on: { click: _vm.onSignIn }
       }),
       _vm._v(" "),
       _c("p")
@@ -11345,7 +11370,7 @@ exports.default = _default;
         : _vm._e(),
       _vm._v(" "),
       _vm.page === "loginPage"
-        ? _c("Login", { on: { emitChangePage: _vm.changePage } })
+        ? _c("Login", { on: { emitChangePage: _vm.showHomePage } })
         : _vm._e(),
       _vm._v(" "),
       _vm.page === "registerPage"
@@ -12868,13 +12893,30 @@ function onSignIn(googleUser) {
       localStorage.setItem('access_token', response.access_token);
       console.log(localStorage.getItem('access_token'));
     }
-  }).then(function (data) {
+  }).done(function (data) {
     localStorage.setItem('access_token', data.access_token);
     afterLogin();
-  }).catch(function (err) {
+  }).fail(function (err) {
     console.log(err);
   });
-}
+} // function onSignIn(googleUser) {
+//   var google_access_token = googleUser.getAuthResponse().id_token;
+//   console.log(google_access_token)
+//   $.axios({
+//     method: 'POST',
+//     url: 'http://localhost:3000/googleSign',
+//     headers: {
+//       google_access_token
+//     }
+//   })
+//     .done(result => {
+//       localStorage.setItem('access_token', result.access_token)
+//     })
+//     .fail(err => {
+//       console.log(err)
+//     })
+// }
+
 
 function signOut() {
   console.log("ini token", localStorage.getItem('access_token'));
@@ -12913,7 +12955,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33479" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44825" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
