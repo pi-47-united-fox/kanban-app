@@ -4,152 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
     <!-- vue.js development version -->
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
     <title>Kanban Uwu</title>
 </head>
 <body>
     <!-- Vue.js implementation -->
     <div id="app">
-        <div class="container my-5 py-3 border border-dark" style="width: 35%;" v-if="page==='beforeLogin'">
-            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                <li class="nav-item" role="tablist">
-                    <a class="nav-link active" id="pills-login-tab" data-toggle="pill" href="#login" role="tab" aria-controls="login" aria-selected="true">Login</a>
-                </li>
-                <li class="nav-item" role="tablist">
-                    <a class="nav-link" id="pills-register-tab" data-toggle="pill" href="#register" role="tab" aria-controls="register" aria-selected="false">Register</a>
-                </li>
-            </ul>
-            <div id="pills-tabContent" class="tab-content">
-                <!-- form login -->
-                <div class="container tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="pills-login-tab">
-                    <form id="loginForm" class="my-3">
-                        <div class="container">
-                            <h3 class="text-center">Login to Kanban</h3>
-                        </div>
-                        <div class="form-group">
-                          <label for="input_email">Email address</label>
-                          <input type="email" class="form-control" id="input_email" aria-describedby="emailHelp" placeholder="Email">
-                          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                        </div>
-                        <div class="form-group">
-                          <label for="input_password">Password</label>
-                          <input type="password" class="form-control" id="input_password" placeholder="Password">
-                        </div>
-                        <button type="submit" class="btn btn-primary" style="width: 100%;" v-on:click="login">Login</button>
-                    </form>
-                </div>
-                <!-- form register -->
-                <div class="container tab-pane fade show active" id="register" role="tabpanel" aria-labelledby="pills-register-tab">
-                    <form id="registerForm" class="my-3">
-                        <div class="container">
-                            <h3 class="text-center">Register to Kanban</h3>
-                        </div>
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" class="form-control" id="name" placeholder="Name">
-                        </div>
-                        <div class="form-group">
-                          <label for="email">Email address</label>
-                          <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email">
-                          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                        </div>
-                        <div class="form-group">
-                          <label for="password">Password</label>
-                          <input type="password" class="form-control" id="password" placeholder="Password">
-                        </div>
-                        <button type="submit" class="btn btn-dark" style="width: 100%;">Register</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    
-    
-    
-        <!-- kanban board -->
-        <div class="mx-auto my-0 px-0" id="board" style="width: 90%;" v-if="page==='afterLogin'">
-            <!-- header of kanban board -->
-            <div class="container d-flex flex-row justify-content-between my-3 mx-0 px-0 mw-100">
-                <div class="container d-flex flex-row justify-content-start px-0">
-                    <h3 class="mr-3">Kanban Board</h3>
-                    <button type="button" class="btn btn-primary">New Task</button>
-                </div>
-                <div class="container d-flex flex-row justify-content-end px-0 mx-0">
-                    <button type="button" class="btn btn-dark" v-on:click="logout">Logout</button>
-                </div>
-            </div>
-            <!-- content of the kanban board -->
-            <div class="container justify-content-xl-between px-0 mw-100">
-                <div class="row">
-                    <!-- backlog -->
-                    <div class="col-3 px-2">
-                        <div class="card">
-                            <h5 class="card-header bg-warning text-white">Backlog</h5>
-                            <div class="card-body px-1" id="Backlog">
-                                <div class="card" style="width: 100%;">
-                                    <h5 class="card-header bg-light text-dark">Card Title</h5>
-                                    <div class="card-body">
-                                        <h6 class="card-subtitle text-muted">Card subtitle</h6>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <button type="button" class="btn btn-primary">Show Detail</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- todo -->
-                    <div class="col-3 px-2">
-                        <div class="card">
-                            <h5 class="card-header bg-primary text-white">To-do</h5>
-                            <div class="card-body" id="Todo">
-                                <div class="card" style="width: 100%;">
-                                    <h5 class="card-header bg-light text-dark">Card Title</h5>
-                                    <div class="card-body">
-                                        <h6 class="card-subtitle text-muted">Card subtitle</h6>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <button type="button" class="btn btn-primary">Show Detail</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- doing -->
-                    <div class="col-3 px-2">
-                        <div class="card">
-                            <h5 class="card-header bg-success text-white">Doing</h5>
-                            <div class="card-body" id="Doing">
-                                <div class="card" style="width: 100%;">
-                                    <h5 class="card-header bg-light text-dark">Card Title</h5>
-                                    <div class="card-body">
-                                        <h6 class="card-subtitle text-muted">Card subtitle</h6>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <button type="button" class="btn btn-primary">Show Detail</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- done -->
-                    <div class="col-3 px-2">
-                        <div class="card">
-                            <h5 class="card-header bg-info text-white">Done</h5>
-                            <div class="card-body" id="Done">
-                                <div class="card" style="width: 100%;">
-                                    <h5 class="card-header bg-light text-dark">Card Title</h5>
-                                    <div class="card-body">
-                                        <h6 class="card-subtitle text-muted">Card subtitle</h6>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <button type="button" class="btn btn-primary">Show Detail</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                  </div>
-                </div>
-            </div>
-        </div>
-
     </div>
 </body>
-<script src="./main.js"></script>
+<script src="./src/main.js"></script>
 </html>

@@ -8,40 +8,27 @@ class TaskController{
             .then(result => {
                 if(result){
                     // perlu diedit agar bisa sesuai object yang akan ditampilkan di client
-                    let obj = {}
+                    let obj = {backlog: [], todo: [], doing: [], done: [] }
                                        
                     result.forEach(el => {
                         if(el.category === 'backlog'){
-                            if(obj[el.category] === undefined){
-                                obj[el.category] = [el]
-                            }
-                            else{
-                                obj[el.category].push(el)
-                            }
+                            
+                                obj.backlog.push(el)
+                            
                         }
-                        else if(el.category === 'todo'){
-                            if(obj[el.category] === undefined){
-                                obj[el.category] = [el]
-                            }
-                            else{
-                                obj[el.category].push(el)
-                            }
+                        if(el.category === 'todo'){
+                            obj.todo.push(el)
+                            
                         }
-                        else if(el.category === 'doing'){
-                            if(obj[el.category] === undefined){
-                                obj[el.category] = [el]
-                            }
-                            else{
-                                obj[el.category].push(el)
-                            }
+                        if(el.category === 'doing'){
+                            
+                                obj.doing.push(el)
+                            
                         }
-                        else{
-                            if(obj[el.category] === undefined){
-                                obj[el.category] = [el]
-                            }
-                            else{
-                                obj[el.category].push(el)
-                            }
+                        if(el.category === 'done'){
+                            
+                                obj.done.push(el)
+                            
                         }
 
                     })
