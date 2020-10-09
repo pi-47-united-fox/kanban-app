@@ -38,6 +38,36 @@ class Controller{
             })
     }
 
+
+    static postGoogleLogin(req,res,next){ 
+        let token =  req.body.id_token
+        // console.log(token);  
+        let randomedPass = Math.round(Math.random()*100000)+1000000
+        // console.log(randomedPass);
+        client.verifyIdToken({idToken:token})
+            .then(payload=>{
+                // console.log(payload.payload);
+                return User.findOrCreate({ 
+                    defaults: { 
+                    email: payload.payload.email,
+                    password: randomedPass+""
+                    },
+                    where: {
+                    email:payload.payload.email
+                    }
+                })
+            })
+            .then(user=>{ 
+                let userData = {id:user[0].id,email:user[0].email}
+                // console.log(userData);
+                let token = jwt.sign({userData},secret_key)
+                res.status(200).json({"access_token":token}) 
+            })
+            .catch(err=>{
+                next(err) 
+            }) 
+    }
+
     static getTasks(req,res){
         let categories
         Category.findAll({include:[ 'tasks' 

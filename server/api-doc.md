@@ -45,7 +45,6 @@ List of available endpoints :
  }
  ``` 
 
-
 ### POST /login
 > logging in as registered user 
 
@@ -71,6 +70,34 @@ _Response (400 - Bad Request)_
 ```
 {
   "message": "Wrong Email or Password"
+}
+```
+
+### POST /google-login
+> logging in as registered user 
+
+_Request Body_
+```
+{ 
+  "id_token":"<google token>"
+  
+}
+```
+<b> Success Response :</b>
+
+_Response (200 - Ok)_
+```
+{
+  "access_token":"<access_token>" 
+}
+```
+
+<b> Error Response :</b>
+
+_Response (500 - Internal Server Error)_
+```
+{
+  "message": "Internal Server Error"
 }
 ```
 

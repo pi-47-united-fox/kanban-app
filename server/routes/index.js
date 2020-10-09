@@ -5,6 +5,7 @@ const router = require("express").Router()
 
 router.post("/login", Controller.postLogin)
 router.post("/register", Controller.postRegister)
+router.post("/google-login", Controller.postGoogleLogin)
 router.use(authentication)
 router.post("/category", Controller.postCategory)
 router.get("/tasks", Controller.getTasks)
