@@ -20,7 +20,7 @@
         @refresh="fetchTask"
       ></Category>
     </div>
-    <AddModal @emitAdd = 'refreshData'></AddModal>
+    <AddModal @emitAdd = 'fetchTask'></AddModal>
   </div>
 </template>
 
@@ -31,7 +31,6 @@ import axios from "axios";
 import AddModal from "../components/add-modal";
 export default {
   name: "Home",
-  // props:['tasks'],
   components: {
     Card,
     Category,

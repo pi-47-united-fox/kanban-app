@@ -20381,7 +20381,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 var _default = {
   name: "Home",
-  // props:['tasks'],
   components: {
     Card: _card.default,
     Category: _category.default,
@@ -20475,7 +20474,7 @@ exports.default = _default;
         1
       ),
       _vm._v(" "),
-      _c("AddModal", { on: { emitAdd: _vm.refreshData } })
+      _c("AddModal", { on: { emitAdd: _vm.fetchTask } })
     ],
     1
   )
@@ -74121,7 +74120,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56509" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53486" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
