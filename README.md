@@ -9,14 +9,13 @@ A Kanban board is a visualization tool that enables you to optimize the flow of 
 ## RESTful endpoints
 `- GET /tasks`
 
-`- GET /tasks/:id`
-
 `- POST /tasks`
 `- PATCH /tasks/:id`
 `- DELETE /tasks/:id`
 
-`- POST /register`
-`- POST /login`
+`- POST /users/register`
+`- POST /users/login`
+`- POST /users/googleLogin`
 
 ### GET /task
 
@@ -55,45 +54,6 @@ _Response (500 - Internal Server Error)_
 ```json
 {
   "message": "Server error"
-}
-```
-
-### GET /tasks/:id
-
-> Get asset kanban-app by Pk
-
-_Request Header_
-```json
-{
-  "access_token": "<your access token>"
-}
-```
-
-_Request Params_
-```json
-{
-  "id": "1"
-}
-```
-
-_Response (200)_
-```json
-[
-  {
-    "id": 1,
-    "title": "Mendesain schema",
-    "description": "Merancang tables dan hubungan asosiasi",
-    "date": "2020-10-30",
-    "category" : "backlog",
-    "UserId": 1
-  }
-]
-```
-
-_Response (404 - Not Found)_
-```json
-{
-  "message": "Data Not Found"
 }
 ```
 
@@ -224,7 +184,7 @@ _Response (500 - Internal Server Error)_
 }
 ```
 
-### POST /register
+### POST /users/register
 
 > Create new asset kanban-app
 
@@ -251,7 +211,7 @@ _Response (400 - Bad Request)_
 }
 ```
 
-### POST /login
+### POST /users/login
 
 > Create new asset kanban-app
 
@@ -261,6 +221,33 @@ _Request Body_
 {
   "email": "admin@mail.com",
   "password": "<your hash password from bcrypt>"
+}
+```
+
+_Response (200 - AccessToken)_
+```json
+{
+  "access_token": "<your token from jwt>"
+}
+```
+
+_Response (400 - Bad Request)_
+```json
+{
+  "message": "Invalid Input"
+}
+```
+
+### POST /users/googleLogin
+
+> Create new asset kanban-app
+
+
+_Request Body_
+```json
+{
+  "email": "<your google mail account>",
+  "password": "<your google mail password>"
 }
 ```
 

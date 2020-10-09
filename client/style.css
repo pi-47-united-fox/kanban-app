@@ -11,6 +11,10 @@ body{
     justify-content: space-between;
     align-items: center;
 }
+.navbar-brand {
+  justify-content: baseline;
+  font-size: 30px;
+}
 
 .menu{
     margin: 10px;
