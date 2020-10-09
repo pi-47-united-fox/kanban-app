@@ -36,7 +36,7 @@ export default {
 		deleteTask() {
 			axios({
 				method: "DELETE",
-				url: `http://localhost:3000/tasks/${this.task.id}`,
+				url: `https://api-kanban-app.herokuapp.com/tasks/${this.task.id}`,
 				headers: {
 					access_token: localStorage.access_token,
 				},
@@ -61,7 +61,7 @@ export default {
 		updateCard(CategoryId) {
 			axios({
 				method: "PATCH",
-				url: `http://localhost:3000/tasks/${this.task.id}`,
+				url: `https://api-kanban-app.herokuapp.com/tasks/${this.task.id}`,
 				headers: {
 					access_token: localStorage.access_token,
 				},

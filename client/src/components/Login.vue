@@ -68,7 +68,7 @@ export default {
 		postLogin() {
 			axios({
 				method: "POST",
-				url: "http://localhost:3000/users/login",
+				url: "https://api-kanban-app.herokuapp.com/users/login",
 				data: {
 					email: this.email,
 					password: this.password,
@@ -90,7 +90,7 @@ export default {
 			const token = googleUser.getAuthResponse().id_token;
 			axios({
 				method: "POST",
-				url: "http://localhost:3000/users/googlesignin",
+				url: "https://api-kanban-app.herokuapp.com/users/googlesignin",
 				data: { token },
 			})
 				.then(({ data }) => {

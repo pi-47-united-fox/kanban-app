@@ -104,7 +104,7 @@ export default {
 		getOrganizations() {
 			axios({
 				method: "GET",
-				url: "http://localhost:3000/organizations",
+				url: "https://api-kanban-app.herokuapp.com/organizations",
 			})
 				.then(({ data }) => {
 					if (data) {
@@ -120,7 +120,7 @@ export default {
 		getTask() {
 			axios({
 				method: "GET",
-				url: "http://localhost:3000/tasks",
+				url: "https://api-kanban-app.herokuapp.com/tasks",
 				headers: {
 					access_token: localStorage.access_token,
 				},

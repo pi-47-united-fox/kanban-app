@@ -47,7 +47,7 @@ export default {
 		postOrganization() {
 			axios({
 				method: "POST",
-				url: "http://localhost:3000/organizations",
+				url: "https://api-kanban-app.herokuapp.com/organizations",
 				data: { name: this.name },
 			})
 				.then(() => {

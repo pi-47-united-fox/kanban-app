@@ -120,7 +120,7 @@ export default {
 		postRegister() {
 			axios({
 				method: "POST",
-				url: "http://localhost:3000/users/register",
+				url: "https://api-kanban-app.herokuapp.com/users/register",
 				data: {
 					email: this.email,
 					password: this.password,
