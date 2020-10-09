@@ -10947,8 +10947,6 @@ exports.default = _default;
             })
           ]),
           _vm._v(" "),
-          _c("br"),
-          _vm._v(" "),
           _c("button", { staticClass: "btn btn-primary" }, [_vm._v("Login")])
         ]
       ),
@@ -10967,7 +10965,13 @@ exports.default = _default;
           },
           [_vm._v("Register")]
         )
-      ])
+      ]),
+      _c("div", {
+        staticClass: "g-signin2",
+        attrs: { "data-onsuccess": "onSignIn" }
+      }),
+      _vm._v(" "),
+      _c("p")
     ])
   ])
 }
@@ -12841,6 +12845,8 @@ var _App = _interopRequireDefault(require("./App.vue"));
 
 require("bootstrap/dist/css/bootstrap.css");
 
+var _axios = _interopRequireDefault(require("axios"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 new _vue.default({
@@ -12848,7 +12854,38 @@ new _vue.default({
     return h(_App.default);
   }
 }).$mount('#app');
-},{"vue":"node_modules/vue/dist/vue.runtime.esm.js","./App.vue":"src/App.vue","bootstrap/dist/css/bootstrap.css":"node_modules/bootstrap/dist/css/bootstrap.css"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+
+function onSignIn(googleUser) {
+  var id_token = googleUser.getAuthResponse().id_token;
+  console.log(google_access_token);
+  (0, _axios.default)({
+    method: 'POST',
+    url: 'http://localhost:3000/googleSign',
+    data: {
+      token: id_token
+    },
+    success: function success(response) {
+      localStorage.setItem('access_token', response.access_token);
+      console.log(localStorage.getItem('access_token'));
+    }
+  }).then(function (data) {
+    localStorage.setItem('access_token', data.access_token);
+    afterLogin();
+  }).catch(function (err) {
+    console.log(err);
+  });
+}
+
+function signOut() {
+  console.log("ini token", localStorage.getItem('access_token'));
+  var auth2 = gapi.auth2.getAuthInstance();
+  auth2.signOut().then(function () {
+    console.log('User signed out.');
+  });
+  localStorage.removeItem('access_token');
+  console.log("ini token", localStorage.getItem('access_token'));
+}
+},{"vue":"node_modules/vue/dist/vue.runtime.esm.js","./App.vue":"src/App.vue","bootstrap/dist/css/bootstrap.css":"node_modules/bootstrap/dist/css/bootstrap.css","axios":"node_modules/axios/index.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -12876,7 +12913,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34903" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33479" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

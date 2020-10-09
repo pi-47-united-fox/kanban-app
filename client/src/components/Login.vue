@@ -23,11 +23,11 @@
             id="password"
           />
         </div>
-        <br />
         <button class="btn btn-primary">Login</button>
       </form>
       <p>
         dont have any account?..<a @click.prevent="registerForm">Register</a>
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
       </p>
     </div>
   </div>
