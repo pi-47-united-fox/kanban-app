@@ -1,5 +1,5 @@
 <template> 
-    <div class="pop-up" v-if="addFormCategory" >
+    <div class="pop-up"  >
         <div class="card pop-up-form" >
             <div class="card-header">
             Add New Task
@@ -7,14 +7,26 @@
             <div class="card-body">
             <h5 class="card-title"></h5>
             <form class="form ">
-                <div class="form-row mx-sm-3 mb-2 ">
-                    <label for="form-category-name" class="mr-3">New Category Name</label>
-                    <input type="text" name="form-category-name" id="">
-                </div><br>
-                <div class=""> 
-                    <a href="#" class="btn btn-primary mr-2">Add Category</a>
-                    <a href="#" @click="close" class="btn btn-danger">Cancel</a>
+                <div class="form-group mx-sm-3 mb-2 ">
+                    <label for="form-task-name" class="mr-3">Task Title</label><br>
+                    <input type="text" class="form-control" name="form-task-title" v-model="inputTaskTitle" id="">
                 </div>
+                <div class="form-group mx-sm-3 mb-2 ">
+                    <label for="form-task-description" class="mr-3">Task Description</label><br>
+                    <textarea type="text" class="form-control" name="form-task-description" v-model="inputTaskDescription" id=""></textarea>
+                </div>
+                <div class="form-group mx-sm-3 mb-2 ">
+                    <label for="form-task-category" class="mr-3">Task Category</label>
+                    <select class="form-control" v-model="inputTaskCategory" name="category" id="">
+                        <option value=""> Select Category</option>
+
+                        <option v-for="category in categories" :key="category.id" :value="category.id"> {{category.name}} </option> 
+                    </select>
+                </div> 
+                <center>
+                    <a href="#" @click="addData()" class="btn btn-primary mr-2">Add Task</a>
+                    <a href="#" @click="close()" class="btn btn-danger">Cancel</a>
+                </center>  
             </form> 
             </div>
         </div> 
@@ -22,17 +34,43 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
-    name:"AddFormCategory",
-    props:['addFormCategory'],
+    name:"AddFormTask",
+    props:['categoryId','categories'],
     data(){
-        return { 
-            addCategoryform : this.addFormCategory
+        return {   
+            inputTaskDescription : '',
+            inputTaskTitle : '',
+            inputTaskCategory : this.categoryId,
         }
     },
     methods:{
-        close(){
-            this.$emit('addFormCategory',false)
+        close(){ 
+            this.$emit('closeForm',{"form":false})
+        },
+        addData(){
+            axios
+              .post('http://localhost:3000/tasks',
+                {
+                    title:this.inputTaskTitle,
+                    description:this.inputTaskDescription,
+                    CategoryId:this.inputTaskCategory,
+                },
+                {
+                  headers:{
+                      access_token:localStorage.access_token
+                    },
+
+                })
+              .then(({data}) => {
+                  console.log(data) 
+                  this.$emit('fetchData',{"form":false})
+                })
+                .catch(err=>{
+                    console.log(err);
+                })
         }
     }
 

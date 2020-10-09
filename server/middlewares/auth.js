@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken")
 const secret_key = 'rahasiabosq'
-const {User} = require("../models")
+const {User, Task} = require("../models")
 function authentication(req,res,next){
     const {access_token} = req.headers
     console.log(access_token);
@@ -15,6 +15,23 @@ function authentication(req,res,next){
 }
 
 function authorization(req,res,next){
+    console.log("authorization");
+    Task.findByPk(req.params.id)
+        .then(task=>{ 
+            if(task){
+                if(task.UserId == req.userData.id){
+                    next()
+                }else{
+                    res.status(401).json({"message":"Not Authorized"})
+                } 
+            }else{ 
+                res.status(404).json({"message":"Task not found"})
+            }
+
+        })
+        .catch(err=>{
+            res.status(500).json(err)
+        })
 
 }
 

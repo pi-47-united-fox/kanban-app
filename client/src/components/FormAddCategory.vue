@@ -1,5 +1,5 @@
 <template> 
-    <div class="pop-up" v-if="addFormCategory" >
+    <div class="pop-up" >
         <div class="card pop-up-form" >
             <div class="card-header">
             Add New Category
@@ -9,10 +9,10 @@
             <form class="form ">
                 <div class="form-row mx-sm-3 mb-2 ">
                     <label for="form-category-name" class="mr-3">New Category Name</label>
-                    <input type="text" name="form-category-name" id="">
+                    <input type="text" v-model="inputCategoryName" name="form-category-name" id="">
                 </div><br>
                 <div class=""> 
-                    <a href="#" class="btn btn-primary mr-2">Add Category</a>
+                    <a href="#" @click="addCategory" class="btn btn-primary mr-2">Add Category</a>
                     <a href="#" @click="close" class="btn btn-danger">Cancel</a>
                 </div>
             </form> 
@@ -22,17 +22,37 @@
 </template>
 
 <script>
+import Axios from 'axios'
 export default {
     name:"AddFormCategory",
     props:['addFormCategory'],
     data(){
         return { 
-            addCategoryform : this.addFormCategory
+            inputCategoryName : ""
         }
     },
     methods:{
         close(){
             this.$emit('addFormCategory',false)
+        },
+        addCategory(){
+            Axios
+                .post('http://localhost:3000/category',
+                {
+                    name:this.inputCategoryName
+                },
+                {
+                    headers:{
+                        access_token:localStorage.access_token
+                    }
+                })
+                .then(result=>{
+                    console.log(result);
+                })
+                .catch(err=>{
+                    console.log(err);
+                })
+
         }
     }
 

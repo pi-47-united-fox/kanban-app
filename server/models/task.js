@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       validate:{
         notEmpty:{
           argv:true,
-          message:"Please Input the Title"
+          msg:"Please Input the Title"
         }
       }
     },
@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
       validate:{
         notEmpty:{
           argv:true,
-          message:"Please Input the Title"
+          msg:"Please Input the Title"
         }
       }
     },

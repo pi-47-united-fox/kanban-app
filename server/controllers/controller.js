@@ -18,7 +18,7 @@ class Controller{
                     console.log(token);
                     res.status(200).json({"access_token":token})
                 }else{
-                    res.status(404).json({"message":"Email atau Password Salah!"})
+                    res.status(404).json({"msg":"Email atau Password Salah!"})
                 }
             })
             .catch(err=>{
@@ -58,14 +58,35 @@ class Controller{
             })
     }
 
+    static getTask(req,res){ 
+        Task.findByPk(req.params.id) 
+            .then(result=>{
+                res.status(200).json(result)
+            })
+            .catch(err=>{
+                console.log(err);
+                res.status(500).json(err)
+            })
+    }
+    static postCategory(req,res){
+        console.log(req.body);
+        Category.create(req.body)
+            .then(result=>{
+                res.status(201).json(result);
+            })
+            .catch(err=>{
+                res.status(500).json(result)
+            })
+    }
+
     static postTask(req,res){
         // let newTask = req.body
-        console.log(req.body);
+        // console.log(req.body);
         let {title,description,CategoryId}= req.body
         let newTask = {
             title,
             description,
-            CategoryId:Number(CategoryId),
+            CategoryId:CategoryId,
             UserId:req.userData.id
         }
         console.log(newTask)
@@ -74,20 +95,34 @@ class Controller{
                 res.status(201).json(result)
             })
             .catch(err=>{
-                console.log(err);
-                res.status(500).json(err)
+                if(err.name == 'SequelizeValidationError'){
+                    console.log(err.errors[0].message);
+                    res.status(400).json({"message":err.errors[0].message})
+                }else{
+                    res.status(500).json(err)
+                }
             })
     }
-    static putTask(req,res){
-        // let newTask = req.body
-        console.log(req.body);
+    static putTask(req,res){  
         let {title,description,CategoryId}= req.body
-        let newTask = {
+        let editedTask = {
             title,
             description,
-            CategoryId:Number(CategoryId),
-            UserId:req.userData.id
-        } 
+            CategoryId:Number(CategoryId)
+        }
+        Task.update(editedTask, {where:{id:req.params.id}})
+            .then(result =>{
+                res.status(201).json({"message":"Updated Successfully"})
+            })
+            .catch(err=>{
+                if(err.name == 'SequelizeValidationError'){
+                    console.log(err.errors[0].message);
+                    res.status(400).json({"message":err.errors[0].message})
+                }else{
+                    console.log(err);
+                    res.status(500).json(err)
+                }
+            })
     }
     static deleteTask(req,res){ 
         console.log(req.params.id);
@@ -96,7 +131,7 @@ class Controller{
         }}) 
             .then(result=>{
                 if(result){
-                    res.status(200).json({"message":"delete succeed"})
+                    res.status(200).json({"message":"Deleted Successfully"})
                 }
             })
             .catch(err=>{

@@ -1,6 +1,9 @@
 <template>
 <div> 
-    <form-add-category @addFormCategory="closeForm" :addFormCategory="addCategoryForm">
+    <form-add-category 
+        v-if="addCategoryForm == true"
+        @addFormCategory="closeForm" 
+        :addFormCategory="addCategoryForm">
 
     </form-add-category> 
     <nav-bar
@@ -13,14 +16,22 @@
     </nav-bar>
 
     <tasks-board 
+        v-if="page==`home`"  
         :categories="categories"
         :tasks="tasks"
+        :users="users" 
+        @fetchData="fetchData" 
     >
 
-    </tasks-board>
+    </tasks-board> 
+    <form-register  
+        @changePage="changePage"
+        v-if="page==`register`"
+        class="login-page">
 
+    </form-register>
     <form-login  
-        @loginProcess="changePage"
+        @changePage="changePage"
         v-if="page==`login`"  class="login-page">
 
     </form-login>
@@ -30,6 +41,7 @@
 <script>
 import axios from 'axios'
 import LoginForm from './components/LoginForm'
+import RegisterForm from './components/RegisterForm'
 import NavBar from './components/Navbar'
 import AddFormCategory from './components/FormAddCategory'
 import TasksBoard from './components/Board'
@@ -38,14 +50,14 @@ export default {
     name: 'App',
     components:{
         'form-login':LoginForm,
+        'form-register':RegisterForm,
         'nav-bar':NavBar,
         'form-add-category':AddFormCategory,
         'tasks-board':TasksBoard
     },
     data() {
         return { 
-            page: 'login',
-            text:"testing",
+            page: 'home', 
             addCategoryForm:false,
             categories: [],
             tasks:[],
@@ -58,6 +70,7 @@ export default {
         },
         changePage(payload){
             console.log(payload);
+            // this.fetchData()
             this.page = payload
         },
         categoryForm(payload){
@@ -65,6 +78,9 @@ export default {
         },
         fetchData(){
             console.log("fetching data!");
+            this.tasks = []
+            this.users = []
+            this.categories = []
             axios
               .get('http://localhost:3000/tasks',
               {
@@ -93,8 +109,7 @@ export default {
     }   ,
     created(){
         if(localStorage.access_token){
-            this.page = 'home'
-            this.fetchData()
+            this.page = 'home' 
         }else{ 
             this.page = 'login'
         }
