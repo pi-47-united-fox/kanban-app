@@ -91,20 +91,21 @@ export default {
             })
         },
         onSuccess(googleUser) {
-            console.log("masuk on success .,.,<><><><><<>><><><><><><><><><><><><><")
+            // console.log("masuk on success .,.,<><><><><<>><><><><><><><><><><><><><")
             var google_access_token = googleUser.getAuthResponse().id_token;
-            console.log(google_access_token)
+            // console.log(google_access_token)
 
             $.axios({
                 method: "POST",
-                url: 'http://localhost:3000/googlelogin',
+                url: 'http://localhost:3000/google',
                 headers : {
                     google_access_token: google_access_token
                 }
             })
-            .then(({data}) => {
+            .then( data => {
+                console.log("dattatattata")
                 localStorage.setItem('access_token', data)
-                this.$emit('changePage', 'home')
+                this.$emit('changePage2', 'home')
             })
             .catch(err => {
                 console.log(err)

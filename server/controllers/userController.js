@@ -68,6 +68,7 @@ class UserController {
     static newGoogleLogin(req, res, next) {
         const client = new OAuth2Client("639126342145-3cuj7836kqi0gn02md1baqivbkb1hkqd.apps.googleusercontent.com")
         let email = ''
+        console.log(req.headers.google_access_token)
 
         client.verifyIdToken({
             idToken: req.headers.google_access_token,

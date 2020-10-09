@@ -9,7 +9,7 @@ router.get('/', UserController.homeController)
 
 router.post('/register', UserController.register)
 router.post('/login', UserController.login)
-router.post('/googlelogin', UserController.newGoogleLogin)
+router.post('/google', UserController.newGoogleLogin)
 
 
 router.get('/tasks', TaskController.findAllTasks)

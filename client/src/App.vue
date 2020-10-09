@@ -9,6 +9,7 @@
         <LoginForm
             v-if="displayPage === 'login'"
             @changePage="changePage"
+            @changePage2="changePage"
         ></LoginForm>
 
         <RegisterForm
