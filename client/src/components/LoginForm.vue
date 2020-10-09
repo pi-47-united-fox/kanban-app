@@ -103,7 +103,7 @@ export default {
                 }
             })
             .then( data => {
-                console.log("dattatattata")
+                // console.log("dattatattata")
                 localStorage.setItem('access_token', data)
                 this.$emit('changePage2', 'home')
             })
