@@ -1,0 +1,39 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: rgb(241, 241, 240);
+    font-family: 'Playfair Display', serif;
+}
+
+.navbar{
+    background-color: #20bae9;
+    display: flex;
+    padding: 3px;
+}
+
+.navbar-brand {
+  color: rgb(253, 215, 1),;
+  padding: 3px;
+  font-size: 30px;
+  font-family: 'Playfair Display', serif;
+}
+
+.menu{
+    margin: 10px;
+    display: flex;
+    align-items: baseline;
+}
+
+#login .container #login-row #login-column #login-box {
+  margin-top: 120px;
+  max-width: 600px;
+  height: 320px;
+  border: 1px solid #9C9C9C;
+  background-color: #EAEAEA;
+}
+#login .container #login-row #login-column #login-box #login-form {
+  padding: 20px;
+}
+#login .container #login-row #login-column #login-box #login-form #register-link {
+  margin-top: -85px;
+}
