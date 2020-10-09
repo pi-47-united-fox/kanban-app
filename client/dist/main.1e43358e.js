@@ -12369,7 +12369,8 @@ var _default = {
   data: function data() {
     return {
       page: 'loginPage',
-      baseUrl: 'http://localhost:3000',
+      baseUrl: 'https://kanban-app-iqbal-sahrizal.herokuapp.com',
+      // baseUrl: 'http://localhost:3000',
       tasks: []
     };
   },
@@ -12535,7 +12536,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57436" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59981" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
