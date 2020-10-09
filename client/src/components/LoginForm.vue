@@ -23,10 +23,10 @@
                             </div>
                             <div class="form-group">
                                 <!-- <label for="remember-me" class="text-info"><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br> -->
-                                <GoogleLogin :params="params" :renderParams="renderParams" :onSuccess="onSuccess" :onFailure="onFailure"></GoogleLogin>
                                 <!-- <google-login :params="params" :renderParams="renderParams" :onSuccess="onSuccess" :onFailure="onFailure">Google Login</google-login> -->
                                 <input type="submit" class="btn btn-info btn-md" @click="login" value="Login">
-                                Dont have any ? <a @click="changePage" class="text-info">Register here</a><br><br>
+                                Dont have any ? <a @click="changePage" class="text-info">Register here</a>
+                                <GoogleLogin class="float-right" :params="params" :renderParams="renderParams" :onSuccess="onSuccess" :onFailure="onFailure"></GoogleLogin>
                             </div> 
                         </form>
                     </div>
@@ -64,10 +64,10 @@ export default {
     methods:{  
         onSuccess(googleUser) {
             let id_token = googleUser.getAuthResponse().id_token
-            console.log(id_token);
+            console.log("token >>>",id_token);
             
             axios.post(`${serverUrl}google-login`,
-                {id_token}
+                {"id_token":id_token}
             )
                 .then(result => {
                     localStorage.setItem('access_token', result.data.token) 
