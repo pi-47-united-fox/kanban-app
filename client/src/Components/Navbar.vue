@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import GoogleLogin from "vue-google-login";
+// import GoogleLogin from "vue-google-login";
 
 export default {
   data() {
@@ -32,12 +32,8 @@ export default {
   },
   methods: {
     logMeOut() {
-      localStorage.removeItem("access_token");
+      localStorage.clear()
       this.$emit("emitWhichPage", "FrontPage");
-      var auth2 = gapi.auth2.getAuthInstance();
-      auth2.signOut().then(function() {
-        console.log("User signed out.");
-      });
     },
   },
 };

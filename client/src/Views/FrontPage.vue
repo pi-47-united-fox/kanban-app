@@ -6,16 +6,16 @@
     >
       <div class="form-container sign-in-container">
         <!-- Sign In form code goes here -->
-        <form>
+        <form @submit.prevent='signMeIn'>
           <h1>Sign in</h1>
-          <br />
-          <br />
-          <input type="email" placeholder="Email" v-model="email" />
-          <input type="password" placeholder="Password" v-model="password" />
           <br>
-          <button @click="signMeIn">Sign In</button>
+          <p v-if="error">{{errMessage}}</p>
+          <input type="email" placeholder="Email" v-model="email" required/>
+          <input type="password" placeholder="Password" v-model="password" required/>
+          <br>
+          <button>Sign In</button>
           <p>Or use</p>
-           <GoogleLogin
+          <GoogleLogin
             :params="params"
             :onSuccess="onSuccess"
             :onFailure="onFailure"
@@ -25,13 +25,13 @@
       </div>
       <div class="form-container sign-up-container">
         <!-- Sign Up form code goes here -->
-        <form>
+        <form @submit.prevent="registerMe">
           <h1>Create Account</h1>
-          <br /><br />
+          <br />
           <!-- <input type="text" placeholder="Name" /> -->
-          <input type="email" placeholder="Email" v-model="email" />
-          <input type="password" placeholder="Password" v-model="password" />
-          <button @click="registerMe">Sign Up</button>
+          <input type="email" placeholder="Email" v-model="email" required/>
+          <input type="password" placeholder="Password" v-model="password" required/>
+          <button>Sign Up</button>
           <p>Or use</p>
            <GoogleLogin
             :params="params"
@@ -45,15 +45,15 @@
         <!-- The overlay code goes here -->
         <div class="overlay">
           <div class="overlay-panel overlay-left">
-            <h1>Hello, Friend!</h1>
-            <p>Enter your personal details and start journey with us</p>
+            <h1>👋 Hello, Friend!</h1>
+            <p>Enter your personal details and start journey with us 🤗🤗🤗🤗</p>
             <button class="ghost" id="signIn" @click.prevent="showSignIn">
               Sign In
             </button>
           </div>
           <div class="overlay-panel overlay-right">
-            <h1>Welcome Back!</h1>
-            <p>To use our app please login with your personal account</p>
+            <h1>🎆 Welcome Back! NotTrelloan</h1>
+            <p>🤗 To use Not Trello please log in with your personal account. Or if you newcomers, just click Sign Up button 👇👇👇 to join with us</p>
             <button class="ghost" id="signUp" @click.prevent="showSignUp">
               Sign Up
             </button>
@@ -76,13 +76,14 @@ export default {
   },
   data() {
     return {
+      error: false,
       switchPanel: "",
       email: "",
       password: "",
       errMessage: "",
       params: {
         client_id:
-          "256037848773-c0eh8t8o0shmclh69i4d5rakps5td6nk.apps.googleusercontent.com",
+          "535140316073-8oullaasjt7gc9kobhnbglojud3e61t5.apps.googleusercontent.com",
       },
     };
   },
@@ -96,24 +97,28 @@ export default {
     signMeIn() {
       // console.log ('masuk')
       axios
-        .post("http://localhost:3000" + "/login", {
+        .post("https://kanban-nottrello.herokuapp.com" + "/login", {
           email: this.email,
           password: this.password,
         })
         .then(({ data }) => {
-          console.log(data);
+          // console.log(data);
           this.$emit("emitWhichPage", "HomePage");
           localStorage.setItem("access_token", data.access_token);
           localStorage.setItem("username", data.username);
           localStorage.setItem("organization", data.organization);
         })
         .catch((err) => {
-          console.error(err);
+          this.error = true
+          if (err.message == 'Request failed with status code 400') {
+            this.errMessage = 'Wrong Email Or Password'
+          }
+          
         });
     },
     registerMe() {
       axios
-        .post("http://localhost:3000" + "/register", {
+        .post("https://kanban-nottrello.herokuapp.com" + "/register", {
           email: this.email,
           password: this.password,
         })
@@ -127,11 +132,11 @@ export default {
         });
     },
     onSuccess(googleUser) {
-      console.log (googleUser)
+      // console.log (googleUser)
       const google_access_token = googleUser.getAuthResponse().id_token;
       axios({
         method: "post",
-        url: "http://localhost:3000" + "/google",
+        url: "https://kanban-nottrello.herokuapp.com" + "/google",
         headers: {
           google_access_token,
         },
@@ -142,11 +147,10 @@ export default {
           this.$emit("emitWhichPage", "HomePage");
         })
         .catch((err) => {
-          console.log(err);
+          console.log (err)
         });
     },
     onFailure(err) {
-      console.log (err) 
     },
   },
 };

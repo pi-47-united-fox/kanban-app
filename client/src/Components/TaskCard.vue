@@ -7,20 +7,21 @@
       <i class="fas fa-pen" @click="showModal = true"></i>
     </div>
     <div class="card__bottom">
-      <p class="card__bottom__date">{{card.createdAt.split('T')[0]}} <span>{{(card.createdAt.split('T')[1])}}</span></p>
-      <p class="card__bottom__author">{{card.User.id}}</p>
-    </div>
+      <p class="card__bottom__date">{{card.createdAt.split('T')[0]}}</p>
+      <p class="card__bottom__author">{{card.User.user_name}}</p>
+    </div>  
   <transition name="fade" appear>
-    <div class="modal-overlay" v-if="showModal" @click="showModal = false">
+    <div class="modal-overlay" v-if="showModal" @click="showModal = false, err = false, delCount = 0">
     </div>
   </transition>
   <transition name="slide" appear>
     <div class="modal" v-if="showModal">
           <h2>Edit Card</h2>
+          <p v-if="delCount == 1">Click again to delete</p>
           <i class="fas fa-trash" @click="deleteTask(card.id)"></i>
       <form>
           <br>
-          <textarea v-model="title"></textarea>
+          <textarea v-model="title" autofocus></textarea>
           <br>
           <label for="category">Change to List: </label>
           <select v-model="category" id="category">
@@ -31,24 +32,34 @@
           </select>
       </form>
       <br>
-      <p>This card Created by: {{card.User.id}}</p>
-      <br><br><br>
-      <button class="button" @click="showModal = false">Close</button>
+      <p>This card Created by: {{card.User.user_name}}</p>
+      <br>
+      <p v-if="err">{{ errMessage }}</p>
+      <br>
+      <button class="button" @click="showModal = false, err = false, delCount = 0">Close</button>
       <button class="button" @click="saveEdit(card.id)">Save</button>
     </div>
   </transition>
-  
+
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import Draggable from 'draggable'
 export default {
+  name: 'TaskCard',
+  components: {
+    Draggable
+  },
   data() {
     return {
       title: this.card.title,
       category: this.card.category,
-      showModal: false
+      showModal: false,
+      err: false,
+      errMessage: '',
+      delCount: 0
     }
   },
   props: ['card', 'categories'],
@@ -58,23 +69,28 @@ export default {
       },
       deleteTask(id) {
           // console.log (id)
-          axios.delete('http://localhost:3000' + `/tasks/${id}`, {
-            headers: {
-              access_token: localStorage.access_token
+            if (this.delCount == 1  ) {
+                axios.delete( 'https://kanban-nottrello.herokuapp.com' +`/tasks/${id}`, {
+                  headers: {
+                    access_token: localStorage.access_token
+                  }
+                }).then(res => {
+                    console.log(res)
+                    this.showModal = false
+                    this.fetchTask()
+                  }).catch(err => {
+                  this.err = !this.err
+                  this.errMessage = 'You can\'t Edit other User Card'
+                  console.error(err); 
+              })
+            } else {
+                this.delCount ++
             }
-          }).then(res => {
-                console.log(res)
-                this.showModal = false
-                this.fetchTask()
-                // this.$emit('fetchTasks')
-          }).catch(err => {
-              console.error(err); 
-          })
       },
       saveEdit(id) {
         axios({
           method:'put',
-          url: 'http://localhost:3000' + `/tasks/${id}`,
+          url: 'https://kanban-nottrello.herokuapp.com' + `/tasks/${id}`,
           headers: {
             access_token: localStorage.access_token
           },
@@ -83,10 +99,12 @@ export default {
             category: this.category
           }
         }).then((result) => {
-          console.log ('berhasil merubah ', result)
+          // console.log ('berhasil merubah ', result)
           this.fetchTask()
           this.showModal = false
         }).catch((err) => {
+          this.err = true
+          this.errMessage = 'You can\'t Edit other User Card'
           console.log (err)
         });
       },

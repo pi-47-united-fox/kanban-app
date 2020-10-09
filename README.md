@@ -28,16 +28,40 @@ See the RestAPI-doc.md for complete documentation
 ```cmd
 .
 ├── client
-│   ├── assets
+│   ├── firebase.json
+│   ├── index.html
+│   ├── _old_assets
 │   │   └── img
 │   │       └── asfalt-light.png
-│   ├── css
+│   ├── _old_css
 │   │   ├── main.css
 │   │   ├── main.css.map
 │   │   └── sass
 │   │       ├── main.scss
 │   │       └── _reset.scss
-│   └── index.html
+│   ├── _old_main.js
+│   ├── package.json
+│   ├── package-lock.json
+│   └── src
+│       ├── App.vue
+│       ├── assets
+│       │   └── img
+│       │       ├── asfalt-light.png
+│       │       └── bg.jpg
+│       ├── Components
+│       │   ├── Navbar.vue
+│       │   ├── TaskBoard.vue
+│       │   └── TaskCard.vue
+│       ├── config
+│       ├── main.js
+│       ├── styles
+│       │   ├── _base.scss
+│       │   └── _reset.scss
+│       └── Views
+│           ├── FrontPage.vue
+│           └── HomePage.vue
+├── db_client_test
+│   └── db.json
 ├── README.md
 ├── RestAPI-doc.md
 └── server
@@ -56,15 +80,15 @@ See the RestAPI-doc.md for complete documentation
     │   └── errHandler.js
     ├── migrations
     │   ├── 20201006080259-create-user.js
-    │   └── 20201006081534-create-task.js
+    │   ├── 20201006081534-create-task.js
+    │   └── 20201009064829-add-usernam-in-Users.js
     ├── models
     │   ├── index.js
     │   ├── task.js
     │   └── user.js
     ├── package.json
     ├── package-lock.json
-    ├── routers
-    │   ├── index.js
-    │   └── tasks.js
-    └── seeders
+    └── routers
+        ├── index.js
+        └── tasks.js
 ```

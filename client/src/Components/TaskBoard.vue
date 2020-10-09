@@ -14,7 +14,6 @@
         @fetchTask="fetchTask"
       ></Card>
     </div>
-
     <div v-if="listTitle == 'Todo'">
       <Card
         v-for="card in Todo"
@@ -53,11 +52,12 @@
             placeholder=""
             @keydown.enter="addTask"
             @keydown.esc="cancleAddM"
+            autofocus
           ></textarea>
         </form>
       </div>
       <div class="board-sec__bottom-add">
-        <button @click="addTask">add Card</button>
+        <button @click.prevent="addTask">add Card</button>
         <a href="#"><i class="fas fa-times" @click.prevent="cancleAddM"></i></a>
       </div>
     </div>
@@ -73,12 +73,11 @@
 </template>
 
 <script>
-import axios from "axios";
 import Card from "./TaskCard";
-
 export default {
+  name: 'TaskBoard',
   components: {
-    Card,
+    Card
   },
   props: ["listTitle", "cards", "categories"],
   data() {
@@ -89,7 +88,6 @@ export default {
     };
   },
   computed: {
-    // filter data
     Backlog: function() {
       return this.cards.filter((card) => card.category == "Backlog");
     },

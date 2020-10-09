@@ -37,7 +37,7 @@ export default {
     },
     fetchTask() {
       axios
-        .get("http://localhost:3000" + "/tasks", {
+        .get("https://kanban-nottrello.herokuapp.com" + "/tasks", {
           headers: {
             access_token: localStorage.access_token,
           },
@@ -55,7 +55,7 @@ export default {
     addCard(data) {
       axios({
         method: "post",
-        url: "http://localhost:3000" + "/tasks",
+        url: "https://kanban-nottrello.herokuapp.com" + "/tasks",
         headers: {
           access_token: localStorage.access_token,
         },
@@ -78,7 +78,7 @@ export default {
   beforeUpdate() {
     for (const ctg in this.dataTask) {
       this.dataTasks[ctg] = [];
-      console.log(this.dataTasks);
+      // console.log(this.dataTasks);
     }
   },
 };

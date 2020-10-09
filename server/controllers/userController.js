@@ -47,6 +47,7 @@ class UserControler {
     }
 
     static async googleLoginC(req, res, next) {
+        // console.log ('masuk')
         const client = new OAuth2Client(process.env.CLIENT_ID);
         try {
             const ticket = await client.verifyIdToken({
