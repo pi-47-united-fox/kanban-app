@@ -1,14 +1,16 @@
 <template>
   <div id="mainpage">
     <div class="container-fluid">
-        <div class="d-flex flex-row-reverse mt-3 mr-3 bd-highlight">
-            <button type="button" class="btn btn-success" @click.prevent="AddTask">New Task</button><br>
+        <div class="button-newtask mt-3">
+            <button type="button" class="btn btn-success" @click="addTaskForm">New Task</button><br>
             <div class="row">
                 <TaskHead
                 v-for="(stage, i) in stages"
                 :key='i'
                 :stage="stage"
-                :fetchedTasks='fetchedTasks'>
+                :fetchedTasks="fetchedTasks"
+                @editForm="editForm"
+                @deleteTask="deleteTask">
                 </TaskHead>
             </div>
         </div>
@@ -26,33 +28,21 @@ export default {
     components: {
         TaskHead
     },
-    props: ['stages'],
-    data() {
-        return {
-            fetchedTasks : []
-        }
-    },
+    props: ['stages', 'fetchedTasks'], //penerima dari app
     methods: {
-        fetchTasks(){
-            axios({
-                method: 'GET',
-                url: 'http://localhost:3000/tasks',
-                headers: {
-                    access_token: localStorage.getItem('access_token')
-                }
-            })
-            .then(({data}) => {
-                this.fetchedTasks = data
-                console.log(data, '<<< fetch data')
-            })
-            .catch(err => {
-                console.log(err)
-            })
-        }
+        addTaskForm(){
+            this.$emit('changePage', 'add-task')
+        },
+        fetchTasks(payload){
+            this.$emit('fetchTasks', payload)
+        },
+        editForm(payload){
+            this.$emit('editForm', payload)
+        },
+        deleteTask(payload){
+            this.$emit('deleteTask', payload)
+      }
     },
-    created(){
-        this.fetchTasks()
-    }
 }
 </script>
 

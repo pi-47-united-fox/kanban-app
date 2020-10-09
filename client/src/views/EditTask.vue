@@ -1,7 +1,7 @@
 <template>
   <div class="jumbotron container" id="addTask">
-    <h2><b>Add new Task</b></h2>
-    <form @submit.prevent="addTask">
+    <h2><b>Edit Task</b></h2>
+    <form @submit.prevent="editTask">
       <div class="form-group">
         <label for="titletodos">Title Task</label>
         <input type="text" class="form-control" placeholder="e.g: Membuat Halaman Client" v-model="title">
@@ -31,22 +31,24 @@ import axios from 'axios'
 
 export default {
     name: 'AddTask',
+    props: ['taskDetail'],
     data(){
       return {
         tasks: [],
-        title: '',
-        description: '',
-        category: ''
+        title: this.taskDetail.title,
+        description: this.taskDetail.description,
+        category: this.taskDetail.category
       }
     },
     methods: {
-      addTask(){
-        let payload = {
-          title: this.title,
-          description: this.description,
-          category: this.category
-        }
-        this.$emit('addTask', payload)
+      editTask(){
+          let payload = {
+              id: this.taskDetail.id,
+              title: this.title,
+              description: this.description,
+              category: this.category
+          }
+          this.$emit('editTask', payload)
       }
     }
 }

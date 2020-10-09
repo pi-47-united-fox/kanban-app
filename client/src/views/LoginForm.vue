@@ -31,6 +31,7 @@ import axios from 'axios'
 
 export default {
     name: 'LoginForm',
+    props: ['fetchTasks'],
     data() {
         return {
             email: '',
@@ -48,9 +49,9 @@ export default {
                 }
             })
             .then(({data}) => {
-                this.isPage = "home"
+                this.$emit('changePage', 'home-page')
                 localStorage.setItem('access_token', data.access_token)
-                //   this.fetchTask()
+                this.fetchTasks()
             })
             .catch(err=> {
                 console.log(err)
@@ -59,7 +60,7 @@ export default {
                 this.email = ''
                 this.password = ''
             })
-        },
+        }
     }
 }
 </script>

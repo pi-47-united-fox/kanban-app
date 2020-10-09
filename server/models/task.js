@@ -34,15 +34,7 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    date: {
-      type: DataTypes.DATEONLY,
-      validate: {
-        isAfter: {
-          args: new Date().toString(),
-          msg: 'Please fill the Date'
-        }
-      }
-    },
+    date: DataTypes.DATEONLY,
     category: {
       type: DataTypes.STRING,
       validate: {
@@ -53,6 +45,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     userId: DataTypes.INTEGER
   }, {
+    hooks: {
+      beforeCreate(task) {
+        task.date = new Date()
+      }
+    },
     sequelize,
     modelName: 'Task',
   });

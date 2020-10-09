@@ -1,13 +1,17 @@
 <template>
   <div class="card-body border">
         <div class="card-title">
-          <h5>Title</h5>
+          <h5><b>{{task.title}}<b></h5>
         </div>
-        <div class="card-title">
-          <h5>Category</h5>
+        <div class="card-description">
+          <h5>{{task.description}}</h5>
         </div>
-          <div class="card-title">
-            <h6>Date</h6>
+          <div class="card-date">
+            <h6>{{task.date}}</h6>
+        </div>
+        <div class="card-button">
+          <i @click="editForm" class="fas fa-pen-square"></i>
+          <i @click="deleteTask" class="fas fa-trash"></i>
         </div>
       </div>
 </template>
@@ -16,7 +20,15 @@
 
 export default {
     name: 'TaskBox',
-    props: ['fetchedTasks']
+    props: ['task'],
+    methods: {
+      editForm(){
+        this.$emit('editForm', this.task)
+      },
+      deleteTask(){
+        this.$emit('deleteTask', this.task)
+      }
+    }
 }
 </script>
 

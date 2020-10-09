@@ -2,38 +2,26 @@ body{
     margin: 0;
     padding: 0;
     background-color: rgb(241, 241, 240);
+    font-family: 'Playfair Display', serif;
 }
 
 .navbar{
-    background-color: #0e79a3;
+    background-color: #20bae9;
     display: flex;
     padding: 3px;
-    justify-content: space-between;
-    align-items: center;
 }
+
 .navbar-brand {
-  justify-content: baseline;
+  color: rgb(253, 215, 1),;
+  padding: 3px;
   font-size: 30px;
+  font-family: 'Playfair Display', serif;
 }
 
 .menu{
     margin: 10px;
     display: flex;
     align-items: baseline;
-}
-
-li{
-    list-style: none;
-    margin-right: 14px;
-}
-
-a{
-    text-decoration: none;
-    color: white;
-}
-i{
-    color: white;
-    margin-right: 20px;
 }
 
 #login .container #login-row #login-column #login-box {

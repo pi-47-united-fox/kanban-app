@@ -5,7 +5,8 @@ class TaskController{
         Task.findAll({
             where: {
                 userId: +req.userData.id
-            }
+            },
+            order:[['date','asc']]
         })
         .then(data => {
             res.status(200).json(data)
@@ -18,7 +19,6 @@ class TaskController{
         Task.create({
             title: req.body.title,
             description: req.body.description,
-            date: req.body.date,
             category: req.body.category,
             userId: +req.userData.id
         })
@@ -31,6 +31,8 @@ class TaskController{
     }
     static patchTasks(req,res,next){
         const patchTasks = {
+            title: req.body.title,
+            description: req.body.description,
             category: req.body.category
         }
         Task.update(patchTasks, {
@@ -39,7 +41,12 @@ class TaskController{
             }
         })
         .then(data => {
-            res.status(200).json({message: 'Task Category Success to Update'})
+            res.status(200).json({
+                id: data.id,
+                title: data.title,
+                description: data.description,
+                category: data.category
+            })
         })
         .catch(err => {
             next(err)

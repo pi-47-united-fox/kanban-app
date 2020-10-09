@@ -26,11 +26,6 @@ const errorHandler = (err,req,res,next) => {
                 message: err.errors[0].message
             })
         break;
-        case 'JsonWebTokenError': 
-            res.status(401).json({
-                name: 'Unauthorized',
-                message: err.errors[0].message
-            })
         case 'TokenExpiredError': 
             res.status(401).json({
                 name: 'Unauthorized',

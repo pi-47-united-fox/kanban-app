@@ -57,45 +57,45 @@ class UserController{
             next(err)
         }
     }
-    static googleLogin(req,res,next){
-        const client = new OAuth2Client(process.env.CLIENT_ID)
-        let emailGoogle
-        client.verifyIdToken({
-            idToken: req.headers.google_access_token,
-            audience: process.env.CLIENT_ID
-        })
-        .then(({payload}) => {
-            emailGoogle = payload.email
-            return User.findOne({
-                where: {email:emailGoogle}
-            })
-        })
-        .then(resultuser => {
-            if(!resultuser){
-                var userGoogle = {
-                    email: emailGoogle,
-                    password: 'passwordrandom'
-                }
-                return User.create(userGoogle)
-            } else {
-                return resultuser
-            }
-        })
-        .then(user => {
-            const access_token = signToken({
-                id: user.id,
-                email: user.email
-            })
-            return res.status(200).json({
-                access_token,
-                UserId: user.id,
-                message:'Google User Success Login'
-            })
-        })
-        .catch(err => {
-            next(err)
-        })
-    }
+    // static googleLogin(req,res,next){
+    //     const client = new OAuth2Client(process.env.CLIENT_ID)
+    //     let emailGoogle
+    //     client.verifyIdToken({
+    //         idToken: req.headers.google_access_token,
+    //         audience: process.env.CLIENT_ID
+    //     })
+    //     .then(({payload}) => {
+    //         emailGoogle = payload.email
+    //         return User.findOne({
+    //             where: {email:emailGoogle}
+    //         })
+    //     })
+    //     .then(resultuser => {
+    //         if(!resultuser){
+    //             var userGoogle = {
+    //                 email: emailGoogle,
+    //                 password: 'passwordrandom'
+    //             }
+    //             return User.create(userGoogle)
+    //         } else {
+    //             return resultuser
+    //         }
+    //     })
+    //     .then(user => {
+    //         const access_token = signToken({
+    //             id: user.id,
+    //             email: user.email
+    //         })
+    //         return res.status(200).json({
+    //             access_token,
+    //             UserId: user.id,
+    //             message:'Google User Success Login'
+    //         })
+    //     })
+    //     .catch(err => {
+    //         next(err)
+    //     })
+    // }
 }
 
 module.exports = UserController

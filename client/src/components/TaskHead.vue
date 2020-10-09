@@ -1,12 +1,15 @@
 <template>
   <div class="col-md-3" >
-    <div class="bg-primary rounded shadow p-3 text-left text-white" >
+    <div class="bg-warning rounded shadow p-2 text-center text-black mt-3" >
       <h3>{{stage.stage}}</h3>
     </div>
-    <div class="card bg-white shadow p-3 mt-3" >
-      {{fetchedTasksPerCategory}}
+    <div class="card bg-white shadow p-3" >
       <TaskBox
-      :fetchedTasks="fetchedTasks">
+      v-for="task in fetchedTasksPerCategory"
+      :key="task.id"
+      :task='task'
+      @editForm="editForm"
+      @deleteTask="deleteTask">
       </TaskBox>
     </div>
   </div>    
@@ -24,6 +27,14 @@ export default {
     computed: {
       fetchedTasksPerCategory(){
         return this.fetchedTasks.filter(fetchedTask => fetchedTask.category == this.stage.stage)
+      }
+    },
+    methods: {
+      editForm(payload){
+        this.$emit('editForm', payload)
+      },
+      deleteTask(payload){
+        this.$emit('deleteTask', payload)
       }
     }
 }
