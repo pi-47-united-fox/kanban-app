@@ -62,10 +62,10 @@ class UserController {
 
     static async googleLogin(req, res, next) {
         const google_token = req.headers.google_token
+
         try {
-            const payLoad = await verifyGoogle(google_token)
-            const email = payLoad.email
-            const name = payLoad.name
+            const payload = await verifyGoogle(google_token)
+            const email = payload.email
             const user = await User.findOne({
                 where: {
                     email
@@ -73,27 +73,23 @@ class UserController {
             })
             const password = process.env.DEFAULT_GOOGLE_USER_PASSWORD
             if (user) {
-                const encryptedPassword = comparePass
-                const newPasswordGoogleUser = await User.update({ password: encryptedPassword }, {
-                    where: {
-                        id: user.id
-                    }
-                })
-                const access_token = jwt.sign({ id: user.id, email: user.email }, process.env.SECRET);
-                res.status(200).json({ access_token })
+                let check = comparePass
+                if (check) {
+                    const access_token = jwt.sign({ id: user.id, email: user.email, }, process.env.SECRET)
+                    res.status(200).json({ access_token })
+                }
             } else {
-                const newUserGoogle = await User.create({
+                const newUser = await User.create({
+                    name,
                     email,
-                    password: password,
-                    name
+                    password
                 })
-                const access_token = jwt.sign({ id: newUserGoogle.id, email: newUserGoogle.email }, process.env.SECRET);
-                res.status(201).json({ access_token })
+                const access_token = jwt.sign({ id: newUser.id, email: newUser.email, }, process.env.SECRET)
+                res.status(200).json({ access_token })
             }
         } catch (err) {
-            next(err)
+            console.log(err)
         }
-
     }
 }
 

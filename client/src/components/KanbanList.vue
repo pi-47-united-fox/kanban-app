@@ -2,14 +2,11 @@
   <div class="px-6 py-4 bg-white p-10 m-3 card-task">
     <div class="container-row">
       <div class="container-row" id="editTask" @click="openEditor">
-        <div v-html="editLogo">
-        </div>
         <p class="text-xs text-gray-500	">edit</p>
       </div>
 
       <div class="container-row" id="deleteTask" @click="deleteTask">
         <p class="text-xs text-gray-500	">delete</p>
-        <div v-html="deleteLogo"></div>
       </div>
     </div>
     <div class="font-bold text-base mb-2">

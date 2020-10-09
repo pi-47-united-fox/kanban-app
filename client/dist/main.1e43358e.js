@@ -10736,39 +10736,61 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 // import google from './google.vue'
 var _default = {
-  name: 'LoginPage',
+  name: "LoginPage",
   data: function data() {
     return {
-      email: '',
-      password: '',
-      message: ''
+      email: "",
+      password: "",
+      message: ""
     };
   },
-  props: ['baseUrl'],
+  props: ["baseUrl"],
   methods: {
     login: function login() {
       var _this = this;
 
       (0, _axios.default)({
-        method: 'POST',
-        url: this.baseUrl + '/login',
+        method: "POST",
+        url: this.baseUrl + "/login",
         data: {
           email: this.email,
           password: this.password,
-          message: ''
+          message: ""
         }
       }).then(function (res) {
-        localStorage.setItem('access_token', res.data.access_token);
+        localStorage.setItem("access_token", res.data.access_token);
 
-        _this.changePage('dashboard');
+        _this.changePage("dashboard");
       }).catch(function (err) {
-        (0, _sweetalert.default)('Anjay', 'Wrong password or email!', 'error');
+        (0, _sweetalert.default)("Anjay", "Wrong password or email!", "error");
       });
     },
     changePage: function changePage(page) {
-      this.$emit('changePage', page);
+      this.$emit("changePage", page);
     }
   }
 };
@@ -10799,7 +10821,7 @@ exports.default = _default;
         _c(
           "form",
           {
-            staticClass: "loginBox shadow-md rounded px-8 pt-6 pb-8 mb-4 ",
+            staticClass: "loginBox shadow-md rounded px-8 pt-6 pb-8 mb-4",
             on: {
               submit: function($event) {
                 $event.preventDefault()
@@ -10821,11 +10843,7 @@ exports.default = _default;
                   staticClass: "block text-gray-700 text-sm font-bold mb-2",
                   attrs: { for: "email-login" }
                 },
-                [
-                  _vm._v(
-                    "\n                        Email\n                    "
-                  )
-                ]
+                [_vm._v("\n            Email\n          ")]
               ),
               _vm._v(" "),
               _c("input", {
@@ -10863,11 +10881,7 @@ exports.default = _default;
                   staticClass: "block text-gray-700 text-sm font-bold mb-2",
                   attrs: { for: "password" }
                 },
-                [
-                  _vm._v(
-                    "\n                        Password\n                    "
-                  )
-                ]
+                [_vm._v("\n            Password\n          ")]
               ),
               _vm._v(" "),
               _c("input", {
@@ -10936,7 +10950,7 @@ var staticRenderFns = [
             "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline",
           attrs: { type: "submit" }
         },
-        [_vm._v("\n                        Sign In\n                    ")]
+        [_vm._v("\n            Sign In\n          ")]
       )
     ])
   }
@@ -11590,9 +11604,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-//
-//
-//
 var _default = {
   name: 'kanbanList',
   props: ['task', 'baseUrl', 'type'],
@@ -11687,11 +11698,7 @@ exports.default = _default;
           attrs: { id: "editTask" },
           on: { click: _vm.openEditor }
         },
-        [
-          _c("div", { domProps: { innerHTML: _vm._s(_vm.editLogo) } }),
-          _vm._v(" "),
-          _c("p", { staticClass: "text-xs text-gray-500\t" }, [_vm._v("edit")])
-        ]
+        [_c("p", { staticClass: "text-xs text-gray-500\t" }, [_vm._v("edit")])]
       ),
       _vm._v(" "),
       _c(
@@ -11704,9 +11711,7 @@ exports.default = _default;
         [
           _c("p", { staticClass: "text-xs text-gray-500\t" }, [
             _vm._v("delete")
-          ]),
-          _vm._v(" "),
-          _c("div", { domProps: { innerHTML: _vm._s(_vm.deleteLogo) } })
+          ])
         ]
       )
     ]),
@@ -12466,7 +12471,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54144" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56530" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
