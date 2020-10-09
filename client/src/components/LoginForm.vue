@@ -53,7 +53,7 @@ export default {
     },
     methods: {
         login(){
-            axios.post('http://localhost:3000/login', {
+            axios.post('https://kanban-uwu.herokuapp.com/login', {
                     email: this.email,
                     password: this.password
                 })
@@ -75,7 +75,7 @@ export default {
             // console.log(google_access_token);
             axios({
                 method: 'POST',
-                url: 'http://localhost:3000/googleLogin',
+                url: 'https://kanban-uwu.herokuapp.com/googleLogin',
                 headers:{
                     google_access_token
                 }

@@ -68,7 +68,7 @@ export default {
             this.page = payload
         },
         fetchTasks(){
-            axios.get('http://localhost:3000/tasks', {
+            axios.get('https://kanban-uwu.herokuapp.com/tasks', {
                 headers: {
                     access_token: localStorage.getItem('access_token')
                 }
@@ -82,7 +82,7 @@ export default {
                 })
         },
         addTask(payload){
-            axios.post('http://localhost:3000/tasks', {
+            axios.post('https://kanban-uwu.herokuapp.com/tasks', {
                     title: payload.title,
                     description: payload.description,
                     category: payload.category,
@@ -111,7 +111,7 @@ export default {
         editTask(payload){
             axios({
                 method: 'PUT',
-                url: `http://localhost:3000/tasks/${payload.id}`,
+                url: `https://kanban-uwu.herokuapp.com/tasks/${payload.id}`,
                 data: {
                     category: payload.category
                 },
@@ -132,7 +132,7 @@ export default {
             console.log(task)
             axios({
                 method: 'DELETE',
-                url: `http://localhost:3000/tasks/${task.id}`,
+                url: `https://kanban-uwu.herokuapp.com/tasks/${task.id}`,
                 headers: {
                     access_token: localStorage.getItem('access_token')
                 }
@@ -159,7 +159,7 @@ export default {
             }
             axios({
                 method: 'PATCH',
-                url: `http://localhost:3000/tasks/${task.id}`,
+                url: `https://kanban-uwu.herokuapp.com/tasks/${task.id}`,
                 data: {
                     category: status
                 },
@@ -190,7 +190,7 @@ export default {
             }
             axios({
                 method: 'PATCH',
-                url: `http://localhost:3000/tasks/${task.id}`,
+                url: `https://kanban-uwu.herokuapp.com/tasks/${task.id}`,
                 data: {
                     category: status
                 },

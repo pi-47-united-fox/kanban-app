@@ -39,7 +39,7 @@ export default {
     methods: {
         registerUser(){
             axios
-                .post('http://localhost:3000/register', {
+                .post('https://kanban-uwu.herokuapp.com/register', {
                     name: this.name,
                     email: this.email,
                     password: this.password
