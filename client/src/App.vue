@@ -76,6 +76,11 @@ body {
   background: #f9f9f9;
 }
 
+.category{
+  display: flex;
+  justify-content: space-around;
+}
+
 .logo {
   height: 50px;
   padding: 10px;

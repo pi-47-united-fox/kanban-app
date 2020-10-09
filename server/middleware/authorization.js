@@ -1,14 +1,16 @@
-const { Task } = require('../models')
+const { User } = require('../models')
 
 const authorization = (req, res, next) => {
-    console.log(req.userData);
     const { id } = req.params
-    const userData = req.userData.id
-    Task.findByPk(id)
+    const userId = req.userData.id
+    console.log(userId, id);
+    User.findByPk(userId)
         .then(data => {
-            if (data && data.userId === userData) {
+            console.log(data);
+            if (data && data.id === userId) {
                 next()
             } else {
+                console.log('ini polisi');
                 return res.status(400).json({
                     message: 'Data not found'
                 })

@@ -2,7 +2,9 @@ const { User, Task } = require('../models')
 
 class TaskController {
     static findAllTask(req, res, next) {
-        Task.findAll()
+        Task.findAll({
+            include: User
+        })
             .then(data => {
                 return res.status(201).json(data)
             })
@@ -11,16 +13,14 @@ class TaskController {
             })
     }
     static findById(req, res, next) {
-        idUser = req.params.id
+        
         Task.findOne({
             where: {
-                id: idUser
+                id: req.params.id
             }
         })
             .then(data => {
-                return res.status(201).json(data, {
-                    message: `ini data dari id : ${idUser}`
-                })
+                return res.status(201).json(data)
             })
             .catch(err => {
                 return next(err)
@@ -30,15 +30,14 @@ class TaskController {
         let task = {
             title: req.body.title,
             category: req.body.category,
-            userId: req.userData.id
+            UserId: req.userData.id
         }
         Task.create(task, {
             include: User
         })
             .then(data => {
-                return res.status(201).json(data, {
-                    message: 'Task has been created'
-                })
+                console.log(data);
+                return res.status(201).json(data)
             })
             .catch(err => {
                 return next(err)
@@ -51,8 +50,9 @@ class TaskController {
             }
         })
             .then(data => {
+                console.log(data, '<-----ini dari controller tasks');
                 if (data) {
-                    return status(201).json({
+                    return res.status(201).json({
                         message: 'Deleted successfully'
                     })
                 } else {
@@ -60,6 +60,9 @@ class TaskController {
                         message: `Data not found, faild to delete`
                     })
                 }
+            })
+            .catch(err => {
+                return next(err)
             })
     }
     static editTask(req, res, next) {

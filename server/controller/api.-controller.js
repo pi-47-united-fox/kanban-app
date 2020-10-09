@@ -1,5 +1,5 @@
 const { OAuth2Client } = require('google-auth-library');
-const client = new OAuth2Client('841246734810-ph9ikv3p8ae847gkere5m2b359glabpe.apps.googleusercontent.com');
+const client = new OAuth2Client('878279928291-3dua9vledg1lkihleq172sghqqo3cdn4.apps.googleusercontent.com');
 
 
 class ApiController {
@@ -34,3 +34,5 @@ class ApiController {
             })
     }
 }
+
+module.exports = ApiController

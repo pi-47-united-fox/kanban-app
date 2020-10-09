@@ -56,24 +56,6 @@ export default {
     };
   },
   methods: {
-    // googleLogin(googleUsers) {
-    //   let id_token = googleUsers.getAuthResponse().id_token;
-    //   axios({
-    //     method: "POST",
-    //     url: "${URL}api/googleLogin",
-    //     data: {
-    //       id_token,
-    //     },
-    //   })
-    //     .then(({ data }) => {
-    //       localStorage.access_token = data.access_token;
-    //       localStorage.setItem("access_token", data.access_token); //set token di client
-    //       this.$emit("emitLogin");
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-    // },
     login() {
       axios({
         method: "POST",

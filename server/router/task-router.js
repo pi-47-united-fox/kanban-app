@@ -3,9 +3,6 @@ const TaskController = require('../controller/task-controller')
 const authentication = require('../middleware/authentication')
 const authorization = require('../middleware/authorization')
 
-
-
-
 router.use(authentication)
 router.get('/', TaskController.findAllTask)
 router.get('/:id', authorization, TaskController.findById)
