@@ -8,6 +8,7 @@ const { authentication, authorization } = require("../middlewares/security");
 
 router.post("/users/login", UserController.login);
 router.post("/users/register", UserController.register);
+router.post("/users/googlesignin", UserController.googleSignIn);
 
 router.post("/organizations", OrganizationController.create);
 router.get("/organizations", OrganizationController.getAll);

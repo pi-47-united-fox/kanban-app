@@ -4,6 +4,8 @@ const { User, Organization } = require("../models");
 const defaultPic = require("../helpers/defaultPicture");
 const { createToken } = require("../helpers/jwt");
 const { comparePassword } = require("../helpers/encyrpt");
+const { OAuth2Client } = require("google-auth-library");
+const client = new OAuth2Client(process.env.CLIENT_ID);
 
 class UserController {
 	static register(req, res, next) {
@@ -43,14 +45,21 @@ class UserController {
 		})
 			.then((result) => {
 				if (result && comparePassword(userData.password, result.password)) {
-					const { id, email, full_name, profile_pic, OrganizationId, Organization } = result;
+					const {
+						id,
+						email,
+						full_name,
+						profile_pic,
+						OrganizationId,
+						Organization,
+					} = result;
 					const access_token = createToken({ id, email, OrganizationId });
 					res.status(201).json({
 						id,
 						access_token,
 						full_name,
 						profile_pic,
-						organization_name: Organization.name
+						organization_name: Organization.name,
 					});
 				} else {
 					next({ name: "WrongCredential" });
@@ -58,6 +67,45 @@ class UserController {
 			})
 			.catch((err) => {
 				next(err);
+			});
+	}
+
+	static googleSignIn(req, res, next) {
+		const token = req.body.token;
+		let user = null;
+		client
+			.verifyIdToken({
+				idToken: token,
+				audience: process.env.CLIENT_ID,
+			})
+			.then((ticket) => {
+				const payload = ticket.getPayload();
+				user = {
+					full_name: `${payload.given_name} ${payload.family_name}`,
+					email: payload.email,
+					password: process.env.DEFAULT_PASS,
+					profile_pic: defaultPic(),
+					OrganizationId: 2,
+				};
+				return User.findOne({ where: { email: user.email } });
+			})
+			.then((data) => {
+				console.log(user);
+				return !data ? User.create(user) : data;
+			})
+			.then((data) => {
+				const { id, email, full_name, profile_pic, OrganizationId } = data;
+				const access_token = createToken({ id, email, OrganizationId });
+				res.status(201).json({
+					id,
+					access_token,
+					full_name,
+					profile_pic,
+					organization_name: "Hacktiv8",
+				});
+			})
+			.catch((err) => {
+				console.log(err);
 			});
 	}
 }

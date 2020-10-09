@@ -63,12 +63,14 @@ import axios from "axios";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import MainPage from "./components/MainPage";
+import GoogleLogin from "vue-google-login";
 
 export default {
 	components: {
 		Login,
 		MainPage,
 		Register,
+		GoogleLogin,
 	},
 	data() {
 		return {
@@ -87,6 +89,10 @@ export default {
 		logout() {
 			this.isPage = "login";
 			localStorage.clear();
+			var auth2 = gapi.auth2.getAuthInstance();
+			auth2.signOut().then(function() {
+				console.log("User signed out.");
+			});
 		},
 		setPage(value) {
 			this.isPage = value;

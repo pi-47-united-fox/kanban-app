@@ -44,7 +44,7 @@ export default {
 	},
 	data() {
 		return {
-			organization_name: localStorage.organization_name,
+			organization_name: localStorage.organization_name || "Hacktiv8",
 			title: "",
 			reload: false,
 		};
