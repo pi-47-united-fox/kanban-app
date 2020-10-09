@@ -37,16 +37,20 @@ class UserController {
 			password: req.body.password,
 		};
 
-		User.findOne({ where: { email: userData.email } })
+		User.findOne({
+			where: { email: userData.email },
+			include: { model: Organization, attributes: ["name"] },
+		})
 			.then((result) => {
 				if (result && comparePassword(userData.password, result.password)) {
-					const { id, email, full_name, profile_pic, OrganizationId } = result;
+					const { id, email, full_name, profile_pic, OrganizationId, Organization } = result;
 					const access_token = createToken({ id, email, OrganizationId });
 					res.status(201).json({
 						id,
 						access_token,
 						full_name,
 						profile_pic,
+						organization_name: Organization.name
 					});
 				} else {
 					next({ name: "WrongCredential" });

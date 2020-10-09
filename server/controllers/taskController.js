@@ -23,6 +23,7 @@ class TaskController {
 							attributes: ["email"],
 						},
 					],
+					order: [["updatedAt", "ASC"]],
 				});
 			})
 			.then((results) => {
@@ -37,6 +38,7 @@ class TaskController {
 						title,
 						email: User.email,
 						CategoryId,
+						category_name: Category.name,
 						createdAt: createdAt.toLocaleDateString("id"),
 					});
 				});

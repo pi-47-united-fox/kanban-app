@@ -60,6 +60,7 @@ export default {
 					localStorage.setItem("full_name", data.full_name);
 					localStorage.setItem("profile_pic", data.profile_pic);
 					localStorage.setItem("id", data.id);
+					localStorage.setItem("organization_name", data.organization_name);
 					this.$emit("toHome", "home");
 				})
 				.catch((err) => {
