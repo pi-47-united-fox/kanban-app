@@ -1,12 +1,19 @@
-const { Task } = require('../models')
+const { Task, User} = require('../models')
 
 
 
 class TaskController{
     static getTaskHandler(req,res,next){
-        Task.findAll({order:[['id','asc']]})
+        Task.findAll({
+            order:[['id','asc']],
+            include:[User]
+        })
             .then(result=>{
-                res.status(200).json({result})
+                let newData = []
+                result.forEach(val=>{
+                    newData.push({id:val.id,title:val.title,category:val.category,email:val.User.email,organization:val.User.organization})
+                })
+                res.status(200).json(newData)
             }).catch(err=>{
                 console.log(err)
                 next(err)
@@ -14,10 +21,11 @@ class TaskController{
     }
 
     static addTaskHandler(req,res,next){
-        const { title } = req.body
+        const { title,category } = req.body
         const userId = req.userData.id
+        console.log(req.body)
 
-        let newTask = {title,userId}
+        let newTask = {title,category,userId}
 
         Task.create(newTask)
             .then(result=>{
@@ -32,6 +40,7 @@ class TaskController{
     static editTaskHandler(req,res,next){
         const id = +req.params.id
         const category = req.query.category
+        console.log(id)
 
         Task.update({category},{where:{id}})
             .then(()=>{

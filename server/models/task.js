@@ -23,9 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     userId:DataTypes.INTEGER
   }, {
     hooks:{
-      beforeCreate(task){
-        task.category = 'backlog'
-      }
+  
     },
     sequelize,
     modelName: 'Task',
