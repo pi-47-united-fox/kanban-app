@@ -18,7 +18,7 @@ class UserController {
 		Organization.findByPk(userData.OrganizationId)
 			.then((result) => {
 				if (!result) {
-					next({ name: "BadRequestOrganization"});
+					next({ name: "BadRequestOrganization" });
 				} else {
 					return User.create(userData);
 				}
@@ -35,7 +35,7 @@ class UserController {
 		const userData = {
 			email: req.body.email,
 			password: req.body.password,
-        };
+		};
 
 		User.findOne({ where: { email: userData.email } })
 			.then((result) => {
@@ -43,6 +43,7 @@ class UserController {
 					const { id, email, full_name, profile_pic, OrganizationId } = result;
 					const access_token = createToken({ id, email, OrganizationId });
 					res.status(201).json({
+						id,
 						access_token,
 						full_name,
 						profile_pic,

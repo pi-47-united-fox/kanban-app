@@ -4,7 +4,10 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="stylesheet" href="./style.css" type="text/css" />
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.css" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.1/css/bulma.css"
+		/>
 		<title>Layout Kanban</title>
 	</head>
 	<body>
@@ -35,356 +38,294 @@
 			</div>
 		</nav>
 
-		<!--MAIN CONTENT-->
-		<section id="main-kanban" class="">
-            <!--BACKLOG-->
-			<div class="task-box has-background-primary-dark has-text-primary-light">
-				<div class="task-category">
-					<h1 class="has-text-primary-light title">Backlog</h1>
+		<!--REGISTRATION-->
+		<section id="registration-form" class="container mt-6">
+			<h1 class="title is-2 has-text-centered">Registration</h1>
+			<form>
+				<div class="field">
+					<label class="label">Email</label>
+					<div class="control has-icons-left has-icons-right">
+						<input class="input" type="email" placeholder="Email input" />
+						<span class="icon is-small is-left">
+							<i class="fas fa-envelope"></i>
+						</span>
+					</div>
 				</div>
 
-				<div class="task-list">
-					<!--TASK 1-->
-                    <div class="task has-background-dark">
-						<div class="task-todo">
-							<p>
-								Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia,
-								maiores!
-							</p>
-						</div>
+				<div class="field">
+					<label class="label">Password</label>
+					<p class="control has-icons-left has-icons-right">
+						<input class="input" type="password" placeholder="Password" />
+						<span class="icon is-small is-left">
+							<i class="fas fa-lock"></i>
+						</span>
+					</p>
+				</div>
 
-						<div class="task-detail">
-                            <div class="email-and-date-stamp">
-                                <p>by: <span>john@mail.com</span></p>
-							    <p>created at: <span>28/01/2020</span></p>
-                            </div>
-                            
-                            <div class="task-options">
-                                <i class="fas fa-adjust fa-2x"></i>
-                                <i class="fas fa-address-book fa-2x"></i>
-                                <i class="fas fa-align-center fa-2x"></i>
-                            </div>
+				<div class="field">
+					<label class="label">Full Name</label>
+					<div class="control has-icons-left has-icons-right">
+						<input class="input" type="text" placeholder="Full Name" />
+						<span class="icon is-small is-left">
+							<i class="fas fa-user"></i>
+						</span>
+					</div>
+				</div>
+
+				<div class="field">
+					<label class="label">Organization</label>
+					<div class="control">
+						<div class="select">
+							<select>
+								<option>Select dropdown</option>
+								<option>With options</option>
+							</select>
 						</div>
 					</div>
 				</div>
 
-				<div class="field has-addons task-add">
+				<div class="field is-grouped">
 					<div class="control">
-						<input class="input" type="text" placeholder="Add Task" />
+						<button type="submit" class="button is-link has-background-primary-dark">
+							Submit
+						</button>
 					</div>
 					<div class="control">
-						<a class="button is-info">Save</a>
+						<button class="button is-link has-background-primary-dark">
+							Add Organization
+						</button>
+					</div>
+					<div class="control">
+						<button class="button is-light">Cancel</button>
+					</div>
+				</div>
+			</form>
+		</section>
+
+		<!--LOGIN-->
+		<section id="login-form" class="container mt-6">
+			<h1 class="title is-2 has-text-centered">Login</h1>
+			<form>
+				<div class="field">
+					<p class="control has-icons-left has-icons-right">
+						<input class="input" type="email" placeholder="Email" />
+						<span class="icon is-small is-left">
+							<i class="fas fa-envelope"></i>
+						</span>
+					</p>
+				</div>
+				<div class="field">
+					<p class="control has-icons-left">
+						<input class="input" type="password" placeholder="Password" />
+						<span class="icon is-small is-left">
+							<i class="fas fa-lock"></i>
+						</span>
+					</p>
+				</div>
+				<div class="field">
+					<p class="control">
+						<button class="button is-success has-background-primary-dark" type="submit">
+							Login
+						</button>
+					</p>
+				</div>
+			</form>
+		</section>
+
+		<!--ADD ORGANIZATION-->
+		<section d="add-organization-form" class="container mt-6">
+			<h1 class="title is-2 has-text-centered">Add Organization</h1>
+			<form>
+				<div class="field">
+					<label class="label">Organization Name</label>
+					<div class="control has-icons-left has-icons-right">
+						<input class="input" type="text" placeholder="Organization Name" />
+						<span class="icon is-small is-left">
+							<i class="fas fa-user"></i>
+						</span>
+					</div>
+				</div>
+				<div class="field">
+					<p class="control">
+						<button class="button is-success has-background-primary-dark" type="submit">
+							Save
+						</button>
+					</p>
+				</div>
+			</form>
+		</section>
+
+		<!--MAIN CONTENT REVISION-->
+		<section id="main-kanban" class="container mt-6">
+			<h1 class="title is-2 has-text-centered">Hacktiv8 Kanban</h1>
+			<div class="columns">
+				<!--BACKLOG-->
+				<div class="column category-box has-background-primary-dark">
+					<div class="category-row-1 is-full">
+						<h1 class="title is-3 has-text-centered has-text-white">Backlog</h1>
+					</div>
+					<div class="category-row-2 is-full">
+						<!--INDIVIDUAL TASK-->
+						<div class="task has-background-dark">
+							<div class="task-todo">
+								<p>Lorem ipsum dolor sit amet.</p>
+							</div>
+
+							<div class="task-detail">
+								<div class="email-and-date">
+									<p>by: <span>john@mail.com</span></p>
+									<p>created at: <span>28/01/2020</span></p>
+								</div>
+
+								<div class="task-options">
+									<i class="fas fa-adjust fa-2x"></i>
+									<i class="fas fa-address-book fa-2x"></i>
+									<i class="fas fa-align-center fa-2x"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="category-row-3 is-full field has-addons has-addons-right">
+						<p class="control">
+							<input
+								class="input is-small"
+								type="text"
+								placeholder="Amount of money"
+							/>
+						</p>
+						<p class="control">
+							<a class="button is-small is-primary has-background-dark">
+								Save
+							</a>
+						</p>
+					</div>
+				</div>
+				<!--TO DO-->
+				<div class="column category-box has-background-primary-dark">
+					<div class="category-row-1 is-full">
+						<h1 class="title is-3 has-text-centered has-text-white">Todo</h1>
+					</div>
+					<div class="category-row-2 is-full">
+						<!--INDIVIDUAL TASK-->
+						<div class="task has-background-dark">
+							<div class="task-todo">
+								<p>Lorem ipsum dolor sit amet.</p>
+							</div>
+
+							<div class="task-detail">
+								<div class="email-and-date">
+									<p>by: <span>john@mail.com</span></p>
+									<p>created at: <span>28/01/2020</span></p>
+								</div>
+
+								<div class="task-options">
+									<i class="fas fa-adjust fa-2x"></i>
+									<i class="fas fa-address-book fa-2x"></i>
+									<i class="fas fa-align-center fa-2x"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="category-row-3 is-full field has-addons has-addons-right">
+						<p class="control">
+							<input
+								class="input is-small"
+								type="text"
+								placeholder="Amount of money"
+							/>
+						</p>
+						<p class="control">
+							<a class="button is-small is-primary has-background-dark">
+								Save
+							</a>
+						</p>
+					</div>
+				</div>
+
+				<!--DEVELOPMENT-->
+				<div class="column category-box has-background-primary-dark">
+					<div class="category-row-1 is-full">
+						<h1 class="title is-3 has-text-centered has-text-white">Development</h1>
+					</div>
+					<div class="category-row-2 is-full">
+						<!--INDIVIDUAL TASK-->
+						<div class="task has-background-dark">
+							<div class="task-todo">
+								<p>Lorem ipsum dolor sit amet.</p>
+							</div>
+
+							<div class="task-detail">
+								<div class="email-and-date">
+									<p>by: <span>john@mail.com</span></p>
+									<p>created at: <span>28/01/2020</span></p>
+								</div>
+
+								<div class="task-options">
+									<i class="fas fa-adjust fa-2x"></i>
+									<i class="fas fa-address-book fa-2x"></i>
+									<i class="fas fa-align-center fa-2x"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="category-row-3 is-full field has-addons has-addons-right">
+						<p class="control">
+							<input
+								class="input is-small"
+								type="text"
+								placeholder="Amount of money"
+							/>
+						</p>
+						<p class="control">
+							<a class="button is-small is-primary has-background-dark">
+								Save
+							</a>
+						</p>
+					</div>
+				</div>
+
+				<!--DONE-->
+				<div class="column category-box has-background-primary-dark">
+					<div class="category-row-1 is-full">
+						<h1 class="title is-3 has-text-centered has-text-white">Done</h1>
+					</div>
+					<div class="category-row-2 is-full">
+						<!--INDIVIDUAL TASK-->
+						<div class="task has-background-dark">
+							<div class="task-todo">
+								<p>Lorem ipsum dolor sit amet.</p>
+							</div>
+
+							<div class="task-detail">
+								<div class="email-and-date">
+									<p>by: <span>john@mail.com</span></p>
+									<p>created at: <span>28/01/2020</span></p>
+								</div>
+
+								<div class="task-options">
+									<i class="fas fa-adjust fa-2x"></i>
+									<i class="fas fa-address-book fa-2x"></i>
+									<i class="fas fa-align-center fa-2x"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="category-row-3 is-full field has-addons has-addons-right">
+						<p class="control">
+							<input
+								class="input is-small"
+								type="text"
+								placeholder="Amount of money"
+							/>
+						</p>
+						<p class="control">
+							<a class="button is-small is-primary has-background-dark">
+								Save
+							</a>
+						</p>
 					</div>
 				</div>
 			</div>
-
-            <!--PRODUCT-->
-            <div class="task-box has-background-primary-dark has-text-primary-light">
-				<div class="task-category">
-					<h1 class="has-text-primary-light title">Product</h1>
-				</div>
-
-				<div class="task-list">
-					<!--TASK 1-->
-                    <div class="task has-background-dark">
-						<div class="task-todo">
-							<p>
-								Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia,
-								maiores!
-							</p>
-						</div>
-
-						<div class="task-detail">
-                            <div class="email-and-date-stamp">
-                                <p>by: <span>john@mail.com</span></p>
-							    <p>created at: <span>28/01/2020</span></p>
-                            </div>
-                            
-                            <div class="task-options">
-                                <i class="fas fa-adjust fa-2x"></i>
-                                <i class="fas fa-address-book fa-2x"></i>
-                                <i class="fas fa-align-center fa-2x"></i>
-                            </div>
-						</div>
-                    </div>
-
-                    <!--TASK 2-->
-                    <div class="task has-background-dark">
-						<div class="task-todo">
-							<p>
-								Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia,
-								maiores!
-							</p>
-						</div>
-
-						<div class="task-detail">
-                            <div class="email-and-date-stamp">
-                                <p>by: <span>john@mail.com</span></p>
-							    <p>created at: <span>28/01/2020</span></p>
-                            </div>
-                            
-                            <div class="task-options">
-                                <i class="fas fa-adjust fa-2x"></i>
-                                <i class="fas fa-address-book fa-2x"></i>
-                                <i class="fas fa-align-center fa-2x"></i>
-                            </div>
-						</div>
-                    </div>
-
-                    <!--TASK 3-->
-                    <div class="task has-background-dark">
-						<div class="task-todo">
-							<p>
-								Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia,
-								maiores!
-							</p>
-						</div>
-
-						<div class="task-detail">
-                            <div class="email-and-date-stamp">
-                                <p>by: <span>john@mail.com</span></p>
-							    <p>created at: <span>28/01/2020</span></p>
-                            </div>
-                            
-                            <div class="task-options">
-                                <i class="fas fa-adjust fa-2x"></i>
-                                <i class="fas fa-address-book fa-2x"></i>
-                                <i class="fas fa-align-center fa-2x"></i>
-                            </div>
-						</div>
-                    </div>
-
-                    <!--TASK 4-->
-                    <div class="task has-background-dark">
-						<div class="task-todo">
-							<p>
-								Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia,
-								maiores!
-							</p>
-						</div>
-
-						<div class="task-detail">
-                            <div class="email-and-date-stamp">
-                                <p>by: <span>john@mail.com</span></p>
-							    <p>created at: <span>28/01/2020</span></p>
-                            </div>
-                            
-                            <div class="task-options">
-                                <i class="fas fa-adjust fa-2x"></i>
-                                <i class="fas fa-address-book fa-2x"></i>
-                                <i class="fas fa-align-center fa-2x"></i>
-                            </div>
-						</div>
-					</div>
-				</div>
-
-				<div class="field has-addons task-add">
-					<div class="control">
-						<input class="input" type="text" placeholder="Add Task" />
-					</div>
-					<div class="control">
-						<a class="button is-info">Save</a>
-					</div>
-				</div>
-            </div>
-            
-            <!--DEVELOPMENT-->
-            <div class="task-box has-background-primary-dark has-text-primary-light">
-				<div class="task-category">
-					<h1 class="has-text-primary-light title">Development</h1>
-				</div>
-
-				<div class="task-list">
-					<!--TASK 1-->
-                    <div class="task has-background-dark">
-						<div class="task-todo">
-							<p>
-								Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia,
-								maiores!
-							</p>
-						</div>
-
-						<div class="task-detail">
-                            <div class="email-and-date-stamp">
-                                <p>by: <span>john@mail.com</span></p>
-							    <p>created at: <span>28/01/2020</span></p>
-                            </div>
-                            
-                            <div class="task-options">
-                                <i class="fas fa-adjust fa-2x"></i>
-                                <i class="fas fa-address-book fa-2x"></i>
-                                <i class="fas fa-align-center fa-2x"></i>
-                            </div>
-						</div>
-                    </div>
-                    
-                    <!--TASK 2-->
-                    <div class="task has-background-dark">
-						<div class="task-todo">
-							<p>
-								Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia,
-								maiores!
-							</p>
-						</div>
-
-						<div class="task-detail">
-                            <div class="email-and-date-stamp">
-                                <p>by: <span>john@mail.com</span></p>
-							    <p>created at: <span>28/01/2020</span></p>
-                            </div>
-                            
-                            <div class="task-options">
-                                <i class="fas fa-adjust fa-2x"></i>
-                                <i class="fas fa-address-book fa-2x"></i>
-                                <i class="fas fa-align-center fa-2x"></i>
-                            </div>
-						</div>
-					</div>
-				</div>
-
-				<div class="field has-addons task-add">
-					<div class="control">
-						<input class="input" type="text" placeholder="Add Task" />
-					</div>
-					<div class="control">
-						<a class="button is-info">Save</a>
-					</div>
-				</div>
-            </div>
-            
-            <!--DONE-->
-            <div class="task-box has-background-primary-dark has-text-primary-light">
-				<div class="task-category">
-					<h1 class="has-text-primary-light title">Done</h1>
-				</div>
-
-				<div class="task-list">
-                    <!--TASK 1-->
-					<div class="task has-background-dark">
-						<div class="task-todo">
-							<p>
-								Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia,
-								maiores!
-							</p>
-						</div>
-
-						<div class="task-detail">
-                            <div class="email-and-date-stamp">
-                                <p>by: <span>john@mail.com</span></p>
-							    <p>created at: <span>28/01/2020</span></p>
-                            </div>
-                            
-                            <div class="task-options">
-                                <i class="fas fa-adjust fa-2x"></i>
-                                <i class="fas fa-address-book fa-2x"></i>
-                                <i class="fas fa-align-center fa-2x"></i>
-                            </div>
-						</div>
-                    </div>
-                    
-                    <!--TASK 2-->
-                    <div class="task has-background-dark">
-						<div class="task-todo">
-							<p>
-								Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia,
-								maiores!
-							</p>
-						</div>
-
-						<div class="task-detail">
-                            <div class="email-and-date-stamp">
-                                <p>by: <span>john@mail.com</span></p>
-							    <p>created at: <span>28/01/2020</span></p>
-                            </div>
-                            
-                            <div class="task-options">
-                                <i class="fas fa-adjust fa-2x"></i>
-                                <i class="fas fa-address-book fa-2x"></i>
-                                <i class="fas fa-align-center fa-2x"></i>
-                            </div>
-						</div>
-                    </div>
-                    
-                    <!--TASK 3-->
-                    <div class="task has-background-dark">
-						<div class="task-todo">
-							<p>
-								Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia,
-								maiores!
-							</p>
-						</div>
-
-						<div class="task-detail">
-                            <div class="email-and-date-stamp">
-                                <p>by: <span>john@mail.com</span></p>
-							    <p>created at: <span>28/01/2020</span></p>
-                            </div>
-                            
-                            <div class="task-options">
-                                <i class="fas fa-adjust fa-2x"></i>
-                                <i class="fas fa-address-book fa-2x"></i>
-                                <i class="fas fa-align-center fa-2x"></i>
-                            </div>
-						</div>
-                    </div>
-                    
-                    <!--TASK 4-->
-                    <div class="task has-background-dark">
-						<div class="task-todo">
-							<p>
-								Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia,
-								maiores!
-							</p>
-						</div>
-
-						<div class="task-detail">
-                            <div class="email-and-date-stamp">
-                                <p>by: <span>john@mail.com</span></p>
-							    <p>created at: <span>28/01/2020</span></p>
-                            </div>
-                            
-                            <div class="task-options">
-                                <i class="fas fa-adjust fa-2x"></i>
-                                <i class="fas fa-address-book fa-2x"></i>
-                                <i class="fas fa-align-center fa-2x"></i>
-                            </div>
-						</div>
-                    </div>
-                    
-                    <!--TASK 5-->
-                    <div class="task has-background-dark">
-						<div class="task-todo">
-							<p>
-								Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia,
-								maiores!
-							</p>
-						</div>
-
-						<div class="task-detail">
-                            <div class="email-and-date-stamp">
-                                <p>by: <span>john@mail.com</span></p>
-							    <p>created at: <span>28/01/2020</span></p>
-                            </div>
-                            
-                            <div class="task-options">
-                                <i class="fas fa-adjust fa-2x"></i>
-                                <i class="fas fa-address-book fa-2x"></i>
-                                <i class="fas fa-align-center fa-2x"></i>
-                            </div>
-						</div>
-					</div>
-				</div>
-
-				<div class="field has-addons task-add">
-					<div class="control">
-						<input class="input" type="text" placeholder="Add Task" />
-					</div>
-					<div class="control">
-						<a class="button is-info">Save</a>
-					</div>
-				</div>
-			</div>
-			
 		</section>
 
 		<script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
