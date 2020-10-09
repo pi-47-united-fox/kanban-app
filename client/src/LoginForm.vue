@@ -53,7 +53,7 @@ export default {
                 })
         },
         login(){
-            axios.post('http://localhost:3000/login',{
+            axios.post('https://kanban-idham.herokuapp.com/login',{
                 email:this.email,
                 password:this.password
             })

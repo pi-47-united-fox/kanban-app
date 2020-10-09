@@ -55,7 +55,6 @@ export default {
         },
         addTask(value){
             this.addFormShow = !this.addFormShow
-            console.log('masuk adtask Task.vue',value)
             this.$emit('addTask',value)
         },
         editCategory(value){

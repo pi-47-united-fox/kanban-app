@@ -42,7 +42,6 @@ export default {
     },
     methods:{
         addTask(value){
-            console.log('masuk adtask Home.vue')
             this.$emit("addTask",value)
         },
         editCategory(value){

@@ -33,7 +33,7 @@ export default {
     },
     methods:{
         backHandler(){
-            axios.patch(`http://localhost:3000/tasks/${this.task.id}?category=${this.task.category==='done'?'doing':this.task.category==='doing'?'todo':'backlog'}`,{},{
+            axios.patch(`https://kanban-idham.herokuapp.com/tasks/${this.task.id}?category=${this.task.category==='done'?'doing':this.task.category==='doing'?'todo':'backlog'}`,{},{
                 headers:{
                     access_token:localStorage.access_token
                 }
@@ -47,7 +47,7 @@ export default {
             })
         },
         editHandler(){
-            axios.patch(`http://localhost:3000/tasks/${this.task.id}?category=${this.task.category==='backlog'?'todo':this.task.category==='todo'?'doing':'done'}`,{},{
+            axios.patch(`https://kanban-idham.herokuapp.com/tasks/${this.task.id}?category=${this.task.category==='backlog'?'todo':this.task.category==='todo'?'doing':'done'}`,{},{
                 headers:{
                     access_token:localStorage.access_token
                 }
@@ -61,7 +61,7 @@ export default {
             })
         },
         deleteHandler(){
-            axios.delete(`http://localhost:3000/tasks/${this.task.id}`,{
+            axios.delete(`https://kanban-idham.herokuapp.com/tasks/${this.task.id}`,{
                 headers:{
                     access_token:localStorage.access_token
                 }

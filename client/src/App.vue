@@ -59,7 +59,7 @@ export default {
             this.getDataTasks()
         },
         getDataTasks(){
-            axios.get('http://localhost:3000/tasks',{
+            axios.get('https://kanban-idham.herokuapp.com/tasks',{
                 headers:{
                     access_token:localStorage.access_token
                 }
@@ -72,7 +72,6 @@ export default {
                 })
         },
         addTask(value){
-            console.log('masuk adtask app.vue')
             this.isPage='home'
             this.getDataTasks()
         },

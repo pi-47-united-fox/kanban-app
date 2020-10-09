@@ -37,7 +37,7 @@ export default {
     },
     methods:{
     register(){
-        axios.post('http://localhost:3000/register',{
+        axios.post('https://kanban-idham.herokuapp.com/register',{
                 email:this.email,
                 password:this.password
             })

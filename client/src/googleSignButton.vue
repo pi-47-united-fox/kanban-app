@@ -28,20 +28,17 @@ export default {
       // `googleUser` is the GoogleUser object that represents the just-signed-in user.
       // See https://developers.google.com/identity/sign-in/web/reference#users
     //   const profile = googleUser.getBasicProfile() // etc etc
-    console.log('masukgooglelogin')
     var id_token = googleUser.getAuthResponse().id_token;
       axios({
         method:'POST',
-        url:'http://localhost:3000/googlelogin',
+        url:'https://kanban-idham.herokuapp.com/googlelogin',
         headers:{
           google_access_token:id_token
         }
       })
       .then(result=>{
-        console.log(result)
         localStorage.setItem('access_token',result.data.access_token)
         this.$emit('googlesuccess','googlesuccess')
-        console.log('sukses login')
       })
       .catch(err=>{
         console.log(err)

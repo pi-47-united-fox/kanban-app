@@ -35,8 +35,7 @@ export default {
                     title:this.title,
                     category:this.category
                 }
-            console.log(localStorage.access_token)
-                axios.post('http://localhost:3000/tasks',newData,{
+                axios.post('https://kanban-idham.herokuapp.com/tasks',newData,{
                     headers:{
                         access_token:localStorage.access_token
                     }
