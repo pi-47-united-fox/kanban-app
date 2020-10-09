@@ -23,9 +23,10 @@
                             </div>
                             <div class="form-group">
                                 <!-- <label for="remember-me" class="text-info"><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br> -->
+                                <GoogleLogin :params="params" :renderParams="renderParams" :onSuccess="onSuccess" :onFailure="onFailure"></GoogleLogin>
+                                <!-- <google-login :params="params" :renderParams="renderParams" :onSuccess="onSuccess" :onFailure="onFailure">Google Login</google-login> -->
                                 <input type="submit" class="btn btn-info btn-md" @click="login" value="Login">
-                                <div class="g-signin2 float-right" data-onsuccess="onSignIn"></div>
-                                Dont have any ? <a @click="changePage" class="text-info">Register here</a>
+                                Dont have any ? <a @click="changePage" class="text-info">Register here</a><br><br>
                             </div> 
                         </form>
                     </div>
@@ -37,17 +38,46 @@
 
 <script>
 const axios  = require("axios")
+import GoogleLogin from 'vue-google-login';
+
 export default {
     name: 'LoginForm',
     data(){
-        return{ 
+        return{  
+            params: {
+                client_id: "841246734810-ph9ikv3p8ae847gkere5m2b359glabpe.apps.googleusercontent.com"
+            },
+            renderParams: {
+                width: 250,
+                height: 50,
+                longtitle: true
+            },
             serverUrl:'http://localhost:3000/',
             emailFormLogin :"",
             passwordFormLogin : "",
             errMessage:""
         }
     },
+    components: { 
+        GoogleLogin
+    },
     methods:{  
+        onSuccess(googleUser) {
+            let id_token = googleUser.getAuthResponse().id_token
+            console.log(id_token);
+            
+            axios.post(`${serverUrl}google-login`,
+                {id_token}
+            )
+                .then(result => {
+                    localStorage.setItem('access_token', result.data.token) 
+                    this.$emit('changePage','home')
+                })
+                .catch(err => {
+                    console.log("ini error >>>> ", err.responseJSON);
+                });
+        },
+        onFailure() {},
         changePage(){
 
             this.$emit('changePage','register')
