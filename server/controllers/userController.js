@@ -1,4 +1,4 @@
-// const { OAuth2Client } = require('google-auth-library')
+const { OAuth2Client } = require('google-auth-library')
 const { User } = require('../models/index.js')
 const { comparePassword } = require('../helpers/bcrypt.js')
 const { signToken } = require('../helpers/jwt.js')
@@ -78,6 +78,7 @@ class UserController {
 
     static googleLogin(req, res, next){
         const client = new OAuth2Client(process.env.CLIENT_ID)
+        console.log(client, "Dari user controller google login")
         let email = ''
         client.verifyIdToken({
             idToken: req.headers.google_access_token,
