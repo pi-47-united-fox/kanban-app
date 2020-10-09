@@ -1,95 +1,90 @@
-// ---------- IMPORT ----------
-@import './reset';
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700&display=swap');
+<template>
+  <main>
+        <Navbar @emitWhichPage='changePage' ></Navbar>
+        <div class="board">
+            <Board v-for="(list, index) in lists"
+                :key="index"
+                :listTitle="list"
+                :cards="dataTasks"
+                :categories='lists'
+                @emitAddTask='addCard'
+                @fetchTask='fetchTaskFromChild'
+            ></Board>
+        </div>
+    </main>
+</template>
 
-// ---------- VARIABLE ----------
-$asset-base-path: '../assets' !default; // helper path
-
-$primary-color: #519839;
-$main-color:#ebecf0;
-$card-color: white;
-
-$a-text-color: white;
-$b-text-color: #898989;
-$c-text-color: #343434;
-
-// ---------- FUNCTION  ----------
-@function asset($type, $file) {
-    @return url($asset-base-path + '/' + $type + '/' + $file);
-}
-
-// ---------- MIXIN  ----------
-@mixin basic-card {
-    border-radius: 5px;
-    background-color: $card-color;
-    margin-bottom: 10px;
-    padding: 10px 7px;
-    box-shadow: 0px 1px 7px 0px rgb(212, 212, 212);
-}
-
-@mixin scrollbars($size, $foreground-color, $background-color: mix($foreground-color, white,  50%)) {
-    // For Google Chrome
-    &::-webkit-scrollbar {
-      width:  $size;
-      height: $size;
-    }
-  
-    &::-webkit-scrollbar-thumb {
-      background: $foreground-color;
-    }
-  
-    &::-webkit-scrollbar-track {
-      background: $background-color;
-    }
-  
-    // For Internet Explorer
-    & {
-      scrollbar-face-color: $foreground-color;
-      scrollbar-track-color: $background-color;
-    }
-}
-
-
-// ---------- MAIN  ----------
-body, textarea, button {
-    font-family: 'Poppins', sans-serif;
-    background-image: asset('img', 'asfalt-light.png');
-    background-color: lighten($primary-color, 5px);
-}
-
-header  {
-    nav {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background-color: $primary-color;
-        padding: 10px;
-
-        .logo {
-            font-weight: 700;
-            font-size: 1.5rem;
-            text-decoration: line-through;
+<script>
+import axios from 'axios'
+import Navbar from '../Components/Navbar'
+import Board from "../Components/TaskBoard";
+export default {
+    name: 'HomePage',
+    components: {
+        Board,
+        Navbar
+    },
+    data() {
+        return {
+            lists: [
+                'Backlog', 'Todo', 'Doing', 'Done'
+            ],
+            dataTasks: []
         }
-
-        .nav-items {
-            color: $a-text-color;
-            display: flex;
-            align-items: center;
-            margin: 0 1rem;
-
-            a {
-                color: $a-text-color;
-                text-decoration: none;
-                margin-right: 20px;
+    },
+    methods: {
+      fetchTaskFromChild() {
+          this.fetchTask()
+      },
+      fetchTask() {
+        axios
+        .get('http://localhost:3000' + '/tasks', {
+            headers: {
+                access_token: localStorage.access_token
             }
-
-            .avatar {
-                width:30px;
-                border-radius: 50%;
-            }
-        }
-    }
+        })
+        .then (({data}) => {
+            return this.dataTasks = data
+        }).catch((err) => {
+            console.log (err)
+        });
+      },
+      changePage (value) {
+          this.$emit('emitChangePage', value)
+      },
+      addCard (data) {
+          axios({
+        method: "post",
+        url: "http://localhost:3000" + "/tasks",
+        headers: {
+          access_token: localStorage.access_token,
+        },
+        data: {
+          title: data.title,
+          category: data.category,
+        },
+      }).then((result) => {
+          this.fetchTask()
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      }
+    },
+    created() {
+        this.fetchTask()
+    },
+    beforeUpdate() {
+        for (const ctg in this.dataTask) {
+              this.dataTasks[ctg] = []
+              console.log (this.dataTasks)
+          }
+    },
 }
+</script>
+
+<style lang="scss">
+@import '../styles/_base.scss';
 
 main {
     width: 100%;
@@ -103,7 +98,6 @@ main {
             background-color: transparentize($main-color, 0.1) !important;
 
             &__add {
-                // width: 100%;
                 padding: 10px;
                 text-align: center;
                 border: dashed $b-text-color 0.1rem;
@@ -230,28 +224,7 @@ main {
                     background-color: $primary-color;
                 }
             }
-
-            &__add-card {
-                form textarea {
-                    @include basic-card;
-                    font-size: 1rem;
-                    border: none;
-                    outline: none;
-                    resize: none;
-                    height: 5rem;
-                    min-width: 100%;
-                    max-width: 100%;
-
-                    &:active, &:focus {
-                        border: none;
-                        outline: none;
-                    }
-
-                    box-sizing: border-box;
-                    width: 100%;
-                    
-                }
-            }
         }
     }
 }
+</style>
