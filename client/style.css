@@ -1,0 +1,159 @@
+
+body{
+    background-image: url("https://venngage-wordpress.s3.amazonaws.com/uploads/2018/09/Minimalist-Crumpled-Paper-Simple-Background-Image.jpg");
+    margin: 0;
+    background-repeat: no-repeat;
+    background-size: 100% 920px;
+    font-family: 'Architects Daughter', cursive !important;
+    
+}
+
+/* .navbar{
+    justify-content: flex-start !important;
+} */
+.containers {
+    display: flex;
+    
+    width: 100% !important;
+    height: 35em;
+    justify-content:center;
+    margin: 0 0;
+    box-sizing: border-box;
+}
+
+.main-page{
+    margin-top: 60px;
+    
+}
+
+.cards{
+    margin: 20px 20px;
+    padding: 5px;
+    max-height: 30em;
+    width: 290px;
+    display: flex;
+    flex-direction: column;
+  
+    overflow:scroll;
+    -webkit-box-shadow: -2px 25px 23px -7px rgba(116,117,117,1);
+-moz-box-shadow: -2px 25px 23px -7px rgba(116,117,117,1);
+box-shadow: -2px 25px 23px -7px rgba(116,117,117,1);
+    
+}
+
+.content{
+  
+    height: 35em;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.input{
+    align-self: center;
+}
+.card h4{
+    text-align: left;
+}
+.card-contain{
+    max-height: 120px;
+    width: 95%;
+    background-color: white;
+    margin: 3px 2px;
+    
+}
+/* ::-webkit-scrollbar {
+    width: 2x;
+
+  }
+  ::-webkit-scrollbar-thumb {
+    background: red; 
+    border-radius: 10px;
+  } */
+
+
+.footer{
+    height: 40px;
+
+}
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding:0px 0px 0px 6px !important;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.title {
+    font-size: 20px;
+    margin-bottom: 1px;
+}
+.date-task {
+    font-size: 10px;
+bottom: 0;
+}
+
+/* login form */
+.Formlogin {
+    width: auto;
+    position: relative;
+    margin: 14px 36px;
+}
+
+.inputlogin ::selection{
+    width: 12px 55px;
+    margin: 4px auto;
+    -webkit-box-shadow: -2px 14px 14px 9px rgba(0,0,0,0.75);
+    -moz-box-shadow: -2px 14px 14px 9px rgba(0,0,0,0.75);
+    box-shadow: -2px 14px 14px 9px rgba(0,0,0,0.75);
+    
+}
+
+.container2 {
+    background:rgb(222,222,255);
+    border:  0.5px solid #42464b;
+    border-radius: 8px;
+    min-height: 20em;
+    margin: 80px auto 0;
+    width: 320px;
+    margin-bottom: 50px;
+    padding-bottom: 20px;
+    -webkit-box-shadow: -2px 14px 14px 9px rgba(0,0,0,0.75);
+-moz-box-shadow: -2px 14px 14px 9px rgba(0,0,0,0.75);
+box-shadow: -2px 14px 14px 9px rgba(0,0,0,0.75);
+
+}
+.container2 h1{
+   
+    text-align: center;
+}
+.inputlogin{
+    height: 30px;
+    box-sizing: border-box;
+    border-radius: 3px;
+    width: 240px;
+}
+.Formlogin label{
+    background-color: ivory;
+}
+.loginSubmit {
+    -webkit-box-shadow: 1px 20px 23px 3px rgba(31,4,31,1);
+    -moz-box-shadow: 1px 20px 23px 3px rgba(31,4,31,1);
+    box-shadow: 1px 20px 23px 3px rgba(31,4,31,1);
+  width: 232px;
+  height: 32px;
+  margin: 6px auto;
+  
+}
+.inputlogin{
+    box-shadow: 0 0 4px 1px rgba(55, 166, 155, 0.3);
+    outline: 0;
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    
+  }
