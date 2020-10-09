@@ -65,17 +65,23 @@ export default {
         onSuccess(googleUser) {
             let id_token = googleUser.getAuthResponse().id_token
             console.log("token >>>",id_token);
-            
-            axios.post(`${serverUrl}google-login`,
-                {"id_token":id_token}
-            )
-                .then(result => {
-                    localStorage.setItem('access_token', result.data.token) 
+            axios 
+                .post(`${this.serverUrl}google-login`,{ 
+                    id_token:id_token
+                })
+                .then(({data})=>{
+                    localStorage.setItem('access_token',data.access_token) 
+                    // this.page = 'home'
+                    // this.fetchData()
                     this.$emit('changePage','home')
                 })
-                .catch(err => {
-                    console.log("ini error >>>> ", err.responseJSON);
-                });
+                .catch(err=>{
+                    console.log(err);
+                    // console.log(err.response);
+                    if(err.response){
+                        this.errMessage = err.response.data.msg
+                    }
+                })
         },
         onFailure() {},
         changePage(){
