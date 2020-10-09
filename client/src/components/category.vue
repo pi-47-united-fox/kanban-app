@@ -12,13 +12,31 @@
         </Card>
       </div>
       <div v-if="categoryName == 'Todo'">
-        <Card v-for="task in todo" :key="task.id" :task="task"> </Card>
+        <Card
+          v-for="task in todo"
+          :key="task.id"
+          :task="task"
+          @emitDelete="refreshData"
+        >
+        </Card>
       </div>
       <div v-if="categoryName == 'Doing'">
-        <Card v-for="task in doing" :key="task.id" :task="task"> </Card>
+        <Card
+          v-for="task in doing"
+          :key="task.id"
+          :task="task"
+          @emitDelete="refreshData"
+        >
+        </Card>
       </div>
       <div v-if="categoryName == 'Done'">
-        <Card v-for="task in done" :key="task.id" :task="task"> </Card>
+        <Card
+          v-for="task in done"
+          :key="task.id"
+          :task="task"
+          @emitDelete="refreshData"
+        >
+        </Card>
       </div>
     </div>
   </div>

@@ -12,7 +12,7 @@
           <span>{{ task.createdAt }}</span>
         </div>
         <div class="icon">
-          <img class="icon-btn" src="../assets/edit.svg" />
+          <img class="icon-btn" src="../assets/edit.svg" v-b-modal.modal-1 />
           <img
             class="icon-btn"
             src="../assets/delete.svg"
@@ -22,7 +22,6 @@
         </div>
       </div>
     </div>
-    <AddModal></AddModal>
   </div>
 </template>
 
@@ -30,15 +29,14 @@
 import Swal from "sweetalert2";
 import axios from "axios";
 import moment from "moment";
-import Moadl from "./add-modal";
 export default {
   props: ["task"],
   name: "Card",
+  components:{
+   
+  },
   data() {
     return {};
-  },
-  components: {
-    Modal,
   },
   created() {
     console.log(this.task, "<------ini this.task di card");

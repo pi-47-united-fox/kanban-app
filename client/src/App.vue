@@ -145,6 +145,7 @@ a {
   height: 20px;
   margin-right: 10px;
   cursor: pointer;
+  display: flex;
 }
 
 .logout-btn {
@@ -231,7 +232,7 @@ a {
   border-radius: 10px;
   width: 300px;
   padding: 10px;
-  border-width: 0;
+  border-width: 1px;
 }
 
 .label {

@@ -5,7 +5,7 @@
         <div class="header">
           <div class="he-l"></div>
           <div class="he-r">
-            <b-button v-b-modal.modal-1 class="add-btn"  >Add Project</b-button>
+            <button class="add-btn" v-b-modal.modal-1>Add Project</button>
           </div>
         </div>
       </div>
@@ -20,7 +20,7 @@
         @refresh="fetchTask"
       ></Category>
     </div>
-    <AddModal></AddModal>
+    <AddModal @emitAdd = 'refreshData'></AddModal>
   </div>
 </template>
 
@@ -46,12 +46,6 @@ export default {
   },
 
   methods: {
-    showModal() {
-      this.isAddModalVisible = true;
-    },
-    closeModal() {
-      this.isAddModalVisible = false;
-    },
     fetchTask() {
       // console.log(localStorage.access_token);
       axios({

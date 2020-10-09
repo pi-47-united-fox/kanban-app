@@ -19783,130 +19783,7 @@ var global = arguments[3];
 
 })));
 
-},{}],"src/components/add-modal.vue":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-//
-//
-//
-//
-//
-//
-//
-//
-var _default = {
-  data: function data() {
-    return {
-      title: ""
-    };
-  },
-  methods: {
-    checkFormValidity: function checkFormValidity() {
-      var valid = this.$refs.form.checkValidity();
-      this.nameState = valid;
-      return valid;
-    },
-    resetModal: function resetModal() {
-      this.title = "";
-    },
-    handleOk: function handleOk(bvModalEvt) {
-      // Prevent modal from closing
-      bvModalEvt.preventDefault(); // Trigger submit handler
-
-      this.handleSubmit();
-    },
-    handleSubmit: function handleSubmit() {
-      var _this = this;
-
-      // Exit when the form isn't valid
-      if (!this.checkFormValidity()) {
-        return;
-      } // Push the name to submitted names
-
-
-      this.submittednames.push(this.name); // Hide the modal manually
-
-      this.$nextTick(function () {
-        _this.$bvModal.hide("modal-prevent-closing");
-      });
-    }
-  }
-};
-exports.default = _default;
-        var $b0d482 = exports.default || module.exports;
-      
-      if (typeof $b0d482 === 'function') {
-        $b0d482 = $b0d482.options;
-      }
-    
-        /* template */
-        Object.assign($b0d482, (function () {
-          var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c(
-        "b-modal",
-        { attrs: { id: "modal-1", title: "Project Title" } },
-        [
-          _c("b-form-input", {
-            attrs: { placeholder: "Enter your project" },
-            model: {
-              value: _vm.title,
-              callback: function($$v) {
-                _vm.title = $$v
-              },
-              expression: "title"
-            }
-          })
-        ],
-        1
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-          return {
-            render: render,
-            staticRenderFns: staticRenderFns,
-            _compiled: true,
-            _scopeId: null,
-            functional: undefined
-          };
-        })());
-      
-    /* hot reload */
-    (function () {
-      if (module.hot) {
-        var api = require('vue-hot-reload-api');
-        api.install(require('vue'));
-        if (api.compatible) {
-          module.hot.accept();
-          if (!module.hot.data) {
-            api.createRecord('$b0d482', $b0d482);
-          } else {
-            api.reload('$b0d482', $b0d482);
-          }
-        }
-
-        
-        var reloadCSS = require('_css_loader');
-        module.hot.dispose(reloadCSS);
-        module.hot.accept(reloadCSS);
-      
-      }
-    })();
-},{"_css_loader":"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/card.vue":[function(require,module,exports) {
+},{}],"src/components/card.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -19919,8 +19796,6 @@ var _sweetalert = _interopRequireDefault(require("sweetalert2"));
 var _axios = _interopRequireDefault(require("axios"));
 
 var _moment = _interopRequireDefault(require("moment"));
-
-var _addModal = _interopRequireDefault(require("./add-modal"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -19951,15 +19826,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-//
 var _default = {
   props: ["task"],
   name: "Card",
+  components: {},
   data: function data() {
     return {};
-  },
-  components: {
-    Modal: Modal
   },
   created: function created() {
     console.log(this.task, "<------ini this.task di card");
@@ -20013,47 +19885,48 @@ exports.default = _default;
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("div", { staticClass: "card" }, [
-        _c("div", [
-          _c("h5", [_vm._v("\n        " + _vm._s(_vm.task.title) + "\n      ")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticStyle: { "margin-top": "10px" } }, [
-          _c("div", { staticClass: "info" }, [
-            _vm._v(_vm._s(_vm.task.User.email))
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "info" }, [
-            _c("span", [_vm._v(_vm._s(_vm.task.createdAt))])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "icon" }, [
-            _c("img", {
-              staticClass: "icon-btn",
-              attrs: { src: "/edit.98ea1e81.svg" }
-            }),
-            _vm._v(" "),
-            _c("img", {
-              staticClass: "icon-btn",
-              attrs: { src: "/delete.34743b57.svg", alt: "" },
-              on: {
-                click: function($event) {
-                  $event.preventDefault()
-                  return _vm.deletedTask(_vm.task.id)
-                }
-              }
-            })
-          ])
-        ])
+  return _c("div", [
+    _c("div", { staticClass: "card" }, [
+      _c("div", [
+        _c("h5", [_vm._v("\n        " + _vm._s(_vm.task.title) + "\n      ")])
       ]),
       _vm._v(" "),
-      _c("AddModal")
-    ],
-    1
-  )
+      _c("div", { staticStyle: { "margin-top": "10px" } }, [
+        _c("div", { staticClass: "info" }, [
+          _vm._v(_vm._s(_vm.task.User.email))
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "info" }, [
+          _c("span", [_vm._v(_vm._s(_vm.task.createdAt))])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "icon" }, [
+          _c("img", {
+            directives: [
+              {
+                name: "b-modal",
+                rawName: "v-b-modal.modal-1",
+                modifiers: { "modal-1": true }
+              }
+            ],
+            staticClass: "icon-btn",
+            attrs: { src: "/edit.98ea1e81.svg" }
+          }),
+          _vm._v(" "),
+          _c("img", {
+            staticClass: "icon-btn",
+            attrs: { src: "/delete.34743b57.svg", alt: "" },
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                return _vm.deletedTask(_vm.task.id)
+              }
+            }
+          })
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -20088,7 +19961,7 @@ render._withStripped = true
       
       }
     })();
-},{"sweetalert2":"node_modules/sweetalert2/dist/sweetalert2.all.js","axios":"node_modules/axios/index.js","moment":"node_modules/moment/moment.js","./add-modal":"src/components/add-modal.vue","./..\\assets\\edit.svg":[["edit.98ea1e81.svg","src/assets/edit.svg"],"src/assets/edit.svg"],"./..\\assets\\delete.svg":[["delete.34743b57.svg","src/assets/delete.svg"],"src/assets/delete.svg"],"_css_loader":"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/category.vue":[function(require,module,exports) {
+},{"sweetalert2":"node_modules/sweetalert2/dist/sweetalert2.all.js","axios":"node_modules/axios/index.js","moment":"node_modules/moment/moment.js","./..\\assets\\edit.svg":[["edit.98ea1e81.svg","src/assets/edit.svg"],"src/assets/edit.svg"],"./..\\assets\\delete.svg":[["delete.34743b57.svg","src/assets/delete.svg"],"src/assets/delete.svg"],"_css_loader":"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/category.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -20100,6 +19973,24 @@ var _card = _interopRequireDefault(require("./card"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -20206,7 +20097,11 @@ exports.default = _default;
         ? _c(
             "div",
             _vm._l(_vm.todo, function(task) {
-              return _c("Card", { key: task.id, attrs: { task: task } })
+              return _c("Card", {
+                key: task.id,
+                attrs: { task: task },
+                on: { emitDelete: _vm.refreshData }
+              })
             }),
             1
           )
@@ -20216,7 +20111,11 @@ exports.default = _default;
         ? _c(
             "div",
             _vm._l(_vm.doing, function(task) {
-              return _c("Card", { key: task.id, attrs: { task: task } })
+              return _c("Card", {
+                key: task.id,
+                attrs: { task: task },
+                on: { emitDelete: _vm.refreshData }
+              })
             }),
             1
           )
@@ -20226,7 +20125,11 @@ exports.default = _default;
         ? _c(
             "div",
             _vm._l(_vm.done, function(task) {
-              return _c("Card", { key: task.id, attrs: { task: task } })
+              return _c("Card", {
+                key: task.id,
+                attrs: { task: task },
+                on: { emitDelete: _vm.refreshData }
+              })
             }),
             1
           )
@@ -20267,7 +20170,172 @@ render._withStripped = true
       
       }
     })();
-},{"./card":"src/components/card.vue","_css_loader":"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/pages/Home.vue":[function(require,module,exports) {
+},{"./card":"src/components/card.vue","_css_loader":"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/add-modal.vue":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _axios = _interopRequireDefault(require("axios"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = {
+  name: "MOdal",
+  data: function data() {
+    return {
+      title: ""
+    };
+  },
+  methods: {
+    onSubmit: function onSubmit() {
+      var _this = this;
+
+      // console.log(this.title);
+      (0, _axios.default)({
+        method: "POST",
+        url: "http://localhost:4000/tasks",
+        headers: {
+          access_token: localStorage.access_token
+        },
+        data: {
+          title: this.title,
+          category: "BackLog"
+        }
+      }).then(function (_ref) {
+        var data = _ref.data;
+
+        _this.$emit("emitAdd");
+      }).catch(function (err) {
+        console.log(err);
+      });
+    }
+  }
+};
+exports.default = _default;
+        var $b0d482 = exports.default || module.exports;
+      
+      if (typeof $b0d482 === 'function') {
+        $b0d482 = $b0d482.options;
+      }
+    
+        /* template */
+        Object.assign($b0d482, (function () {
+          var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "b-modal",
+        {
+          attrs: {
+            id: "modal-1",
+            title: "Project Title",
+            "hide-footer": "true"
+          }
+        },
+        [
+          _c("div", { staticClass: "input" }, [
+            _c("label", { staticClass: "label", attrs: { for: "" } }, [
+              _vm._v("Project")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.title,
+                  expression: "title"
+                }
+              ],
+              staticClass: "text",
+              attrs: { placeholder: "Your Project" },
+              domProps: { value: _vm.title },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.title = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "add-btn",
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.onSubmit($event)
+                }
+              }
+            },
+            [_vm._v("Submit")]
+          )
+        ]
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+          return {
+            render: render,
+            staticRenderFns: staticRenderFns,
+            _compiled: true,
+            _scopeId: null,
+            functional: undefined
+          };
+        })());
+      
+    /* hot reload */
+    (function () {
+      if (module.hot) {
+        var api = require('vue-hot-reload-api');
+        api.install(require('vue'));
+        if (api.compatible) {
+          module.hot.accept();
+          if (!module.hot.data) {
+            api.createRecord('$b0d482', $b0d482);
+          } else {
+            api.reload('$b0d482', $b0d482);
+          }
+        }
+
+        
+        var reloadCSS = require('_css_loader');
+        module.hot.dispose(reloadCSS);
+        module.hot.accept(reloadCSS);
+      
+      }
+    })();
+},{"axios":"node_modules/axios/index.js","_css_loader":"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/pages/Home.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -20327,12 +20395,6 @@ var _default = {
     };
   },
   methods: {
-    showModal: function showModal() {
-      this.isAddModalVisible = true;
-    },
-    closeModal: function closeModal() {
-      this.isAddModalVisible = false;
-    },
     fetchTask: function fetchTask() {
       var _this = this;
 
@@ -20380,27 +20442,22 @@ exports.default = _default;
           _c("div", { staticClass: "header" }, [
             _c("div", { staticClass: "he-l" }),
             _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "he-r" },
-              [
-                _c(
-                  "b-button",
-                  {
-                    directives: [
-                      {
-                        name: "b-modal",
-                        rawName: "v-b-modal.modal-1",
-                        modifiers: { "modal-1": true }
-                      }
-                    ],
-                    staticClass: "add-btn"
-                  },
-                  [_vm._v("Add Project")]
-                )
-              ],
-              1
-            )
+            _c("div", { staticClass: "he-r" }, [
+              _c(
+                "button",
+                {
+                  directives: [
+                    {
+                      name: "b-modal",
+                      rawName: "v-b-modal.modal-1",
+                      modifiers: { "modal-1": true }
+                    }
+                  ],
+                  staticClass: "add-btn"
+                },
+                [_vm._v("Add Project")]
+              )
+            ])
           ])
         ])
       ]),
@@ -20418,7 +20475,7 @@ exports.default = _default;
         1
       ),
       _vm._v(" "),
-      _c("AddModal")
+      _c("AddModal", { on: { emitAdd: _vm.refreshData } })
     ],
     1
   )
