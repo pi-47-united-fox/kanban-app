@@ -1,4 +1,4 @@
-const {Task} = require('../models/index')
+const {Task,User} = require('../models/index')
 
 class TaskController {
     static async addTask(req, res, next) {
@@ -16,7 +16,7 @@ class TaskController {
     }
     static async listTasks(req, res, next) {
         try{
-            const data = await Task.findAll({order:[['id', 'ASC']]})
+            const data = await Task.findAll({include:[User]})
             res.status(200).json(data)
         } catch(err) {
             res.status(500).json(err)
@@ -54,7 +54,7 @@ class TaskController {
                 },
                 returning: true
             })
-            res.status(200).json(data[1][0].category)
+            res.status(200).json({category: data[1][0].category})
         } catch (err) {
             res.status(500).json(err)
         }
