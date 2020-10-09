@@ -1,0 +1,42 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "title": "learn Vue JS",
+      "category": "Backlog",
+      "author": "Bagus"
+    },
+    {
+      "id": 2,
+      "title": "learn JS from Youtube",
+      "category": "Todo",
+      "author": "Bagus"
+    },
+    {
+      "id": 3,
+      "title": "learn Sass from Youtube",
+      "category": "Todo",
+      "author": "Bagus"
+    },
+    {
+      "title": "Learn Web Dev Yt",
+      "category": "Backlog",
+      "author": "Bagus",
+      "id": 4
+    },
+    {
+      "title": "Coba pakai db JSON",
+      "category": "Backlog",
+      "author": "Bagus",
+      "id": 5
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "email": "bagus@mail.com",
+      "password": "qwerty",
+      "organization": "Hacktiv8"
+    }
+  ]
+}
