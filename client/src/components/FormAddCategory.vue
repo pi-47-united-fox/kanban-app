@@ -28,6 +28,7 @@ export default {
     props:['addFormCategory'],
     data(){
         return { 
+            serverUrl:'http://localhost:3000/',
             inputCategoryName : ""
         }
     },
@@ -37,7 +38,7 @@ export default {
         },
         addCategory(){
             Axios
-                .post('http://localhost:3000/category',
+                .post(`${this.serverUrl}category`,
                 {
                     name:this.inputCategoryName
                 },

@@ -39,6 +39,7 @@ export default {
     name: 'RegisterForm',
     data(){
         return{ 
+            serverUrl:'http://localhost:3000/',
             emailFormLogin :"",
             passwordFormLogin : "",
             errMessage:""
@@ -54,7 +55,7 @@ export default {
         login(){
             console.log(this.emailFormLogin,this.passwordFormLogin);
             axios
-                .post('http://localhost:3000/register',{ 
+                .post(`${this.serverUrl}register`,{ 
                     email:this.emailFormLogin,
                     password:this.passwordFormLogin,
                 })
@@ -62,9 +63,12 @@ export default {
                     this.$emit('changePage','login')
                 })
                 .catch(err=>{ 
-                    let errors = err.response.data.errors
-                    console.log(errors);
-                    this.errMessage = errors[0].message
+                    console.log(err);
+                    if(err.response){
+                        let errors = err.response.data.errors
+                        console.log(errors);
+                        this.errMessage = errors[0].message
+                    }
 
                 })
 

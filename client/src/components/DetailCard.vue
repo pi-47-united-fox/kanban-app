@@ -63,6 +63,7 @@ export default {
     props:['taskId','categories','users'],
     data(){
         return {
+            serverUrl:'http://localhost:3000/',
             errMessage:"",
             cardTitle:"Task Detail",
             taskTitle:"titletest",
@@ -97,7 +98,7 @@ export default {
         },
         editData(){
             axios
-              .put(`http://localhost:3000/tasks/${this.taskId}`,
+              .put(`${this.serverUrl}tasks/${this.taskId}`,
                 {
                     title:this.inputTaskTitle,
                     description:this.inputTaskDescription,
@@ -122,7 +123,7 @@ export default {
         },
         deleteData(){
             axios
-              .delete(`http://localhost:3000/tasks/${this.taskId}`,
+              .delete(`${this.serverUrl}tasks/${this.taskId}`,
                 {
                   headers:{
                       access_token:localStorage.access_token
@@ -151,7 +152,7 @@ export default {
     },
     created(){ 
         axios
-            .get(`http://localhost:3000/tasks/${this.taskId}`, 
+            .get(`${this.serverUrl}tasks/${this.taskId}`, 
             {
                 headers:{
                     access_token:localStorage.access_token

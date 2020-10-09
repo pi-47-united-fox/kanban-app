@@ -41,6 +41,7 @@ export default {
     props:['categoryId','categories'],
     data(){
         return {   
+            serverUrl:'http://localhost:3000/',
             inputTaskDescription : '',
             inputTaskTitle : '',
             inputTaskCategory : this.categoryId,
@@ -52,7 +53,7 @@ export default {
         },
         addData(){
             axios
-              .post('http://localhost:3000/tasks',
+              .post(`${this.serverUrl}tasks`,
                 {
                     title:this.inputTaskTitle,
                     description:this.inputTaskDescription,

@@ -41,6 +41,7 @@ export default {
     name: 'LoginForm',
     data(){
         return{ 
+            serverUrl:'http://localhost:3000/',
             emailFormLogin :"",
             passwordFormLogin : "",
             errMessage:""
@@ -57,7 +58,7 @@ export default {
         login(){
             console.log(this.emailFormLogin,this.passwordFormLogin);
             axios
-                .post('http://localhost:3000/login',{ 
+                .post(`${this.serverUrl}login`,{ 
                     email:this.emailFormLogin,
                     password:this.passwordFormLogin,
                 })
@@ -69,8 +70,10 @@ export default {
                 })
                 .catch(err=>{
                     console.log(err);
-                    console.log(err.response);
-                    this.errMessage = err.response.data.msg
+                    // console.log(err.response);
+                    if(err.response){
+                        this.errMessage = err.response.data.msg
+                    }
                 })
 
         }, 

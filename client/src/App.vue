@@ -57,6 +57,7 @@ export default {
     },
     data() {
         return { 
+            serverUrl:'http://localhost:3000/',
             page: 'home', 
             addCategoryForm:false,
             categories: [],
@@ -82,7 +83,7 @@ export default {
             this.users = []
             this.categories = []
             axios
-              .get('http://localhost:3000/tasks',
+              .get(`${this.serverUrl}tasks`,
               {
                   headers:{
                       access_token:localStorage.access_token
