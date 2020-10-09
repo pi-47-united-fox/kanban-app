@@ -12,16 +12,16 @@
           class="loginBox shadow-md rounded px-8 pt-6 pb-8 mb-4"
           v-on:submit.prevent="login"
         >
-          <div class="text-2xl mb-8 font-bold text-gray-700">Login</div>
+          <div class="text-2xl mb-8 font-bold text-blue-700">Login</div>
           <div class="mb-4">
             <label
-              class="block text-gray-700 text-sm font-bold mb-2"
+              class="block text-blue-700 text-sm font-bold mb-2"
               for="email-login"
             >
               Email
             </label>
             <input
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-blue-700 leading-tight focus:outline-none focus:shadow-outline"
               id="username"
               v-model="email"
               type="email"
@@ -30,7 +30,7 @@
           </div>
           <div class="mb-6">
             <label
-              class="block text-gray-700 text-sm font-bold mb-2"
+              class="block text-blue-700 text-sm font-bold mb-2"
               for="password"
             >
               Password
@@ -56,8 +56,15 @@
               href="#"
               @click.prevent="changePage('registerPage')"
               class="bg-transparent hover:bg-blue-700 text-blue-700 font-semibold hover:text-white py-2 px-4 hover:border-transparent rounded"
-              >Register or Login using Google Here</a
+              >Register Here!</a
             >
+            <br>
+            <br>
+            <label class="bg-transparent text-blue-700 font-semibold py-2 px-4 hover:border-transparent rounded">Or</label>
+            <br>
+            <button class="btn-google" @click.prevent="" v-google-signin-button="clientId">
+          <img src="../assets/btn-Google.png" alt="" />
+        </button>
           </div>
         </form>
       </div>
@@ -67,7 +74,7 @@
 
 <script>
 import axios from "axios";
-// import google from './google.vue'
+import GoogleSignInButton from "vue-google-signin-button-directive";
 import swal from "sweetalert";
 export default {
   name: "LoginPage",
@@ -76,6 +83,8 @@ export default {
       email: "",
       password: "",
       message: "",
+      clientId:
+        "943080442583-qb7c2sta7dd409pf6dpovmqghplh2f74.apps.googleusercontent.com"
     };
   },
   props: ["baseUrl"],
@@ -101,18 +110,42 @@ export default {
     changePage(page) {
       this.$emit("changePage", page);
     },
+    OnGoogleAuthSuccess(idToken) {
+      axios({
+        method: "POST",
+        url: this.baseUrl + "/loginGoogle",
+        headers: {
+          google_token: idToken,
+        },
+      })
+        .then((res) => {
+          localStorage.setItem("access_token", res.data.access_token);
+          this.changePage("dashboard");
+        })
+        .catch((err) => {
+          this.message = err.response;
+        });
+    },
+    OnGoogleAuthFail(error) {
+      console.log(error);
+    }
   },
 };
 </script>
 
 <style scoped>
 .loginBox {
-  background-color: wheat;
   box-shadow: -1px 3px 15px 0px rgba(0, 0, 0, 1);
-  border-radius: 25px;
+  border-radius: 15px;
   width: 500px;
   align-items: center;
   align-self: center;
   text-align: center;
+  margin-bottom: -20px;
+}
+
+.btn-google{
+  width: 200px;
+  height: 70px;
 }
 </style>

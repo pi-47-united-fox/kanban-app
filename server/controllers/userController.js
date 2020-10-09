@@ -65,6 +65,8 @@ class UserController {
 
         try {
             const payload = await verifyGoogle(google_token)
+            console.log(payload);
+            const name = payload.name
             const email = payload.email
             const user = await User.findOne({
                 where: {
@@ -73,18 +75,18 @@ class UserController {
             })
             const password = process.env.DEFAULT_GOOGLE_USER_PASSWORD
             if (user) {
-                let check = comparePass
-                if (check) {
-                    const access_token = jwt.sign({ id: user.id, email: user.email, }, process.env.SECRET)
+                if (comparePass) {
+                    const access_token = jwt.sign({ id: user.id, name: user.name, email: user.email, }, process.env.SECRET)
                     res.status(200).json({ access_token })
                 }
             } else {
+                console.log(user);
                 const newUser = await User.create({
                     name,
                     email,
                     password
                 })
-                const access_token = jwt.sign({ id: newUser.id, email: newUser.email, }, process.env.SECRET)
+                const access_token = jwt.sign({ id: newUser.id, name: user.name, email: newUser.email, }, process.env.SECRET)
                 res.status(200).json({ access_token })
             }
         } catch (err) {

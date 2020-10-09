@@ -1,6 +1,6 @@
 <template>
-    <nav class="flex items-center justify-between flex-wrap bg-white p-3 mb-10">
-        <div class="flex items-center flex-shrink-0 text-gray-600 mr-6">
+    <nav class="flex items-center justify-between flex-wrap bg-none p-3 mb-10">
+        <div class="flex items-center flex-shrink-0 text-black-600 mr-6">
             <span class="font-semibold text-xl tracking-tight ml-2">Kanban App</span>
         </div>
         <div v-if="page == 'dashboard'" >
