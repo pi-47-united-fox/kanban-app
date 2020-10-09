@@ -4,6 +4,8 @@ const task = require('./tasks')
 
 router.post('/register', UserController.registerUserC)
 router.post('/login', UserController.loginUserC)
+router.post('/google', UserController.googleLoginC)
+
 
 
 router.use('/tasks', task)

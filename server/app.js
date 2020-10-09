@@ -7,7 +7,7 @@ const router     = require('./routers')
 const errHandler = require('./middlewares/errHandler')
 
 app.use(cors())
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 app.get('/', (req, res) => {

@@ -28,7 +28,8 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: true
       }
     },
-    organization: DataTypes.STRING
+    organization: DataTypes.STRING,
+    user_name: DataTypes.STRING
   }, {
     hooks: {
       beforeCreate: (instance) => {
@@ -37,6 +38,9 @@ module.exports = (sequelize, DataTypes) => {
 
         // FOR PASSWORD
         instance.password = BcryptJs.makeHash(instance.password)
+
+        // FOR USERNAME
+        instance.user_name = instance.email.split('@')[0]
       }
     },
     sequelize,

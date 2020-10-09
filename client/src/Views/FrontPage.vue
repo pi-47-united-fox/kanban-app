@@ -6,24 +6,39 @@
     >
       <div class="form-container sign-in-container">
         <!-- Sign In form code goes here -->
-        <form @submit.prevent="signMeIn">
+        <form>
           <h1>Sign in</h1>
-          <br /><br />
+          <br />
+          <br />
           <input type="email" placeholder="Email" v-model="email" />
           <input type="password" placeholder="Password" v-model="password" />
-          <a href="#">Forgot your password?</a>
-          <button>Sign In</button>
+          <br>
+          <button @click="signMeIn">Sign In</button>
+          <p>Or use</p>
+           <GoogleLogin
+            :params="params"
+            :onSuccess="onSuccess"
+            :onFailure="onFailure"
+            >Google</GoogleLogin
+          >
         </form>
       </div>
       <div class="form-container sign-up-container">
         <!-- Sign Up form code goes here -->
-        <form @submit.prevent="registerMe">
+        <form>
           <h1>Create Account</h1>
-          <br><br>
+          <br /><br />
           <!-- <input type="text" placeholder="Name" /> -->
-          <input type="email" placeholder="Email" v-model="email"/>
-          <input type="password" placeholder="Password" v-model="password"/>
-          <button>Sign Up</button>
+          <input type="email" placeholder="Email" v-model="email" />
+          <input type="password" placeholder="Password" v-model="password" />
+          <button @click="registerMe">Sign Up</button>
+          <p>Or use</p>
+           <GoogleLogin
+            :params="params"
+            :onSuccess="onSuccess"
+            :onFailure="onFailure"
+            >Google</GoogleLogin
+          >
         </form>
       </div>
       <div class="overlay-container">
@@ -50,18 +65,25 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
+import GoogleLogin from "vue-google-login";
 
 export default {
   name: "FrontPage",
-  props: [
-  ],
+  props: [],
+  components: {
+    GoogleLogin,
+  },
   data() {
     return {
       switchPanel: "",
       email: "",
       password: "",
       errMessage: "",
+      params: {
+        client_id:
+          "256037848773-c0eh8t8o0shmclh69i4d5rakps5td6nk.apps.googleusercontent.com",
+      },
     };
   },
   methods: {
@@ -74,13 +96,16 @@ export default {
     signMeIn() {
       // console.log ('masuk')
       axios
-        .post('http://localhost:3000' + "/login", {
+        .post("http://localhost:3000" + "/login", {
           email: this.email,
-          password: this.password
-        }).then(({data}) => {
+          password: this.password,
+        })
+        .then(({ data }) => {
           console.log(data);
-          this.$emit('emitWhichPage', 'HomePage')
-          localStorage.setItem('access_token', data.access_token)
+          this.$emit("emitWhichPage", "HomePage");
+          localStorage.setItem("access_token", data.access_token);
+          localStorage.setItem("username", data.username);
+          localStorage.setItem("organization", data.organization);
         })
         .catch((err) => {
           console.error(err);
@@ -88,16 +113,40 @@ export default {
     },
     registerMe() {
       axios
-        .post('http://localhost:3000' + "/register", {
+        .post("http://localhost:3000" + "/register", {
           email: this.email,
-          password: this.password
-        }).then((res) => {
-          this.showSignIn()
-          console.log(res);
+          password: this.password,
+        })
+        
+        .then((res) => {
+          this.showSignIn();
+          // console.log(res);
         })
         .catch((err) => {
           console.error(err);
         });
+    },
+    onSuccess(googleUser) {
+      console.log (googleUser)
+      const google_access_token = googleUser.getAuthResponse().id_token;
+      axios({
+        method: "post",
+        url: "http://localhost:3000" + "/google",
+        headers: {
+          google_access_token,
+        },
+      }).then(({ data }) => {
+          localStorage.setItem("access_token", data.access_token);
+          localStorage.setItem("username", data.username);
+          localStorage.setItem("organization", data.organization);
+          this.$emit("emitWhichPage", "HomePage");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    onFailure(err) {
+      console.log (err) 
     },
   },
 };

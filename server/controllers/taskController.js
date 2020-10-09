@@ -1,19 +1,19 @@
-const {Task, User} = require('../models');
+const { Task, User } = require('../models');
 
 class TaskController {
     // Success
-    static getAllTasksC (req, res, next) {
+    static getAllTasksC(req, res, next) {
         // console.log ('masuk get all')
-        Task.findAll({include: User})
-        .then((result) => {
+        Task.findAll({ include: User })
+            .then((result) => {
                 res.status(200).json(result)
-        }).catch((err) => {
-            next(err)
-        });
+            }).catch((err) => {
+                next(err)
+            });
     }
 
     // Success
-    static findTaskC (req, res, next) {
+    static findTaskC(req, res, next) {
         Task.findByPk(req.params.id, {
             include: User
         }).then((result) => {
@@ -24,7 +24,7 @@ class TaskController {
     }
 
     // Success
-    static addTaskC (req, res, next) {
+    static addTaskC(req, res, next) {
         Task.create({
             title: req.body.title,
             category: req.body.category,
@@ -37,12 +37,12 @@ class TaskController {
     }
 
     // SUCCESS
-    static editTaskC (req, res, next) {
+    static editTaskC(req, res, next) {
         // console.log ('masuk', req.params.id)
         Task.update({
             title: req.body.title,
             category: req.body.category
-        },{
+        }, {
             where: {
                 id: req.params.id
             },
@@ -55,10 +55,10 @@ class TaskController {
     }
 
     // SUCCESS
-    static editTaskCategoyC (req, res, next) {
+    static editTaskCategoyC(req, res, next) {
         Task.update({
             category: req.body.category
-        },{
+        }, {
             where: {
                 id: req.params.id
             },
@@ -71,7 +71,7 @@ class TaskController {
     }
 
     // Success
-    static deleteTaskC (req, res, next) {
+    static deleteTaskC(req, res, next) {
         // console.log ('masuk delete')
         Task.destroy({
             where: {
@@ -81,9 +81,9 @@ class TaskController {
             if (result == 1) {
                 return res.status(200).json({
                     message: 'Task: success deleted'
-                }) 
+                })
             } else {
-                return next({name: 'not found'})
+                return next({ name: 'not found' })
             }
         }).catch((err) => {
             next(err)
