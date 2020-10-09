@@ -1,7 +1,10 @@
 <template>
   <section class="main-page container">
+    <div v-if="messageDelete" class="alert alert-danger" role="alert">
+      {{ messageDelete }}
+      <i class="fa fa-window-close" @click="closeAlert"></i>
+    </div>
     <div class="containers">
-      <!-- backlog -->
       <categoryCard
         v-for="(category, i) in categories"
         :key="i"
@@ -18,7 +21,8 @@
 <script>
 import categoryCard from "../components/Category";
 export default {
-  props: ["tasks"],
+  name: "TaskHome",
+  props: ["tasks", "messageDelete"],
   components: {
     categoryCard,
   },
@@ -50,11 +54,14 @@ export default {
     };
   },
   methods: {
+    closeAlert() {
+      this.messageDelete = "";
+    },
     updateTask(value) {
-      this.$emit = ("updateTask", value);
+      this.$emit("updateTask", value);
     },
     deleteTask(value) {
-      this.$emit = ("deleteTask", value);
+      this.$emit("deleteTask", value);
     },
   },
 };

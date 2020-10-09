@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-light bg-danger fixed-top">
+  <nav class="navbar navbar-light bg-transparant fixed-top">
     <a
       class="navbar-brand"
       href="#"
@@ -10,7 +10,8 @@
       Todo What ?
     </a>
 
-    <div>
+    <div class="d-flex">
+      <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
       <a
         class="navbar-brand"
         href="#"

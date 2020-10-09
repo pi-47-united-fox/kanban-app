@@ -1,5 +1,6 @@
 
 body{
+    background-image: url("https://venngage-wordpress.s3.amazonaws.com/uploads/2018/09/Minimalist-Crumpled-Paper-Simple-Background-Image.jpg");
     margin: 0;
     background-repeat: no-repeat;
     background-size: 100% 920px;
@@ -12,7 +13,7 @@ body{
 } */
 .containers {
     display: flex;
-    background-color: white;
+    
     width: 100% !important;
     height: 35em;
     justify-content:center;
@@ -22,6 +23,7 @@ body{
 
 .main-page{
     margin-top: 60px;
+    
 }
 
 .cards{

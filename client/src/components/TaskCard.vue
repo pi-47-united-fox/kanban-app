@@ -1,9 +1,8 @@
 <template>
   <div class="card mt-2 bg-transparent text-dark mb-3" style="max-width: 18rem">
     <div class="card-body">
-      <p class="title">{{ task.title }}</p>
+      <p>{{ task.title }}</p>
 
-      <p>{{ task.User.name }}</p>
       <p>status : {{ task.category }}</p>
       <div class="reedit">
         <i @click="deleteTask" class="fa fa-trash-alt"></i>
@@ -11,6 +10,7 @@
         <i @click="updateTask" class="fa fa-edit"></i>
       </div>
 
+      <p>{{ task.User.name }}</p>
       <p class="date-task">{{ task.createdAt.substring(0, 10) }}</p>
     </div>
   </div>
@@ -26,7 +26,7 @@ export default {
     },
 
     updateTask() {
-      his.$emit("updateTask", this.task);
+      this.$emit("updateTask", this.task);
     },
   },
 };

@@ -2,9 +2,6 @@
   <div class="card cards category">
     <div class="headsot" :class="`${categoryName.color}`">
       <i :class="`${categoryName.icon}`"> {{ categoryName.name }} </i>
-      <a href="">
-        <i class="fa fa-plus"></i>
-      </a>
     </div>
     <!-- main card backlog-->
 
@@ -35,7 +32,7 @@ export default {
     },
 
     deleteTask(value) {
-      this.$emit("deleteTAsk", value);
+      this.$emit("deleteTask", value);
     },
   },
   computed: {

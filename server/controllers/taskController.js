@@ -54,7 +54,7 @@ class TaskController {
 
         try {
             let value = {
-                titile: title,
+                title: title,
                 category: category
             }
             let data = await Task.update(value, {
