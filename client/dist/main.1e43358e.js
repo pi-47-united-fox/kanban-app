@@ -11210,6 +11210,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
 var _default = {
   name: 'RegisterPage',
   data: function data() {
@@ -11217,7 +11218,8 @@ var _default = {
       userNameRegister: '',
       emailRegister: '',
       passwordRegister: '',
-      message: ''
+      message: '',
+      clientId: '943080442583-qb7c2sta7dd409pf6dpovmqghplh2f74.apps.googleusercontent.com'
     };
   },
   props: ['baseUrl'],
@@ -11252,6 +11254,26 @@ var _default = {
     },
     changePage: function changePage(page) {
       this.$emit('changePage', page);
+    },
+    OnGoogleAuthSuccess: function OnGoogleAuthSuccess(idToken) {
+      var _this2 = this;
+
+      (0, _axios.default)({
+        method: 'POST',
+        url: this.baseUrl + '/loginGoogle',
+        headers: {
+          google_token: idToken
+        }
+      }).then(function (res) {
+        localStorage.setItem('access_token', res.data.access_token);
+
+        _this2.changePage('dashboard');
+      }).catch(function (err) {
+        _this2.message = err.response;
+      });
+    },
+    OnGoogleAuthFail: function OnGoogleAuthFail(error) {
+      console.log(error);
     }
   }
 };
@@ -11406,11 +11428,35 @@ exports.default = _default;
           _vm._v(" "),
           _vm._m(0),
           _vm._v(" "),
+          _c(
+            "button",
+            {
+              directives: [
+                {
+                  name: "google-signin-button",
+                  rawName: "v-google-signin-button",
+                  value: _vm.clientId,
+                  expression: "clientId"
+                }
+              ],
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                }
+              }
+            },
+            [
+              _c("img", {
+                attrs: { src: "/btn-Google.9fa5ddeb.png", alt: "" }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
           _vm._m(1),
-          _vm._v(" "),
-          _c("br"),
-          _vm._v(" "),
-          _c("br"),
           _vm._v(" "),
           _c(
             "a",
@@ -11454,8 +11500,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("button", [
-      _c("img", {
-        attrs: { src: "/btn-Google.9fa5ddeb.png", alt: "" }
+      _c("div", {
+        staticClass: "g-signin2",
+        attrs: { "data-onsuccess": "onSignIn" }
       })
     ])
   }
@@ -12419,7 +12466,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52646" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54144" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

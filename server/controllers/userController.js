@@ -1,8 +1,7 @@
 const { User } = require('../models/index')
 const { comparePass } = require('../helpers/bcrypt')
 const jwt = require('jsonwebtoken')
-const { OAuth2Client } = require('google-auth-library')
-const { use } = require('../routes/user')
+const verifyGoogle = require('../helpers/googleVerify')
 
 class UserController {
     static register(req, res, next) {
@@ -61,35 +60,40 @@ class UserController {
         }
     }
 
-    static googleLogin(req, res) {
-        const client = new OAuth2Client(process.env.CLIENT_ID_GOOGLE)
-        client.verifyIdToken({
-                idToken: req.headers.google_access_token,
-                audience: process.env.CLIENT_ID_GOOGLE,
-            })
-            .then(ticket => {
-                let payload = ticket.getPayload()
-                email = payload['email']
-                return User.findOne({ where: { email } })
-            })
-            .then(user => {
-                if (!user) {
-                    let userObj = {
-                        email: email,
-                        password: process.env.DEFAULT_GOOGLE_USER_PASSWORD
-                    }
-                    return User.create(userObj)
-                } else {
-                    return user
+    static async googleLogin(req, res, next) {
+        const google_token = req.headers.google_token
+        try {
+            const payLoad = await verifyGoogle(google_token)
+            const email = payLoad.email
+            const name = payLoad.name
+            const user = await User.findOne({
+                where: {
+                    email
                 }
             })
-            .then(user => {
-                const access_token = generateToken({ id: user.id, email: user.email })
-                return res.status(201).json(access_token)
-            })
-            .catch(err => {
+            const password = process.env.DEFAULT_GOOGLE_USER_PASSWORD
+            if (user) {
+                const encryptedPassword = comparePass
+                const newPasswordGoogleUser = await User.update({ password: encryptedPassword }, {
+                    where: {
+                        id: user.id
+                    }
+                })
+                const access_token = jwt.sign({ id: user.id, email: user.email }, process.env.SECRET);
+                res.status(200).json({ access_token })
+            } else {
+                const newUserGoogle = await User.create({
+                    email,
+                    password: password,
+                    name
+                })
+                const access_token = jwt.sign({ id: newUserGoogle.id, email: newUserGoogle.email }, process.env.SECRET);
+                res.status(201).json({ access_token })
+            }
+        } catch (err) {
+            next(err)
+        }
 
-            })
     }
 }
 

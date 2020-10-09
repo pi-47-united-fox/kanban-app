@@ -39,8 +39,9 @@
                       Sign Up
                   </button>
               </div>
-             <button> <img src="../assets/btn-Google.png" alt=""></button>
+               <button @click.prevent="" v-google-signin-button="clientId"> <img src="../assets/btn-Google.png" alt=""></button>
                 <br> <br>
+             <button> <div class="g-signin2" data-onsuccess="onSignIn"></div> </button>
               <a @click.prevent="changePage('loginPage')" id="redirect" class="bg-transparent hover:bg-blue-700 text-blue-700 font-semibold hover:text-white py-2 px-4 hover:border-transparent rounded" >Already have an account? Click here.</a>
           </form>
       </div>
@@ -58,6 +59,7 @@ export default {
             emailRegister:'',
             passwordRegister:'',
             message:'',
+            clientId: '943080442583-qb7c2sta7dd409pf6dpovmqghplh2f74.apps.googleusercontent.com'
         }
     },
     props:['baseUrl'],
@@ -91,6 +93,25 @@ export default {
         changePage(page){
             this.$emit('changePage',page)
         },
+        OnGoogleAuthSuccess (idToken) {
+            axios({
+                method:'POST',
+                url: this.baseUrl+'/loginGoogle',
+                headers:{
+                    google_token: idToken
+                }
+            })
+            .then(res=>{
+                localStorage.setItem('access_token',res.data.access_token)
+                this.changePage('dashboard')
+            })
+            .catch(err=>{
+                this.message = err.response
+            })
+        },
+        OnGoogleAuthFail (error) {
+            console.log(error)
+        }
     }
 }
 </script>
