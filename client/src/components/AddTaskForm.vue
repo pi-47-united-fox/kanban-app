@@ -7,7 +7,7 @@
                 <form>
                     <div class="field">
                         <div class="select">
-                            <select v-model="taskCategory">
+                            <select v-model="addWhat">
                                 <option value="Backlog">Backlog</option>
                                 <option value="Todo">Todo</option>
                                 <option value="Doing">Doing</option>
@@ -38,9 +38,9 @@ import axios from "axios"
 
 export default {
     name: "AddTaskForm",
+    props: ['addWhat'],
     data() {
         return {
-            taskCategory: '',
             taskText: ''
         }
     },
@@ -52,11 +52,12 @@ export default {
                 headers: {'access_token': localStorage.access_token},
                 data: {
                     title: this.taskText,
-                    category: this.taskCategory
+                    category: this.addWhat
                 }
             })
             .then(({data}) => {
                 this.$emit('refetchTasks')
+                this.$emit('changePage', 'home')
                 console.log(data.message)
             })
             .catch(err => {

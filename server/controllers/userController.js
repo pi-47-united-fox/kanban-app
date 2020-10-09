@@ -1,6 +1,8 @@
 const { User, Task } = require("../models/index")
 const { comparePassword } = require("../helpers/bcrypt")
 const { signToken } = require("../helpers/jwt")
+const { OAuth2Client } = require('google-auth-library');
+
 
 class UserController {
     static homeController(req, res, next) {
@@ -61,6 +63,46 @@ class UserController {
                 console.log(err)
             })
 
+    }
+
+    static newGoogleLogin(req, res, next) {
+        const client = new OAuth2Client("639126342145-3cuj7836kqi0gn02md1baqivbkb1hkqd.apps.googleusercontent.com")
+        let email = ''
+
+        client.verifyIdToken({
+            idToken: req.headers.google_access_token,
+            audience: "639126342145-3cuj7836kqi0gn02md1baqivbkb1hkqd.apps.googleusercontent.com"
+        })
+        .then(ticket => {
+            let payload = ticket.getPayload()
+            email = payload['email']
+            return User.findOne({
+                where: {
+                    email: email
+                }
+            })
+
+        })
+        .then(user => {
+            if (!user) {
+                let userObj = {
+                    email: email,
+                    password: "supernatural"
+                }
+                return User.create(userObj)
+            } else {
+                return user
+            }
+        })
+        .then(user => {
+            let access_token  = signToken({id: user.id, email: user.email, organization: user.organization})
+            return res.status(201).json({
+                access_token
+            })
+        })
+        .catch(err => {
+            console.log(err)
+        })
     }
 
 

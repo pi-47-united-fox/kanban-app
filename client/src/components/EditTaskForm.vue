@@ -7,7 +7,7 @@
                 <form>
                     <div class="field">
                         <div class="select">
-                            <select v-model="taskCategory">
+                            <select v-model="taskEdit.category">
                                 <option value="Backlog">Backlog</option>
                                 <option value="Todo">Todo</option>
                                 <option value="Doing">Doing</option>
@@ -17,7 +17,7 @@
                     </div>
                     <div class="field">
                         <p class="control has-icons-left">
-                            <textarea v-model="taskText" class="textarea" placeholder="Start a new mission here.."></textarea>
+                            <textarea class="textarea" placeholder="Start a new mission here.." v-model="taskEdit.title"></textarea>
                         </p>
                     </div>
                     <div class="field is-grouped">
@@ -38,30 +38,41 @@ import axios from "axios"
 
 export default {
     name: "EditTaskForm",
+    props: ['editWhat'],
     data() {
         return {
-            taskCategory: '',
-            taskText: ''
+            taskEdit: {
+                title: '',
+                category: ''
+            }
         }
     },
     methods: {
-        editTask(id) {
+        editTask() {
             axios({
                 method: "PUT",
-                url: `http://localhost:3000/tasks/${id}`,
+                url: `http://localhost:3000/tasks/${this.editWhat.id}`,
                 headers: {'access_token': localStorage.access_token},
                 data: {
-                    title: this.taskText,
-                    category: this.taskCategory
+                    title: this.taskEdit.title,
+                    category: this.taskEdit.category
                 }
             })
             .then(({data}) => {
                 console.log(data.message)
+                this.$emit('changePage', 'home')
+                this.$emit("refetchTasks")
             })
             .catch(err => {
                 console.log(err)
             })
         }
+    },
+
+    created() {
+        this.taskEdit.title = this.editWhat.title
+        this.taskEdit.category = this.editWhat.category
+
     }
 
 }

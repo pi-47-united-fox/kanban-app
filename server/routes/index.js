@@ -9,6 +9,8 @@ router.get('/', UserController.homeController)
 
 router.post('/register', UserController.register)
 router.post('/login', UserController.login)
+router.post('/googlelogin', UserController.newGoogleLogin)
+
 
 router.get('/tasks', TaskController.findAllTasks)
 
@@ -18,8 +20,8 @@ router.post('/tasks', TaskController.addTask)
 
 router.get('/tasks/:id', authorization, TaskController.findTaskByTaskId)
 router.put('/tasks/:id', authorization, TaskController.editTask)
-router.patch('/tasks/up/:id', authorization, TaskController.upgradeTask)
-router.patch('/tasks/down/:id', authorization, TaskController.downgradeTask)
+router.patch('/tasks/up/:id', TaskController.upgradeTask)
+router.patch('/tasks/down/:id', TaskController.downgradeTask)
 
 // router.patch('/tasks/:id?move=up', authorization, TaskController.upgradeTask)
 // router.patch('/tasks/:id?move=down', authorization, TaskController.downgradeTask)

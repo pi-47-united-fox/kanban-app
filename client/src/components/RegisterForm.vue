@@ -33,11 +33,7 @@
                                 Sign Up
                             </a>
                         </p>
-                        <p class="control">
-                            <a class="button is-light">
-                                Cancel
-                            </a>
-                        </p>
+                    
                         <!-- button google sign in -->
                         <div class="g-signin2" data-onsuccess="onSignIn"></div>
                     </div>

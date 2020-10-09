@@ -90,7 +90,7 @@ class TaskController {
             title: req.body.title,
             category: req.body.category
         }
-
+        console.log(dataEdit, "<<>><<<<DATA>>>")
         Task.findOne({
             where: {
                 id: targetId

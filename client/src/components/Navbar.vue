@@ -15,7 +15,7 @@
 
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
-                    <a class="navbar-item">
+                    <a @click="displayHome" v-show="displayPage === 'home'" class="navbar-item">
                         Home
                     </a>
                 </div>
@@ -23,13 +23,13 @@
                 <div class="navbar-end">
                     <div class="navbar-item">
                         <div class="buttons">
-                            <a class="button is-primary">
+                            <a @click="displayRegister" v-show="displayPage !== 'home'" class="button is-primary">
                                 <strong>Sign up</strong>
                             </a>
-                            <a class="button is-light">
+                            <a @click="displayLogin" v-show="displayPage !== 'home'" class="button is-light">
                                 Log in
                             </a>
-                            <a @click="logout" class="button is-dark">
+                            <a @click="logout" v-show="displayPage === 'home'" class="button is-dark">
                                 Logout
                             </a>
                         </div>
@@ -42,6 +42,7 @@
 <script>
 export default {
     name: 'Navbar',
+    props: ['displayPage'],
     data() {
         return {
 
@@ -49,8 +50,28 @@ export default {
     },
     methods: {
         logout() {
+            this.$emit('changePage', 'login')
             localStorage.removeItem('access_token')
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+                console.log('User signed out.');
+            });
+        },
+
+        displayLogin() {
+            this.$emit('changePage2', 'login')
+        },
+
+        displayRegister() {
+            this.$emit('changePage', 'register')
+        },
+
+        displayHome() {
+            this.$emit('changePage', 'home')
+            this.$emit('refetchTasks')
         }
+
+
     }
 }
 </script>

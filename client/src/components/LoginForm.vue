@@ -32,13 +32,9 @@
                                 Sign In
                             </a>
                         </p>
-                        <p class="control">
-                            <a class="button is-light">
-                                Cancel
-                            </a>
-                        </p>
+                    
                         <!-- button google sign in -->
-                        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                        <GoogleLogin :params="params" :renderParams="renderParams" :onSuccess="onSuccess" :onFailure="onFailure"></GoogleLogin>
                     </div>
                 </form>
             </div>
@@ -48,14 +44,27 @@
 
 <script>
 import axios from "axios"
+import GoogleLogin from 'vue-google-login';
 
 export default {
     name: 'LoginForm',
+    components: {
+        GoogleLogin
+    },
     data() {
         return {
             displayPage: 'LoginForm',
             emailLogin: '',
-            passwordLogin: ''
+            passwordLogin: '',
+            params: {
+                client_id: "639126342145-3cuj7836kqi0gn02md1baqivbkb1hkqd.apps.googleusercontent.com"
+            },
+            // only needed if you want to render the button with the google ui
+            renderParams: {
+                width: 250,
+                height: 40,
+                longtitle: true
+            }
 
         }
     },
@@ -71,6 +80,7 @@ export default {
             })
             .then(({data}) => {
                 localStorage.setItem('access_token', data.access_token)
+                this.$emit('changePage', 'home')
             })
             .catch(err => {
                 console.log(err)
@@ -79,6 +89,30 @@ export default {
                 this.emailLogin = ''
                 this.passwordLogin = ''
             })
+        },
+        onSuccess(googleUser) {
+            console.log("masuk on success .,.,<><><><><<>><><><><><><><><><><><><><")
+            var google_access_token = googleUser.getAuthResponse().id_token;
+            console.log(google_access_token)
+
+            $.axios({
+                method: "POST",
+                url: 'http://localhost:3000/googlelogin',
+                headers : {
+                    google_access_token: google_access_token
+                }
+            })
+            .then(({data}) => {
+                localStorage.setItem('access_token', data)
+                this.$emit('changePage', 'home')
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        },
+
+        onFailure() {
+
         }
     }
 

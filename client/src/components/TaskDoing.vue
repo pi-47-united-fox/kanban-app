@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <div class="actions">
-                    <span class="icon has-text-info">
+                    <span @click="editTaskForm(doing)" class="icon has-text-info">
                         <i class="fas fa-edit"></i>
                     </span>
                     <span @click="upgradeTask(doing.id)" class="icon has-text-success">
@@ -49,6 +49,7 @@ export default {
                 headers: {'access_token': localStorage.access_token}
             })
             .then(({data}) => {
+                this.$emit('refetchTasks')
                 console.log(data.message)
             })
             .catch(err => {
@@ -63,9 +64,11 @@ export default {
                 headers: {'access_token': localStorage.access_token}
             })
             .then(({data}) => {
+                this.$emit('refetchTasks')
                 console.log(data.message)
             })
             .catch(err => {
+                this.$emit('refetchTasks')
                 console.log(err)
             })
         },
@@ -77,11 +80,17 @@ export default {
                 headers: {'access_token': localStorage.access_token}
             })
             .then(({data}) => {
+                this.$emit('refetchTasks')
                 console.log(data.message)
             })
             .catch(err => {
                 console.log(err)
             })
+        },
+
+        editTaskForm(task) {
+            this.$emit('editForm', task)
+
         }
 
     }

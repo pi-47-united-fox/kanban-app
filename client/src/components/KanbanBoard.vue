@@ -23,7 +23,7 @@
                             </div>
                             <div class="kanban-tasks">
                                 <!--- EMPTY TASK-->
-                                <div class="kanban-task">
+                                <div v-if="allTasks.backlog.length === 0" class="kanban-task">
                                     <div class="panel-block">
                                         <div class="notification">
                                             <div class="content">
@@ -36,14 +36,16 @@
                                 <!--- END OF EMPTY TASK-->
 
                                 <TaskBacklog 
+                                    v-else
                                     v-for="backlog in allTasks.backlog"
                                     :key="backlog.id"
                                     :backlog="backlog"
-                                    @refetchTask="refetchTask"
+                                    v-on="$listeners"
+                                    @editForm="editForm"
                                 ></TaskBacklog>
                                 
                             </div>
-                            <div id="btn-add-task">
+                            <div @click="addBacklog" id="btn-add-task">
                                 <div class="panel-block">
                                     <button class="button is-warning is-outlined is-fullwidth">
                                         <i class="fas fa-plus-circle"> </i>
@@ -65,7 +67,7 @@
                             </div>
                             <div class="kanban-tasks">
                                 <!--- EMPTY TASK-->
-                                <div class="kanban-task">
+                                <div v-if="allTasks.todo.length === 0" class="kanban-task">
                                     <div class="panel-block">
                                         <div class="notification">
                                             <div class="content">
@@ -76,13 +78,15 @@
                                     </div>
                                 </div>
                                 <!--- END OF EMPTY TASK-->
-                                <TaskTodo 
+                                <TaskTodo
+                                    v-else
                                     v-for="todo in allTasks.todo"
                                     :key="todo.id"
                                     :todo="todo"
+                                    v-on="$listeners"
                                 ></TaskTodo>
                             </div>
-                            <div id="btn-add-task">
+                            <div @click="addTodo" id="btn-add-task">
                                 <div class="panel-block">
                                     <button class="button is-success is-outlined is-fullwidth">
                                         <i class="fas fa-plus-circle"> </i>
@@ -104,7 +108,7 @@
                             </div>
                             <div class="kanban-tasks">
                                 <!--- EMPTY TASK-->
-                                <div class="kanban-task">
+                                <div v-if="allTasks.doing.length === 0" class="kanban-task">
                                     <div class="panel-block">
                                         <div class="notification">
                                             <div class="content">
@@ -116,13 +120,15 @@
                                 </div>
                                 <!--- END OF EMPTY TASK-->
                                 <TaskDoing 
+                                    v-else
                                     v-for="doing in allTasks.doing"
                                     :key="doing.id"
                                     :doing="doing"
+                                    v-on="$listeners"
                                 ></TaskDoing>
                                 
                             </div>
-                            <div id="btn-add-task">
+                            <div @click="addDoing" id="btn-add-task">
                                 <div class="panel-block">
                                     <button class="button is-link is-outlined is-fullwidth">
                                         <i class="fas fa-plus-circle"> </i>
@@ -144,7 +150,7 @@
                             </div>
                             <div class="kanban-tasks">
                                 <!--- EMPTY TASK-->
-                                <div class="kanban-task">
+                                <div v-if="allTasks.completed.length === 0" class="kanban-task">
                                     <div class="panel-block">
                                         <div class="notification">
                                             <div class="content">
@@ -156,13 +162,15 @@
                                 </div>
                                 <!--- END OF EMPTY TASK-->
                                 <TaskCompleted 
+                                    v-else
                                     v-for="completed in allTasks.completed"
                                     :key="completed.id"
                                     :completed="completed"
+                                    v-on="$listeners"
                                 ></TaskCompleted>
                                 
                             </div>
-                            <div id="btn-add-task">
+                            <div @click="addCompleted" id="btn-add-task">
                                 <div class="panel-block">
                                     <button class="button is-primary is-outlined is-fullwidth">
                                         <i class="fas fa-plus-circle"> </i>
@@ -200,9 +208,25 @@ export default {
         }
     },
     methods: {
-        refetchTask() {
-           this.$emit('refetchTasks')
-        }
+       addBacklog() {
+           this.$emit('addTask', 'Backlog')
+       },
+
+       addTodo() {
+           this.$emit('addTask', 'Todo')
+       },
+
+       addDoing() {
+           this.$emit('addTask', 'Doing')
+       },
+
+       addCompleted() {
+           this.$emit('addTask', 'Completed')
+       },
+
+       editForm(task) {
+           this.$emit('editForm', task)
+       }
     }
 };
 </script>
