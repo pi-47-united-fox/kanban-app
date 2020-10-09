@@ -13,11 +13,15 @@ class TaskControllers {
     }
 
     static addTask(req, res, next) {
+        const username = req.userData.email.split('@').slice(0, 1)
         let inputTask = {
             tittle: req.body.tittle,
             category: req.body.category,
+            description: req.body.description,
+            author: username[0],
             UserId: req.userData.id
         }
+
         Task.create(inputTask)
             .then(task => {
                 return res.status(201).json(task)
@@ -41,6 +45,7 @@ class TaskControllers {
         const editTaskData = {
             tittle: req.body.tittle,
             category: req.body.category,
+            description: req.body.description,
             UserId: req.userData.id
         }
         Task.update(editTaskData, {

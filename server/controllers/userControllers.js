@@ -27,8 +27,9 @@ class UserControllers {
                     })
                 }
                 else {
+                    const email = user.email.split('@').slice(0, 1)
                     const access_token = getToken({ id: user.id, email: user.email, organization: user.organization })
-                    res.status(200).json({ access_token })
+                    res.status(200).json({ access_token, email })
                 }
             })
     }
