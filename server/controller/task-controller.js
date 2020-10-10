@@ -85,7 +85,7 @@ class TaskController {
     }
     static editCategory(req, res, next) {
         let task = {
-            status: req.body.status,
+            category: req.body.category,
         }
         Task.update(task, {
             where: {
@@ -94,7 +94,7 @@ class TaskController {
         })
             .then(data => {
                 return res.status(201).json({
-                    message: `Update status successfully`
+                    message: `Update category successfully`
                 })
             })
             .catch(err => {

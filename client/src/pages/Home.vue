@@ -20,7 +20,10 @@
         @refresh="fetchTask"
       ></Category>
     </div>
-    <AddModal @emitAdd = 'fetchTask'></AddModal>
+    <AddModal 
+    @emitAdd="fetchTask"
+    
+    ></AddModal>
   </div>
 </template>
 
@@ -62,6 +65,9 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+    },
+    conDate(date) {
+      return moment(date).startOf("hour").fromNow();
     },
   },
 

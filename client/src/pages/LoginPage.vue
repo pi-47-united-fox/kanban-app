@@ -40,6 +40,7 @@
           />
         </div>
       </div>
+      <div>Reyand Oneil@2020</div>
     </center>
   </div>
 </template>

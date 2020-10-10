@@ -19783,7 +19783,165 @@ var global = arguments[3];
 
 })));
 
-},{}],"src/components/card.vue":[function(require,module,exports) {
+},{}],"src/components/edit-modal.vue":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _axios = _interopRequireDefault(require("axios"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = {
+  name: "EditModal",
+  data: function data() {
+    return {
+      title: ""
+    };
+  },
+  methods: {
+    editTask: function editTask(id) {
+      var _this = this;
+
+      console.log(id, "<------ini di dalam edit modal");
+      (0, _axios.default)({
+        method: "PUT",
+        url: "http://localhost:4000/tasks/${id}",
+        headers: {
+          access_token: localStorage.access_token
+        },
+        data: {
+          title: this.title
+        }
+      }).then(function (_ref) {
+        var data = _ref.data;
+
+        _this.$emit("emitEditTitle");
+      }).catch(function (err) {
+        console.log(err);
+      });
+    }
+  }
+};
+exports.default = _default;
+        var $8cec93 = exports.default || module.exports;
+      
+      if (typeof $8cec93 === 'function') {
+        $8cec93 = $8cec93.options;
+      }
+    
+        /* template */
+        Object.assign($8cec93, (function () {
+          var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "b-modal",
+        { attrs: { id: "m2", title: "edit Title", "hide-footer": "true" } },
+        [
+          _c("div", { staticClass: "input" }, [
+            _c("label", { staticClass: "label", attrs: { for: "" } }, [
+              _vm._v("Edit Project Title")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.title,
+                  expression: "title"
+                }
+              ],
+              staticClass: "text",
+              attrs: { placeholder: "Your Project" },
+              domProps: { value: _vm.title },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.title = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "add-btn",
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.editTask(_vm.task.id)
+                }
+              }
+            },
+            [_vm._v("Submit")]
+          )
+        ]
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+          return {
+            render: render,
+            staticRenderFns: staticRenderFns,
+            _compiled: true,
+            _scopeId: null,
+            functional: undefined
+          };
+        })());
+      
+    /* hot reload */
+    (function () {
+      if (module.hot) {
+        var api = require('vue-hot-reload-api');
+        api.install(require('vue'));
+        if (api.compatible) {
+          module.hot.accept();
+          if (!module.hot.data) {
+            api.createRecord('$8cec93', $8cec93);
+          } else {
+            api.reload('$8cec93', $8cec93);
+          }
+        }
+
+        
+        var reloadCSS = require('_css_loader');
+        module.hot.dispose(reloadCSS);
+        module.hot.accept(reloadCSS);
+      
+      }
+    })();
+},{"axios":"node_modules/axios/index.js","_css_loader":"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/card.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -19796,6 +19954,8 @@ var _sweetalert = _interopRequireDefault(require("sweetalert2"));
 var _axios = _interopRequireDefault(require("axios"));
 
 var _moment = _interopRequireDefault(require("moment"));
+
+var _editModal = _interopRequireDefault(require("../components/edit-modal"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -19826,16 +19986,31 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   props: ["task"],
   name: "Card",
-  components: {},
+  components: {
+    EditModal: _editModal.default
+  },
   data: function data() {
-    return {};
+    return {
+      selected: ""
+    };
   },
-  created: function created() {
-    console.log(this.task, "<------ini this.task di card");
-  },
+  created: function created() {},
   methods: {
     deletedTask: function deletedTask(id) {
       var _this = this;
@@ -19869,6 +20044,54 @@ var _default = {
           });
         }
       });
+    },
+    editCategory: function editCategory(id) {
+      var _this2 = this;
+
+      console.log("ini di edit category", id, this.selected);
+      (0, _axios.default)({
+        method: "Patch",
+        url: "http://localhost:4000/tasks/".concat(id),
+        headers: {
+          access_token: localStorage.access_token
+        },
+        data: {
+          category: this.selected
+        }
+      }).then(function (_ref2) {
+        var data = _ref2.data;
+
+        _this2.$emit("emitEditCategory");
+      }).catch(function (err) {
+        console.log(err);
+      });
+    },
+    editTitle: function editTitle(id) {
+      var _this3 = this;
+
+      console.log("ini di edit title", id, this.selected);
+      (0, _axios.default)({
+        method: "PUT",
+        url: "http://localhost:4000/tasks/".concat(id),
+        headers: {
+          access_token: localStorage.access_token
+        },
+        data: {
+          title: this.selected
+        }
+      }).then(function (_ref3) {
+        var data = _ref3.data;
+
+        _this3.$emit("emitEditCategory");
+      }).catch(function (err) {
+        console.log(err);
+      });
+    },
+    refreshData: function refreshData() {
+      this.$emit("refresh");
+    },
+    conDate: function conDate(date) {
+      return (0, _moment.default)(date).startOf('hour').fromNow();
     }
   }
 };
@@ -19885,48 +20108,102 @@ exports.default = _default;
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "card" }, [
-      _c("div", [
-        _c("h5", [_vm._v("\n        " + _vm._s(_vm.task.title) + "\n      ")])
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "card" }, [
+        _c("div", [
+          _c("h5", [_vm._v("\n        " + _vm._s(_vm.task.title) + "\n      ")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticStyle: { "margin-top": "10px" } }, [
+          _c("div", { staticClass: "info" }, [
+            _vm._v("Created by " + _vm._s(_vm.task.User.email.split("@")[0]))
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "info" }, [
+            _c("span", [_vm._v(_vm._s(_vm.conDate(_vm.task.createdAt)))])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "icon" }, [
+            _c("img", {
+              directives: [
+                {
+                  name: "b-modal",
+                  rawName: "v-b-modal.m2",
+                  modifiers: { m2: true }
+                }
+              ],
+              staticClass: "icon-btn",
+              attrs: { src: "/edit.98ea1e81.svg" }
+            }),
+            _vm._v(" "),
+            _c("img", {
+              staticClass: "icon-btn",
+              attrs: { src: "/delete.34743b57.svg", alt: "" },
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.deletedTask(_vm.task.id)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.selected,
+                    expression: "selected"
+                  }
+                ],
+                attrs: { id: "v-select" },
+                on: {
+                  change: [
+                    function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.selected = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    },
+                    function($event) {
+                      return _vm.editCategory(_vm.task.id)
+                    }
+                  ]
+                }
+              },
+              [
+                _c("option", { attrs: { disabled: "", value: "" } }, [
+                  _vm._v("Action")
+                ]),
+                _vm._v(" "),
+                _c("option", [_vm._v("BackLog")]),
+                _vm._v(" "),
+                _c("option", [_vm._v("Todo")]),
+                _vm._v(" "),
+                _c("option", [_vm._v("Doing")]),
+                _vm._v(" "),
+                _c("option", [_vm._v("Done")])
+              ]
+            )
+          ])
+        ])
       ]),
       _vm._v(" "),
-      _c("div", { staticStyle: { "margin-top": "10px" } }, [
-        _c("div", { staticClass: "info" }, [
-          _vm._v(_vm._s(_vm.task.User.email))
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "info" }, [
-          _c("span", [_vm._v(_vm._s(_vm.task.createdAt))])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "icon" }, [
-          _c("img", {
-            directives: [
-              {
-                name: "b-modal",
-                rawName: "v-b-modal.modal-1",
-                modifiers: { "modal-1": true }
-              }
-            ],
-            staticClass: "icon-btn",
-            attrs: { src: "/edit.98ea1e81.svg" }
-          }),
-          _vm._v(" "),
-          _c("img", {
-            staticClass: "icon-btn",
-            attrs: { src: "/delete.34743b57.svg", alt: "" },
-            on: {
-              click: function($event) {
-                $event.preventDefault()
-                return _vm.deletedTask(_vm.task.id)
-              }
-            }
-          })
-        ])
-      ])
-    ])
-  ])
+      _c("EditModal", { on: { emitEditTitle: _vm.refresh } })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -19961,7 +20238,7 @@ render._withStripped = true
       
       }
     })();
-},{"sweetalert2":"node_modules/sweetalert2/dist/sweetalert2.all.js","axios":"node_modules/axios/index.js","moment":"node_modules/moment/moment.js","./..\\assets\\edit.svg":[["edit.98ea1e81.svg","src/assets/edit.svg"],"src/assets/edit.svg"],"./..\\assets\\delete.svg":[["delete.34743b57.svg","src/assets/delete.svg"],"src/assets/delete.svg"],"_css_loader":"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/category.vue":[function(require,module,exports) {
+},{"sweetalert2":"node_modules/sweetalert2/dist/sweetalert2.all.js","axios":"node_modules/axios/index.js","moment":"node_modules/moment/moment.js","../components/edit-modal":"src/components/edit-modal.vue","./..\\assets\\edit.svg":[["edit.98ea1e81.svg","src/assets/edit.svg"],"src/assets/edit.svg"],"./..\\assets\\delete.svg":[["delete.34743b57.svg","src/assets/delete.svg"],"src/assets/delete.svg"],"_css_loader":"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/category.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -19973,6 +20250,10 @@ var _card = _interopRequireDefault(require("./card"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
+//
+//
+//
 //
 //
 //
@@ -20086,7 +20367,10 @@ exports.default = _default;
               return _c("Card", {
                 key: task.id,
                 attrs: { task: task },
-                on: { emitDelete: _vm.refreshData }
+                on: {
+                  emitDelete: _vm.refreshData,
+                  emitEditCategory: _vm.refreshData
+                }
               })
             }),
             1
@@ -20100,7 +20384,10 @@ exports.default = _default;
               return _c("Card", {
                 key: task.id,
                 attrs: { task: task },
-                on: { emitDelete: _vm.refreshData }
+                on: {
+                  emitDelete: _vm.refreshData,
+                  emitEditCategory: _vm.refreshData
+                }
               })
             }),
             1
@@ -20114,7 +20401,10 @@ exports.default = _default;
               return _c("Card", {
                 key: task.id,
                 attrs: { task: task },
-                on: { emitDelete: _vm.refreshData }
+                on: {
+                  emitDelete: _vm.refreshData,
+                  emitEditCategory: _vm.refreshData
+                }
               })
             }),
             1
@@ -20128,7 +20418,10 @@ exports.default = _default;
               return _c("Card", {
                 key: task.id,
                 attrs: { task: task },
-                on: { emitDelete: _vm.refreshData }
+                on: {
+                  emitDelete: _vm.refreshData,
+                  emitEditCategory: _vm.refreshData
+                }
               })
             }),
             1
@@ -20196,7 +20489,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 var _default = {
-  name: "MOdal",
+  name: "Modal",
   data: function data() {
     return {
       title: ""
@@ -20379,6 +20672,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
 var _default = {
   name: "Home",
   components: {
@@ -20411,6 +20707,9 @@ var _default = {
       }).catch(function (err) {
         console.log(err);
       });
+    },
+    conDate: function conDate(date) {
+      return moment(date).startOf("hour").fromNow();
     }
   },
   created: function created() {
@@ -20524,6 +20823,7 @@ var _axios = _interopRequireDefault(require("axios"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
 //
 //
 //
@@ -20737,7 +21037,9 @@ exports.default = _default;
               }
             })
           ])
-        ])
+        ]),
+        _vm._v(" "),
+        _c("div", [_vm._v("Reyand Oneil@2020")])
       ])
     ],
     1
@@ -74120,7 +74422,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53486" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51025" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

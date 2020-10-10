@@ -14,7 +14,7 @@
 <script>
 import axios from "axios";
 export default {
-  name: "MOdal",
+  name: "Modal",
   data() {
     return {
       title: "",

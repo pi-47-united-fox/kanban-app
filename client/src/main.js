@@ -7,5 +7,5 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
 new Vue({
-  render: h => h(App),
+  render: h => h(App)
 }).$mount('#app');

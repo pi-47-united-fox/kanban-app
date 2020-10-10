@@ -8,6 +8,7 @@
           :key="task.id"
           :task="task"
           @emitDelete="refreshData"
+          @emitEditCategory="refreshData"
         >
         </Card>
       </div>
@@ -17,6 +18,7 @@
           :key="task.id"
           :task="task"
           @emitDelete="refreshData"
+          @emitEditCategory="refreshData"
         >
         </Card>
       </div>
@@ -26,6 +28,7 @@
           :key="task.id"
           :task="task"
           @emitDelete="refreshData"
+          @emitEditCategory="refreshData"
         >
         </Card>
       </div>
@@ -35,6 +38,7 @@
           :key="task.id"
           :task="task"
           @emitDelete="refreshData"
+          @emitEditCategory="refreshData"
         >
         </Card>
       </div>
