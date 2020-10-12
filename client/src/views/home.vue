@@ -1,25 +1,31 @@
 <template>
 <div class="container">
-        <categoryBoard v-for="(category,i) in categories" :key="i" :categoryName="category" :dataTask="tasks"></categoryBoard>
-        <taskForm @addTask="addTask"></taskForm>
+        <categoryBoard
+        v-for="(category,i) in categories" 
+        :key="i" 
+        :categoryName="category" 
+        :dataTask="tasks"
+        @changePage="changePage"
+        @changeAddForm="changeAddForm"
+        ></categoryBoard>
 </div>
 </template>
-
+ 
 <script>
 import axios from 'axios'
 import categoryBoard from '../components/categoryBoard'
-import taskForm from './taskForm'
+import taskForm from './TaskForm'
 export default {
   name: 'home',
    components: {
        categoryBoard,
-       taskForm
+       
    },
   data() {
     return {
-      categories:['backlog', 'todo', 'onProgress', 'completed'],
-     
-      tasks: []
+      categories:['Backlog', 'Todo', 'On Progress', 'Completed'],
+      tasks: [],
+      page: false
     };
   },
   methods: {
@@ -38,7 +44,12 @@ export default {
           console.log(err)
       })
       },
-      
+      changePage() {
+        this.$emit('changePage', 'home')
+      },
+      changeAddForm() {
+
+      }
   },
    created() {
      this.fetchTasks()

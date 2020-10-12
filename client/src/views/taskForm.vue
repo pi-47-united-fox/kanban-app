@@ -1,58 +1,65 @@
 <template>
+<!-- <div class="form-popup" id="form"> -->
 <div class="form-container">
     <div  class="title-box">
         <h2 class="title">Add Task</h2>
     </div>
       <form @submit.prevent="addTask">
-          <label for="products_name"  class="title-form">your doing</label>
-          <input type="name" v-model="title" class="form-content">
-          <label for=""  class="title-form"> Status</label>
-          <select v-model="category" class="form-content ">
-            <option value="">----Select ----</option>
-            <option value="backlog">backlog</option>
-            <option value="todo">Todo</option>
-            <option value="doing">On Progress</option>
-            <option value="done">Completed</option>
-          </select>
-        <div class="title-form">
-          <input type="submit" value="input" class="btn btn-lg btn-light">
+        <label for="title" class="title-form">title</label>
+        <input class="form-content" name="title" v-model="title">
+        <div class="title-box">
+          <button type="submit" class="title-form" @click="submitForm">Submit</button>
           <button
             type="button"
-            @click.prevent="home">
+            class="title-form"
+            @click="closeForm">
             Cancel
           </button>
         </div>
       </form>
     </div>
+<!-- </div> -->
 </template>
 
 <script>
+import axios from 'axios'
 export default {
-  methods: { 
-         methods: {
-        addTask() {
-            axios({
-                method: "POST",
-                url: "http://localhost:3000/task",
-                headers: {'access_token': localStorage.access_token},
-                data: {
-                    title: this.taskText,
-                    category: this.addWhat
-                }
-            })
-            .then(({data}) => {
-                this.$emit('refetchTasks')
-                this.$emit('changePage', 'home')
-                console.log(data.message)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-        }
+  props: ['categoryName'],
+  name: 'addTask',
+  data() {
+    return{
+      title: '',
+      category: this.categoryName
     }
-        
+  },
+  methods: {
+    addTask() {
+      axios 
+      .post('http://localhost:3000/task', {
+        title:this.title,
+        category:this.category
+        },
+      { 
+        headers:{
+          access_token: localStorage.access_token
+          },
+      })
+      .then(({data}) => {
+        this.$emit('changePage', 'home')
+       })
+      .catch(err => {
+          console.log(err)
+      })
+    },
+    closeForm() {
+      this.title = ''
+      this.category = ''
+      this.$emit('closeForm')
+    },
+    submitForm() {
+      this.$emit('submitForm')
     }
-    
+  }
 }
 </script>
 

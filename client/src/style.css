@@ -39,6 +39,17 @@ a {
     background: #c71c32;
     border-radius: 15px;
 }
+.title-box-popup {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: thin;
+    margin: 5px;
+    width: 125px;
+    height: 30px;
+    background: #c71c32;
+    border-radius: 10px;
+}
 .column {
     display: flex;
     justify-content: space-between;
@@ -97,12 +108,60 @@ a {
     width: 260px;
     margin: 10px;
 }
+.form-container-popup {
+    display:flex;
+    position: fixed;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: pink;
+    border-radius: 10px;
+    width: 130;
+    margin: 10px;
+}
+.title-submit {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: thin;
+    margin: 5px;
+    width: 250px;
+    height: 60px;
+    background:pink;
+    border-radius: 15px;
+}
 .title-form {
     font-size: x-large;
     color: #c71c32;
     width: 200px;
     margin-inline-start: 10px;
+    margin-inline-end: 10px;
 }
+.title-form-popup {
+    font-size: medium;
+    color: #c71c32;
+    width: 100px;
+    margin-inline-start: 5px;
+    margin-inline-end: 5px;
+}
+.title-button {
+    font-size: x-large;
+    color: #f8bf32;;
+    width: 200px;
+    margin-inline-start: 10px;
+    margin-inline-end: 10px;
+    background-color: #c71c32;
+    display: inline-block;
+    box-sizing: unset;
+}
+.form-popup {
+    right: 15px;
+    border: 3px solid #f1f1f1;
+
+  }
+.popup {
+    display: block
+}
+
 .form-content {
     size: 50px;
     border-radius: 90px;
@@ -111,15 +170,27 @@ a {
     margin: 10px;
     padding: 10px
 }
+.form-content-popup {
+    size: 25px;
+    border-radius: 45px;
+    font-size: medium;
+    width: 100px;
+    margin: 5px;
+    padding: 5px
+}
 h2 {
     color: #f8bf32;
     padding: 10px
 }
-.fa-edit {
-    color: #f8bf32;
-    padding: 10px;
+.title-popup {
+    color:  #c71c32;
+    font-size: smaller;
 }
-.fa-plus-square { 
+.titleForm-popup {
+    color:  #f8bf32;
+    font-size: small;
+}
+.fa-plus-square {
     color: #f8bf32;
     padding: 5px;
     size: 100px;
@@ -127,9 +198,17 @@ h2 {
 }
 .fa-bars {
     color: #c71c32;
+
 }
 .fa-trash {
     color: #c71c32;
+}
+.fa-edit {
+    color: #c71c32
+}
+.icon {
+    display: flex;
+    flex-direction: column;
 }
 h3 {
     color: white;
@@ -139,3 +218,12 @@ h4 {
     color:#c71c32;
     margin: 5px;
 }
+.form-popup {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    right: 15px;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+  }
+  

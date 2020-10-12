@@ -4,6 +4,7 @@ class TaskController {
     static async addTask(req, res, next) {
         const newTask = {
             title: req.body.title,
+            category:req.body.category,
             UserId: req.userData.id
         }
         try{

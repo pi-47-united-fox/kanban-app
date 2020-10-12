@@ -5,7 +5,7 @@
     :isPage="isPage"></navbar>
     <register v-if="isPage === 'register'" @changePage="changePage"></register>
     <login v-else-if="isPage === 'login'" @changePage="changePage"></login>
-    <home v-else-if="isPage === 'home'"></home>
+    <home v-else-if="isPage === 'home'" @changePage="changePage"></home>
 </div>
   
 
@@ -13,9 +13,9 @@
 
 <script>
 import navbar from './components/navbar'
-import home from './views/home'
-import register from './views/register'
-import login from './views/login'
+import home from './views/Home'
+import register from './views/Register'
+import login from './views/Login'
 import axios from 'axios'
 export default {
    components: {

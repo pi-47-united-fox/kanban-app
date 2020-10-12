@@ -25,6 +25,7 @@ export default {
         },
         home() {
             this.$emit('changePage','home')
+            this.$emit('refetch')
         },
         logout() {
             localStorage.clear()

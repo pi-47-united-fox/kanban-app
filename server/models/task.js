@@ -21,11 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     category: DataTypes.STRING,
     UserId: DataTypes.INTEGER
-  }, { hooks : {
-    beforeCreate: (user)=> {
-      user.category = 'backlog'
-    }
-  },
+  }, {
     sequelize,
     modelName: 'Task',
   });
