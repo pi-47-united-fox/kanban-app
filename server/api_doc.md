@@ -225,7 +225,7 @@ _Response (403 - not authorize)_
 
 ### DELETE /tasks/:id
 
-> Register user
+> Delete tasks by id
 
 _Request Header_
 ```
