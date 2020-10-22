@@ -6,8 +6,8 @@
 
 .board{
     display: flex;
-    overflow-x: scroll;
-    padding: 10px 30px;
+    overflow: scroll;
+    /* padding: 10px 30px; */
     height: 100%;
     /* width: 90%; */
     /* padding-bottom: 15px; */

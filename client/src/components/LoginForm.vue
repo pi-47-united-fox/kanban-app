@@ -19,7 +19,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="password" class="text-info">Password:</label><br>
-                                <input v-model="passwordFormLogin" type="text" name="password" id="password-login" class="form-control">
+                                <input v-model="passwordFormLogin" type="password" name="password" id="password-login" class="form-control">
                             </div>
                             <div class="form-group">
                                 <!-- <label for="remember-me" class="text-info"><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br> -->
@@ -52,7 +52,8 @@ export default {
                 height: 50,
                 longtitle: true
             },
-            serverUrl:'http://localhost:3000/',
+            // serverUrl:'http://localhost:3000/',
+            serverUrl:'https://kanban-server-porto.herokuapp.com/',
             emailFormLogin :"",
             passwordFormLogin : "",
             errMessage:""

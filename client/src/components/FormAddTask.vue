@@ -41,7 +41,8 @@ export default {
     props:['categoryId','categories'],
     data(){
         return {   
-            serverUrl:'http://localhost:3000/',
+            // serverUrl:'http://localhost:3000/',
+            serverUrl:'https://kanban-server-porto.herokuapp.com/',
             inputTaskDescription : '',
             inputTaskTitle : '',
             inputTaskCategory : this.categoryId,

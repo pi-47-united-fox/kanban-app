@@ -63,7 +63,8 @@ export default {
     props:['taskId','categories','users'],
     data(){
         return {
-            serverUrl:'http://localhost:3000/',
+            // serverUrl:'http://localhost:3000/',
+            serverUrl:'https://kanban-server-porto.herokuapp.com/',
             errMessage:"",
             cardTitle:"Task Detail",
             taskTitle:"titletest",

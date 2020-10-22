@@ -3,7 +3,9 @@
     <form-add-category 
         v-if="addCategoryForm == true"
         @addFormCategory="closeForm" 
-        :addFormCategory="addCategoryForm">
+        :addFormCategory="addCategoryForm"
+        @fetchData="fetchData" 
+        >
 
     </form-add-category> 
     <nav-bar
@@ -58,6 +60,7 @@ export default {
     data() {
         return { 
             serverUrl:'http://localhost:3000/',
+            // serverUrl:'https://kanban-server-porto.herokuapp.com/',
             page: 'home', 
             addCategoryForm:false,
             categories: [],

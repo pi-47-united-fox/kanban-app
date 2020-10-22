@@ -29,6 +29,7 @@ export default {
     data(){
         return { 
             serverUrl:'http://localhost:3000/',
+            // serverUrl:'https://kanban-server-porto.herokuapp.com/',
             inputCategoryName : ""
         }
     },
@@ -49,6 +50,8 @@ export default {
                 })
                 .then(result=>{
                     console.log(result);
+                    this.close()
+                    this.$emit('fetchData')
                 })
                 .catch(err=>{
                     console.log(err);

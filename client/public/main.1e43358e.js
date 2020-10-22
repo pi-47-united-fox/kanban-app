@@ -10332,7 +10332,12 @@ module.exports.default = axios;
 
 },{"./utils":"node_modules/axios/lib/utils.js","./helpers/bind":"node_modules/axios/lib/helpers/bind.js","./core/Axios":"node_modules/axios/lib/core/Axios.js","./core/mergeConfig":"node_modules/axios/lib/core/mergeConfig.js","./defaults":"node_modules/axios/lib/defaults.js","./cancel/Cancel":"node_modules/axios/lib/cancel/Cancel.js","./cancel/CancelToken":"node_modules/axios/lib/cancel/CancelToken.js","./cancel/isCancel":"node_modules/axios/lib/cancel/isCancel.js","./helpers/spread":"node_modules/axios/lib/helpers/spread.js"}],"node_modules/axios/index.js":[function(require,module,exports) {
 module.exports = require('./lib/axios');
-},{"./lib/axios":"node_modules/axios/lib/axios.js"}],"../../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"./lib/axios":"node_modules/axios/lib/axios.js"}],"node_modules/vue-google-login/dist/vue-google-login.min.js":[function(require,module,exports) {
+var define;
+!function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"function"==typeof define&&define.amd?define(["exports"],e):e((t=t||self)["vue-google-login"]={})}(this,(function(t){"use strict";var e,n,i=function(t){return e?Promise.resolve(e):(n||(n=function(t){return new Promise((function(n,i){window.onGapiLoad=function(){window.gapi.load("auth2",(function(){try{e=window.gapi.auth2.init(Object.assign({},t))}catch(t){i({err:"client_id missing or is incorrect, or if you added extra params maybe they are written incorrectly, did you add it to the component or plugin?"})}n(e)}))}}))}(t)),n)},o=function(t,e){if(t)return t[e]();return Promise.reject({err:"Script not loaded correctly, did you added the plugin or the client_id to the component?"})},r={load:function(t){return Promise.all([i(t),new Promise((function(t,e){if(!document.getElementById("auth2_script_id")){var n=document.createElement("script");n.setAttribute("src","https://apis.google.com/js/platform.js?onload=onGapiLoad"),n.setAttribute("async",!0),n.setAttribute("defer","defer"),n.setAttribute("id","auth2_script_id"),document.head.appendChild(n)}t()}))]).then((function(t){return t[0]}))},signIn:function(){return o(e,"signIn")},signOut:function(){return o(e,"signOut")},isSignedIn:function(){return o(e.isSignedIn,"get")},currentUser:function(){return o(e.currentUser,"get")},grantOfflineAccess:function(){return o(e,"grantOfflineAccess")}},s=0;var u=function(t,e,n,i,o,r,s,u,c,d){"boolean"!=typeof s&&(c=u,u=s,s=!1);var a,l="function"==typeof n?n.options:n;if(t&&t.render&&(l.render=t.render,l.staticRenderFns=t.staticRenderFns,l._compiled=!0,o&&(l.functional=!0)),i&&(l._scopeId=i),r?(a=function(t){(t=t||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext)||"undefined"==typeof __VUE_SSR_CONTEXT__||(t=__VUE_SSR_CONTEXT__),e&&e.call(this,c(t)),t&&t._registeredComponents&&t._registeredComponents.add(r)},l._ssrRegister=a):e&&(a=s?function(){e.call(this,d(this.$root.$options.shadowRoot))}:function(t){e.call(this,u(t))}),a)if(l.functional){var f=l.render;l.render=function(t,e){return a.call(e),f(t,e)}}else{var h=l.beforeCreate;l.beforeCreate=h?[].concat(h,a):[a]}return n}({render:function(){var t=this.$createElement,e=this._self._c||t;return this.renderParams&&!this.logoutButton?e("div",{attrs:{id:this.id},on:{click:this.handleClick}}):e("button",{attrs:{id:this.id},on:{click:this.handleClick}},[this._t("default")],2)},staticRenderFns:[]},void 0,{name:"GoogleLogin",props:{params:{type:Object,required:!0},onCurrentUser:{type:Function,default:function(){}},onSuccess:{type:Function,default:function(){}},onFailure:{type:Function,default:function(){}},logoutButton:{type:Boolean,default:!1},renderParams:{type:Object,required:!1}},beforeCreate:function(){this.id="google-signin-btn-".concat(s++)},methods:{handleClick:function(){var t=this,e=this.logoutButton?"signOut":"signIn";r[e]().then((function(e){return t.onSuccess(e)})).catch((function(e){return t.onFailure(e)}))}},mounted:function(){var t=this;r.load(this.params).then((function(){t.renderParams&&!1===t.logoutButton&&window.gapi.signin2.render(t.id,t.renderParams),r.isSignedIn()&&t.onCurrentUser(r.currentUser())})).catch((function(t){console.log(t)}))}},void 0,!1,void 0,void 0,void 0),c={install:function(t,e){t.GoogleAuth=r.load(e)}};t.GoogleLogin=u,t.LoaderPlugin=c,t.default=u,Object.defineProperty(t,"__esModule",{value:!0})}));
+
+
+},{}],"../../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -10682,6 +10687,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _vueGoogleLogin = _interopRequireDefault(require("vue-google-login"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
 //
 //
 //
@@ -10725,25 +10735,32 @@ var _default = {
   name: 'LoginForm',
   data: function data() {
     return {
+      params: {
+        client_id: "841246734810-ph9ikv3p8ae847gkere5m2b359glabpe.apps.googleusercontent.com"
+      },
+      renderParams: {
+        width: 250,
+        height: 50,
+        longtitle: true
+      },
+      // serverUrl:'http://localhost:3000/',
+      serverUrl: 'https://kanban-server-porto.herokuapp.com/',
       emailFormLogin: "",
       passwordFormLogin: "",
       errMessage: ""
     };
   },
+  components: {
+    GoogleLogin: _vueGoogleLogin.default
+  },
   methods: {
-    changePage: function changePage() {
-      this.$emit('changePage', 'register');
-    },
-    closeAlert: function closeAlert() {
-      this.errMessage = "";
-    },
-    login: function login() {
+    onSuccess: function onSuccess(googleUser) {
       var _this = this;
 
-      console.log(this.emailFormLogin, this.passwordFormLogin);
-      axios.post('https://kanban-client-porto.web.app/login', {
-        email: this.emailFormLogin,
-        password: this.passwordFormLogin
+      var id_token = googleUser.getAuthResponse().id_token;
+      console.log("token >>>", id_token);
+      axios.post("".concat(this.serverUrl, "google-login"), {
+        id_token: id_token
       }).then(function (_ref) {
         var data = _ref.data;
         localStorage.setItem('access_token', data.access_token); // this.page = 'home'
@@ -10755,6 +10772,34 @@ var _default = {
 
         if (err.response) {
           _this.errMessage = err.response.data.msg;
+        }
+      });
+    },
+    onFailure: function onFailure() {},
+    changePage: function changePage() {
+      this.$emit('changePage', 'register');
+    },
+    closeAlert: function closeAlert() {
+      this.errMessage = "";
+    },
+    login: function login() {
+      var _this2 = this;
+
+      console.log(this.emailFormLogin, this.passwordFormLogin);
+      axios.post("".concat(this.serverUrl, "login"), {
+        email: this.emailFormLogin,
+        password: this.passwordFormLogin
+      }).then(function (_ref2) {
+        var data = _ref2.data;
+        localStorage.setItem('access_token', data.access_token); // this.page = 'home'
+        // this.fetchData()
+
+        _this2.$emit('changePage', 'home');
+      }).catch(function (err) {
+        console.log(err); // console.log(err.response);
+
+        if (err.response) {
+          _this2.errMessage = err.response.data.msg;
         }
       });
     }
@@ -10916,29 +10961,39 @@ exports.default = _default;
                         })
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("input", {
-                          staticClass: "btn btn-info btn-md",
-                          attrs: { type: "submit", value: "Login" },
-                          on: { click: _vm.login }
-                        }),
-                        _vm._v(" "),
-                        _c("div", {
-                          staticClass: "g-signin2 float-right",
-                          attrs: { "data-onsuccess": "onSignIn" }
-                        }),
-                        _vm._v(
-                          "\n                            Dont have any ? "
-                        ),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "text-info",
-                            on: { click: _vm.changePage }
-                          },
-                          [_vm._v("Register here")]
-                        )
-                      ])
+                      _c(
+                        "div",
+                        { staticClass: "form-group" },
+                        [
+                          _c("input", {
+                            staticClass: "btn btn-info btn-md",
+                            attrs: { type: "submit", value: "Login" },
+                            on: { click: _vm.login }
+                          }),
+                          _vm._v(
+                            "\n                            Dont have any ? "
+                          ),
+                          _c(
+                            "a",
+                            {
+                              staticClass: "text-info",
+                              on: { click: _vm.changePage }
+                            },
+                            [_vm._v("Register here")]
+                          ),
+                          _vm._v(" "),
+                          _c("GoogleLogin", {
+                            staticClass: "float-right",
+                            attrs: {
+                              params: _vm.params,
+                              renderParams: _vm.renderParams,
+                              onSuccess: _vm.onSuccess,
+                              onFailure: _vm.onFailure
+                            }
+                          })
+                        ],
+                        1
+                      )
                     ]
                   )
                 ]
@@ -10983,7 +11038,7 @@ render._withStripped = true
       
       }
     })();
-},{"axios":"node_modules/axios/index.js","_css_loader":"../../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/RegisterForm.vue":[function(require,module,exports) {
+},{"axios":"node_modules/axios/index.js","vue-google-login":"node_modules/vue-google-login/dist/vue-google-login.min.js","_css_loader":"../../../../../../../usr/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/RegisterForm.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11032,6 +11087,8 @@ var _default = {
   name: 'RegisterForm',
   data: function data() {
     return {
+      // serverUrl:'http://localhost:3000/',
+      serverUrl: 'https://kanban-server-porto.herokuapp.com/',
       emailFormLogin: "",
       passwordFormLogin: "",
       errMessage: ""
@@ -11048,7 +11105,7 @@ var _default = {
       var _this = this;
 
       console.log(this.emailFormLogin, this.passwordFormLogin);
-      axios.post('https://kanban-client-porto.web.app/register', {
+      axios.post("".concat(this.serverUrl, "register"), {
         email: this.emailFormLogin,
         password: this.passwordFormLogin
       }).then(function (_ref) {
@@ -11477,6 +11534,8 @@ var _default = {
   props: ['addFormCategory'],
   data: function data() {
     return {
+      // serverUrl:'http://localhost:3000/',
+      serverUrl: 'https://kanban-server-porto.herokuapp.com/',
       inputCategoryName: ""
     };
   },
@@ -11485,7 +11544,7 @@ var _default = {
       this.$emit('addFormCategory', false);
     },
     addCategory: function addCategory() {
-      _axios.default.post('https://kanban-client-porto.web.app/category', {
+      _axios.default.post("".concat(this.serverUrl, "category"), {
         name: this.inputCategoryName
       }, {
         headers: {
@@ -11911,6 +11970,8 @@ var _default = {
   props: ['categoryId', 'categories'],
   data: function data() {
     return {
+      // serverUrl:'http://localhost:3000/',
+      serverUrl: 'https://kanban-server-porto.herokuapp.com/',
       inputTaskDescription: '',
       inputTaskTitle: '',
       inputTaskCategory: this.categoryId
@@ -11925,7 +11986,7 @@ var _default = {
     addData: function addData() {
       var _this = this;
 
-      _axios.default.post('https://kanban-client-porto.web.app/tasks', {
+      _axios.default.post("".concat(this.serverUrl, "tasks"), {
         title: this.inputTaskTitle,
         description: this.inputTaskDescription,
         CategoryId: this.inputTaskCategory
@@ -12233,6 +12294,8 @@ var _default = {
   props: ['taskId', 'categories', 'users'],
   data: function data() {
     return {
+      // serverUrl:'http://localhost:3000/',
+      serverUrl: 'https://kanban-server-porto.herokuapp.com/',
       errMessage: "",
       cardTitle: "Task Detail",
       taskTitle: "titletest",
@@ -12276,7 +12339,7 @@ var _default = {
     editData: function editData() {
       var _this = this;
 
-      _axios.default.put("https://kanban-client-porto.web.app/tasks/".concat(this.taskId), {
+      _axios.default.put("".concat(this.serverUrl, "tasks/").concat(this.taskId), {
         title: this.inputTaskTitle,
         description: this.inputTaskDescription,
         CategoryId: this.inputTaskCategory
@@ -12300,7 +12363,7 @@ var _default = {
     deleteData: function deleteData() {
       var _this2 = this;
 
-      _axios.default.delete("https://kanban-client-porto.web.app/tasks/".concat(this.taskId), {
+      _axios.default.delete("".concat(this.serverUrl, "tasks/").concat(this.taskId), {
         headers: {
           access_token: localStorage.access_token
         }
@@ -12329,7 +12392,7 @@ var _default = {
   created: function created() {
     var _this3 = this;
 
-    _axios.default.get("https://kanban-client-porto.web.app/tasks/".concat(this.taskId), {
+    _axios.default.get("".concat(this.serverUrl, "tasks/").concat(this.taskId), {
       headers: {
         access_token: localStorage.access_token
       }
@@ -12927,6 +12990,8 @@ var _default = {
   },
   data: function data() {
     return {
+      // serverUrl:'http://localhost:3000/',
+      serverUrl: 'https://kanban-server-porto.herokuapp.com/',
       page: 'home',
       addCategoryForm: false,
       categories: [],
@@ -12954,7 +13019,7 @@ var _default = {
       this.users = [];
       this.categories = [];
 
-      _axios.default.get('https://kanban-client-porto.web.app/tasks', {
+      _axios.default.get("".concat(this.serverUrl, "tasks"), {
         headers: {
           access_token: localStorage.access_token
         }
@@ -13120,7 +13185,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43761" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40217" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

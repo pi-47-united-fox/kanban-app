@@ -19,7 +19,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="password" class="text-info">Password:</label><br>
-                                <input v-model="passwordFormLogin" type="text" name="password" id="password-login" class="form-control">
+                                <input v-model="passwordFormLogin" type="password" name="password" id="password-login" class="form-control">
                             </div>
                             <div class="form-group"> 
                                 <input type="submit" class="btn btn-info btn-md" @click="login" value="Register"> 
@@ -39,7 +39,8 @@ export default {
     name: 'RegisterForm',
     data(){
         return{ 
-            serverUrl:'http://localhost:3000/',
+            // serverUrl:'http://localhost:3000/',
+            serverUrl:'https://kanban-server-porto.herokuapp.com/',
             emailFormLogin :"",
             passwordFormLogin : "",
             errMessage:""
