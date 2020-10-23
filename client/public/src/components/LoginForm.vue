@@ -97,7 +97,7 @@ export default {
 
             $.axios({
                 method: "POST",
-                url: 'http://localhost:3000/google',
+                url: 'https://benban.herokuapp.com',
                 headers : {
                     google_access_token: google_access_token
                 }
