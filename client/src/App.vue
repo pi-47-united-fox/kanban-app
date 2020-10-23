@@ -113,7 +113,10 @@ export default {
                 method: 'PUT',
                 url: `https://kanban-uwu.herokuapp.com/tasks/${payload.id}`,
                 data: {
-                    category: payload.category
+                    category: payload.category,
+                    title: payload.title,
+                    description: payload.description,
+                    assigned_to: payload.assigned_to
                 },
                 headers: {
                     access_token: localStorage.getItem('access_token')
@@ -209,7 +212,7 @@ export default {
         }
     },
     created(){
-        if(localStorage.getItem('access_token')){
+        if(localStorage.access_token){
             this.page = 'home'
             this.fetchTasks()
         }

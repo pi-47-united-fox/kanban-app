@@ -45,7 +45,6 @@ export default {
             description: this.taskData.description,
             category: this.taskData.category,
             assigned_to: this.taskData.assigned_to
-
         }
     },
     methods:{
@@ -56,7 +55,10 @@ export default {
             console.log('masuk editTask method di editForm')
             let payload = {
                 id: this.taskData.id,
+                title: this.title,
+                description: this.description,
                 category: this.category,
+                assigned_to: this.assigned_to
             }
             this.$emit('editTask', payload)
         }

@@ -56,6 +56,9 @@ export default {
         editStatusToLeft(payload){
             this.$emit('editStatusToLeft', payload)
         }
+    },
+    created () {
+        this.refetchTasks()
     }
 }
 </script>
