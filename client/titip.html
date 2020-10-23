@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kanban App</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+  <div id="app">
+    <!--register form-->
+    <div v-if="page==='registerPage'">
+      <div class="container add-form">
+        <h1>Register Account</h1>
+        <form id="btn-add">
+          <div class="form-group">
+            <label>Email</label>
+            <input type="text" class="form-control" id="email">
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input class="form-control" id="password" rows="3">
+          </div>
+          <button type="submit" class="btn btn-primary btn-save">Save</button>
+          <button type="submit" class="btn btn-danger btn-back" @click="toLoginPage">Back</button>
+        </form>
+      </div>
+    </div>
+    <!--Login Form-->
+    <div v-else-if="page==='loginPage'">
+      <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+          <div class="card card-signin my-5">
+            <div class="card-body">
+              <h5 class="card-title text-center" style="font-size: 40px;">Sign In</h5>
+              <form class="form-signin">
+                <div class="form-label-group">
+                  <input type="email" id="inputEmail" class="form-control" placeholder="Email address">
+                  <label for="inputEmail">Email address</label>
+                </div>
+
+                <div class="form-label-group">
+                  <input type="password" id="inputPassword" class="form-control" placeholder="Password">
+                  <label for="inputPassword">Password</label>
+                </div>
+
+                <div class="custom-control custom-checkbox mb-3">
+                  <input type="checkbox" class="custom-control-input" id="customCheck1">
+                  <label class="custom-control-label" for="customCheck1">Remember password</label>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" @click="toMainPage">Sign
+                  in</button>
+                <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i
+                    class="fab fa-google mr-2"></i> Sign in with Google</button>
+                <hr class="my-4">
+                <p>Dont have Account ?</p>
+                <button class="btn btn-lg btn-success btn-block text-uppercase" type="submit"
+                  v-on:click="toRegisterPage">Register</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Navbar-->
+    <nav class="navbar navbar-light" style="background-color: #e3f2fd;" v-if="page === 'afterLoginPage'">
+      <a class="navbar-brand">Kanban App</a>
+      <form class="form-inline">
+        <button class="btn btn-outline-success my-2 my-sm-0 addTask" type="submit" @click="toAddTaskPage">Add
+          Task</button>
+        <button class="btn btn-outline-danger my-2 my-sm-0 logout" type="submit" @click="toLoginPage">Logout</button>
+      </form>
+    </nav>
+    <!--Add Task-->
+    <div class="container add-form" v-if="page === 'addTaskPage'">
+      <h1>Add Task</h1>
+      <form id="btn-add">
+        <div class="form-group">
+          <label>Title</label>
+          <input type="text" class="form-control" id="title" v-model="title">
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea class="form-control" id="description" rows="3" v-model="description"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-save" @click.prevent="addTask">Save</button>
+        <button class="btn btn-danger btn-save" @click="toMainPage">Back</button>
+      </form>
+    </div>
+    <!--Content-->
+    <div class="container-fluid contain" v-if="page === 'afterLoginPage'">
+      <div class="card border-secondary mb-3 w-100" style="max-width: 18rem;">
+        <div class="card-header bg-info text-white">Back-log</div>
+        <div class="card-body overflow-auto" style="max-height: 18rem;">
+          <div class="card border-success" v-for="task in tasks" v-for="task in tasks">
+            <div class="card-header">
+              <h5>{{task.title}}</h5>
+            </div>
+            <div class="card-body">
+              <p class="card-text">{{task.description}}</p>
+              <a href="#" class="btn btn-primary">Edit</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card border-secondary mb-3 w-100" style="max-width: 18rem;">
+        <div class="card-header bg-danger text-white">To-Do</div>
+        <div class="card-body overflow-auto" style="max-height: 18rem;">
+          <div class="card kanban border-success mb-3">lorem ipsum</div>
+          <div class="card kanban border-success mb-3">lorem ipsum</div>
+          <div class="card kanban border-success mb-3">lorem ipsum</div>
+          <div class="card kanban border-success mb-3">lorem ipsum</div>
+          <div class="card kanban border-success mb-3">lorem ipsum</div>
+          <div class="card kanban border-success mb-3">lorem ipsum</div>
+          <div class="card kanban border-success mb-3">lorem ipsum</div>
+          <div class="card kanban border-success mb-3">lorem ipsum</div>
+          <div class="card kanban border-success mb-3">lorem ipsum</div>
+        </div>
+      </div>
+      <div class="card border-secondary mb-3 w-100" style="max-width: 18rem;">
+        <div class="card-header bg-primary text-white">Doing</div>
+        <div class="card-body overflow-auto" style="max-height: 18rem;">
+          <div class="card kanban border-success mb-3">lorem ipsum</div>
+          <div class="card kanban border-success mb-3">lorem ipsum</div>
+          <div class="card kanban border-success mb-3">lorem ipsum</div>
+          <div class="card kanban border-success mb-3">lorem ipsum</div>
+          <div class="card kanban border-success mb-3">lorem ipsum</div>
+          <div class="card kanban border-success mb-3">lorem ipsum</div>
+          <div class="card kanban border-success mb-3">lorem ipsum</div>
+          <div class="card kanban border-success mb-3">lorem ipsum</div>
+          <div class="card kanban border-success mb-3">lorem ipsum</div>
+          <div class="card kanban border-success mb-3">lorem ipsum</div>
+        </div>
+      </div>
+      <div class="card border-secondary mb-3 w-100" style="max-width: 18rem;">
+        <div class="card-header bg-success text-white">Done</div>
+        <div class="card-body overflow-auto" style="max-height: 18rem;">
+          <div class="card kanban border-success mb-3">lorem ipsum</div>
+          <div class="card kanban border-success mb-3">lorem ipsum</div>
+          <div class="card kanban border-success mb-3">lorem ipsum</div>
+          <div class="card kanban border-success mb-3">lorem ipsum</div>
+          <div class="card kanban border-success mb-3">lorem ipsum</div>
+          <div class="card kanban border-success mb-3">lorem ipsum</div>
+          <div class="card kanban border-success mb-3">lorem ipsum</div>
+          <div class="card kanban border-success mb-3">lorem ipsum</div>
+          <div class="card kanban border-success mb-3">lorem ipsum</div>
+          <div class="card kanban border-success mb-3">lorem ipsum</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="./main.js"></script>
+
+</html>
