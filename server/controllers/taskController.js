@@ -26,7 +26,7 @@ class TaskController {
                 res.status(200).json(result)
             })
             .catch(err => {
-                console.log(err)
+                next(err)
             })
     }
     
@@ -49,7 +49,7 @@ class TaskController {
                 })
             })
             .catch(err => {
-                console.log(err.message)
+                next(err)
             })
     }
 
@@ -90,7 +90,7 @@ class TaskController {
             title: req.body.title,
             category: req.body.category
         }
-        console.log(dataEdit, "<<>><<<<DATA>>>")
+        // console.log(dataEdit, "<<>><<<<DATA>>>")
         Task.findOne({
             where: {
                 id: targetId
@@ -121,7 +121,7 @@ class TaskController {
     }
 
     static upgradeTask(req, res, next) {
-        console.log("masuk")
+        // console.log("masuk")
         let targetId = +req.params.id
         let dataEdit = {
             category: ''

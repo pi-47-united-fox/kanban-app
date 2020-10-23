@@ -26,7 +26,7 @@ class UserController {
                 })
             })
             .catch(err => {
-                console.log(err)
+                next(err)
             }) 
     }
 
@@ -60,7 +60,7 @@ class UserController {
                 }
             })
             .catch(err => {
-                console.log(err)
+                next(err)
             })
 
     }
@@ -102,7 +102,7 @@ class UserController {
             })
         })
         .catch(err => {
-            console.log(err)
+            next(err)
         })
     }
 

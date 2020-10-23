@@ -10,12 +10,10 @@
             v-if="displayPage === 'login'"
             @changePage="changePage"
             @changePage2="changePage"
-            @refetchTasks="fetchTasks"
         ></LoginForm>
 
         <RegisterForm
             v-if="displayPage === 'register'"
-            @changePage="changePage"
         ></RegisterForm>
 
         <KanbanBoard

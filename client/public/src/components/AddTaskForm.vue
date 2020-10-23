@@ -56,8 +56,8 @@ export default {
                 }
             })
             .then(({data}) => {
-                this.$emit('changePage', 'home')
                 this.$emit('refetchTasks')
+                this.$emit('changePage', 'home')
                 console.log(data.message)
             })
             .catch(err => {

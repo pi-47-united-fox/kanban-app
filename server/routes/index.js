@@ -19,8 +19,8 @@ router.use(authentication)
 router.post('/tasks', TaskController.addTask)
 
 router.get('/tasks/:id', authorization, TaskController.findTaskByTaskId)
-router.put('/tasks/:id', authorization, TaskController.editTask)
 router.patch('/tasks/up/:id', TaskController.upgradeTask)
+router.put('/tasks/:id', authorization, TaskController.editTask)
 router.patch('/tasks/down/:id', TaskController.downgradeTask)
 
 // router.patch('/tasks/:id?move=up', authorization, TaskController.upgradeTask)

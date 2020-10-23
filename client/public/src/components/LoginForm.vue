@@ -81,7 +81,6 @@ export default {
             .then(({data}) => {
                 localStorage.setItem('access_token', data.access_token)
                 this.$emit('changePage', 'home')
-                this.$emit('refetchTasks')
             })
             .catch(err => {
                 console.log(err)
@@ -92,9 +91,9 @@ export default {
             })
         },
         onSuccess(googleUser) {
-            // console.log("masuk on success .,.,<><><><><<>><><><><><><><><><><><><><")
+            console.log("masuk on success .,.,<><><><><<>><><><><><><><><><><><><><")
             var google_access_token = googleUser.getAuthResponse().id_token;
-            // console.log(google_access_token)
+            console.log(google_access_token)
 
             $.axios({
                 method: "POST",
