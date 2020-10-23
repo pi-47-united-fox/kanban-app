@@ -14,6 +14,7 @@
 
         <RegisterForm
             v-if="displayPage === 'register'"
+            @changePage="changePage"
         ></RegisterForm>
 
         <KanbanBoard
