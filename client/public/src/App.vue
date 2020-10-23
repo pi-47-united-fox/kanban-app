@@ -76,7 +76,7 @@ export default {
         fetchTasks() {
             axios({
                 method: "GET",
-                url: "http://localhost:3000/tasks"
+                url: "https://benban.herokuapp.com/tasks"
             })
             .then(({data}) => {
                 console.log(data)

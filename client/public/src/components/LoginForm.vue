@@ -72,7 +72,7 @@ export default {
         login() {
             axios({
                 method: "POST",
-                url: "http://localhost:3000/login",
+                url: "https://benban.herokuapp.com/login",
                 data: {
                     email: this.emailLogin,
                     password: this.passwordLogin
@@ -97,7 +97,7 @@ export default {
 
             $.axios({
                 method: "POST",
-                url: 'https://benban.herokuapp.com',
+                url: 'https://benban.herokuapp.com/google',
                 headers : {
                     google_access_token: google_access_token
                 }

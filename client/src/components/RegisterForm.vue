@@ -58,7 +58,7 @@ export default {
         register() {
             axios({
                 method: "POST",
-                url: "http://localhost:3000/register",
+                url: "https://benban.herokuapp.com/register",
                 data: {
                     email: this.registerEmail,
                     password: this.registerPassword

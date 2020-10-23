@@ -48,7 +48,7 @@ export default {
         addTask() {
             axios({
                 method: "POST",
-                url: "http://localhost:3000/tasks",
+                url: "https://benban.herokuapp.com/tasks",
                 headers: {'access_token': localStorage.access_token},
                 data: {
                     title: this.taskText,

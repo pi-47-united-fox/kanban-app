@@ -51,7 +51,7 @@ export default {
         editTask() {
             axios({
                 method: "PUT",
-                url: `http://localhost:3000/tasks/${this.editWhat.id}`,
+                url: `https://benban.herokuapp.com/tasks/${this.editWhat.id}`,
                 headers: {'access_token': localStorage.access_token},
                 data: {
                     title: this.taskEdit.title,

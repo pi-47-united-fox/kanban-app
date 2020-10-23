@@ -45,7 +45,7 @@ export default {
         upgradeTask(id){
             axios({
                 method: "PATCH",
-                url: `http://localhost:3000/tasks/up/${id}`,
+                url: `https://benban.herokuapp.com/tasks/up/${id}`,
                 headers: {'access_token': localStorage.access_token}
             })
             .then(({data}) => {
@@ -60,7 +60,7 @@ export default {
         downgradeTask(id){
             axios({
                 method: "PATCH",
-                url: `http://localhost:3000/tasks/down/${id}`,
+                url: `https://benban.herokuapp.com/tasks/down/${id}`,
                 headers: {'access_token': localStorage.access_token}
             })
             .then(({data}) => {
@@ -75,7 +75,7 @@ export default {
         deleteTask(id){
             axios({
                 method: "DELETE",
-                url: `http://localhost:3000/tasks/${id}`,
+                url: `https://benban.herokuapp.com/tasks/${id}`,
                 headers: {'access_token': localStorage.access_token}
             })
             .then(({data}) => {
