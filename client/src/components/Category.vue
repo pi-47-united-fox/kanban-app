@@ -18,7 +18,7 @@
         @emitShowPopMove="showPopMove"
         @editTask="editTask"
         @moveTask="moveTask"
-        @emitDeleteTask="emitDeleteTask"
+        @reloadTask="reloadTask"
       ></TaskCard>
     </div>
   </div>
@@ -52,8 +52,8 @@ export default {
     moveTask(payload) {
       this.$emit("moveTask", payload);
     },
-    emitDeleteTask() {
-      this.$emit("emitDeleteTask");
+    reloadTask() {
+      this.$emit("reloadTask");
     },
   },
   // let longWords = words.filter(word => word.length > 6);

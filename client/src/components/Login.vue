@@ -27,22 +27,38 @@
       </form>
       <p>
         dont have any account?..<a @click.prevent="registerForm">Register</a>
-        <div class="g-signin2" data-onsuccess="onSignIn" @click="onSignIn"></div>
       </p>
+      <!-- gsign in -->
+      <g-signin-button
+        :params="googleSignInParams"
+        @success="onSignInSuccess"
+        @error="onSignInError"
+      >
+        Sign in with Google
+      </g-signin-button>
     </div>
   </div>
 </template>
 
 <script>
+import GSignInButton from "vue-google-signin-button";
+
 import axios from "axios";
 export default {
   name: "login",
+  components: {
+    GSignInButton,
+  },
   data() {
     return {
       email: "",
       password: "",
       errors: "",
       id_token: "",
+      googleSignInParams: {
+        client_id:
+          "473073932556-kf6cbck6k8v5do2nqu2974i1uemoutno.apps.googleusercontent.com",
+      },
     };
   },
   methods: {
@@ -68,34 +84,51 @@ export default {
           this.errors = "";
         });
     },
-    onSignIn(googleUser) {
-      this.id_token = googleUser.getAuthResponse().id_token;
+    registerForm() {
+      this.$emit("emitChangePage", "registerPage");
+    },
+
+    onSignInSuccess(googleUser) {
+      // const profile = googleUser.getBasicProfile(); // etc etc
+      var google_access_token = googleUser.getAuthResponse().id_token;
       console.log(google_access_token);
       axios({
         method: "POST",
         url: "http://localhost:3000/googleSign",
-        data: { token: id_token },
-        success: function (response) {
-          localStorage.setItem("access_token", response.access_token);
-          console.log(localStorage.getItem("access_token"));
+        headers: {
+          google_access_token,
         },
       })
-        .then((data) => {
-          localStorage.setItem("access_token", data.access_token);
-          this.$emit("emitChangePage");
+        .then((result) => {
+          console.log(result, "INI RESULT");
+          localStorage.setItem("access_token", result.data.access_token);
+          this.$emit("emitChangePage", "Home");
         })
         .catch((err) => {
-          console.log(err);
+          console.log(err, "ERR G-SIGN");
         });
     },
-    registerForm() {
-      this.$emit("emitChangePage", "registerPage");
+    onSignInError(error) {
+      console.log("OH NOES", error);
     },
   },
 };
 </script>
 
 <style scoped>
+/* gsignin */
+
+.g-signin-button {
+  /* This is where you control how the button looks. Be creative! */
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 3px;
+  background-color: #3c82f7;
+  color: #fff;
+  box-shadow: 0 3px 0 #0f69ff;
+  cursor: pointer;
+}
+
 /* Login */
 .container-login {
   margin: 0 auto;

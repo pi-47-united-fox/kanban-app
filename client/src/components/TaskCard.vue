@@ -48,7 +48,7 @@ export default {
       })
         .then((data) => {
           console.log(`data task deleted`);
-          this.deleteTaskReload();
+          this.$emit("reloadTask");
         })
         .catch((err) => {
           console.log(err);
@@ -67,10 +67,6 @@ export default {
       this.$emit("emitShowPopMove", true);
     },
 
-    deleteTaskReload() {
-      this.$emitTask("emitDeleteTask");
-      console.log(`triger dari delete`);
-    },
 
     showPopEdit() {
       console.log(`edit triger taskcard`);

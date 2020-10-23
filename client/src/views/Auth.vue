@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar v-if="page === 'loginPage'" @emitChangePage="changePage"></Navbar>
-    <Login v-if="page === 'loginPage'" @emitChangePage="showHomePage"></Login>
+    <Login v-if="page === 'loginPage'" @emitChangePage="changePage"></Login>
     <Register
       v-if="page === 'registerPage'"
       @showLoginPage="changePage"

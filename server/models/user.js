@@ -1,9 +1,7 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 
-const { getHash } = require('../helpers/bcrypt')
+const { getHash } = require("../helpers/bcrypt");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -13,45 +11,48 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      User.hasMany(models.Task)
+      User.hasMany(models.Task);
     }
-  };
-  User.init({
-    email: {
-      type: DataTypes.STRING,
-      validate: {
-        isEmail: {
-          msg: `must email format`
+  }
+  User.init(
+    {
+      email: {
+        type: DataTypes.STRING,
+        validate: {
+          isEmail: {
+            msg: `must email format`,
+          },
+          notEmpty: {
+            msg: `must fill email`,
+          },
         },
-        notEmpty: {
-          msg: `must fill email`
-        }
-      }
-    },
-    password: {
-      type: DataTypes.STRING,
-      validate: {
-        notEmpty: {
-          msg: `password can be empty`
+      },
+      password: {
+        type: DataTypes.STRING,
+        validate: {
+          notEmpty: {
+            msg: `password can be empty`,
+          },
+          len: {
+            args: [6, 10000],
+            msg: `password min 6 character max 10 character`,
+          },
         },
-        len: {
-          args: [6, 10],
-          msg: `password min 6 character max 10 character`
-        }
-      }
+      },
+      organization: DataTypes.STRING,
     },
-    organization: DataTypes.STRING
-  }, {
-    hooks: {
-      beforeCreate(instance, option) {
-        instance.password = getHash(instance.password)
-        if (instance.organization == '') {
-          instance.organization = 'hacktiv8'
-        }
-      }
-    },
-    sequelize,
-    modelName: 'User',
-  });
+    {
+      hooks: {
+        beforeCreate(instance, option) {
+          instance.password = getHash(instance.password);
+          if (instance.organization == "") {
+            instance.organization = "hacktiv8";
+          }
+        },
+      },
+      sequelize,
+      modelName: "User",
+    }
+  );
   return User;
 };

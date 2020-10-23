@@ -13,6 +13,7 @@
         @editTask="editTask"
         @moveTask="moveTask"
         @emitDeleteTask="reloadTask"
+        @reloadTask="reloadTask"
       >
       </Category>
       <PopUpAdd
@@ -91,6 +92,7 @@ export default {
       this.showPopMove = false;
     },
     reloadTask() {
+      console.log("masuk reload home");
       this.$emit("reloadTask");
       console.log(this.reloadTask);
       this.showPop = false;
