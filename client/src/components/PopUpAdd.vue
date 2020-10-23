@@ -56,7 +56,7 @@ export default {
     addTask() {
       axios({
         method: "POST",
-        url: "http://localhost:3000/tasks",
+        url: "https://kanban-hacktiv8.herokuapp.com/tasks",
         headers: {
           access_token: localStorage.getItem("access_token"),
         },

@@ -54,7 +54,7 @@ export default {
   methods: {
     register() {
       axios
-        .post("http://localhost:3000/register", {
+        .post("https://kanban-hacktiv8.herokuapp.com/register", {
           email: this.email,
           password: this.password,
           organization: this.organization,

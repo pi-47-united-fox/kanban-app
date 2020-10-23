@@ -61,7 +61,7 @@ export default {
       console.log(task, `dari app`);
       axios({
         method: "PUT",
-        url: `http://localhost:3000/tasks/${this.taskEdit.id}`,
+        url: `https://kanban-hacktiv8.herokuapp.com/tasks/${this.taskEdit.id}`,
         headers: {
           access_token: localStorage.getItem("access_token"),
         },

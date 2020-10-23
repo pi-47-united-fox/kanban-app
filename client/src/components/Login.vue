@@ -64,7 +64,7 @@ export default {
   methods: {
     login() {
       axios
-        .post("http://localhost:3000/login", {
+        .post("https://kanban-hacktiv8.herokuapp.com/login", {
           email: this.email,
           password: this.password,
         })
@@ -94,7 +94,7 @@ export default {
       console.log(google_access_token);
       axios({
         method: "POST",
-        url: "http://localhost:3000/googleSign",
+        url: "https://kanban-hacktiv8.herokuapp.com/googleSign",
         headers: {
           google_access_token,
         },

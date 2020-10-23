@@ -10855,7 +10855,7 @@ var _default = {
     login: function login() {
       var _this = this;
 
-      _axios.default.post("http://localhost:3000/login", {
+      _axios.default.post("https://kanban-hacktiv8.herokuapp.com/login", {
         email: this.email,
         password: this.password
       }).then(function (_ref) {
@@ -10885,7 +10885,7 @@ var _default = {
       console.log(google_access_token);
       (0, _axios.default)({
         method: "POST",
-        url: "http://localhost:3000/googleSign",
+        url: "https://kanban-hacktiv8.herokuapp.com/googleSign",
         headers: {
           google_access_token: google_access_token
         }
@@ -11127,7 +11127,7 @@ var _default = {
     register: function register() {
       var _this = this;
 
-      _axios.default.post("http://localhost:3000/register", {
+      _axios.default.post("https://kanban-hacktiv8.herokuapp.com/register", {
         email: this.email,
         password: this.password,
         organization: this.organization
@@ -11495,7 +11495,7 @@ var _default = {
       console.log("delete");
       (0, _axios.default)({
         method: "DELETE",
-        url: "http://localhost:3000/tasks/".concat(id),
+        url: "https://kanban-hacktiv8.herokuapp.com/tasks/".concat(id),
         headers: {
           access_token: localStorage.getItem("access_token")
         }
@@ -11840,7 +11840,7 @@ var _default = {
 
       (0, _axios.default)({
         method: "POST",
-        url: "http://localhost:3000/tasks",
+        url: "https://kanban-hacktiv8.herokuapp.com/tasks",
         headers: {
           access_token: localStorage.getItem("access_token")
         },
@@ -12114,7 +12114,7 @@ var _default = {
       console.log(task, "dari app");
       (0, _axios.default)({
         method: "PUT",
-        url: "http://localhost:3000/tasks/".concat(this.taskEdit.id),
+        url: "https://kanban-hacktiv8.herokuapp.com/tasks/".concat(this.taskEdit.id),
         headers: {
           access_token: localStorage.getItem("access_token")
         },
@@ -12364,7 +12364,7 @@ var _default = {
       console.log("move");
       (0, _axios.default)({
         method: "PATCH",
-        url: "http://localhost:3000/tasks/".concat(this.moveTask.id),
+        url: "https://kanban-hacktiv8.herokuapp.com/tasks/".concat(this.moveTask.id),
         headers: {
           access_token: localStorage.getItem("access_token")
         },
@@ -12787,7 +12787,7 @@ var _default = {
     fetchData: function fetchData() {
       var _this = this;
 
-      _axios.default.get("http://localhost:3000/tasks", {
+      _axios.default.get("https://kanban-hacktiv8.herokuapp.com/tasks", {
         headers: {
           access_token: localStorage.getItem("access_token")
         }

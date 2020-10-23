@@ -37,7 +37,7 @@ export default {
       console.log(`move`);
       axios({
         method: "PATCH",
-        url: `http://localhost:3000/tasks/${this.moveTask.id}`,
+        url: `https://kanban-hacktiv8.herokuapp.com/tasks/${this.moveTask.id}`,
         headers: {
           access_token: localStorage.getItem("access_token"),
         },

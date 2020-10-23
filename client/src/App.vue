@@ -50,7 +50,7 @@ export default {
     },
     fetchData() {
       axios
-        .get("http://localhost:3000/tasks", {
+        .get("https://kanban-hacktiv8.herokuapp.com/tasks", {
           headers: {
             access_token: localStorage.getItem("access_token"),
           },

@@ -41,7 +41,7 @@ export default {
       console.log(`delete`);
       axios({
         method: "DELETE",
-        url: `http://localhost:3000/tasks/${id}`,
+        url: `https://kanban-hacktiv8.herokuapp.com/tasks/${id}`,
         headers: {
           access_token: localStorage.getItem("access_token"),
         },
