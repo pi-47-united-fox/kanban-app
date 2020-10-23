@@ -94,6 +94,27 @@ class TaskController {
 				next(err);
 			});
 	}
+
+	static updateTask(req, res, next) {
+		const taskData = {
+			title: req.body.title,
+			UserId: req.userData.id,
+			CategoryId: req.body.CategoryId,
+			OrganizationId: req.userData.OrganizationId,
+		};
+
+		Task.update(taskData, { where: { id: req.params.id } })
+			.then((result) => {
+				if (result) {
+					res.status(200).json({ status: "Success" });
+				} else {
+					next({ name: "BadRequestPatch" });
+				}
+			})
+			.catch((err) => {
+				next(err);
+			});
+	}
 }
 
 module.exports = TaskController;

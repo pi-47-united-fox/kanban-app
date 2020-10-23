@@ -2,8 +2,8 @@
 
 Kanban App is an application to manage your task and work into categories. This app has :
 
--   RESTful endpoint for asset's CRUD operation
--   JSON formatted response
+- RESTful endpoint for asset's CRUD operation
+- JSON formatted response
 
 &nbsp;
 
@@ -380,6 +380,65 @@ _Request Body_
 
 ```
 {
+    "CategoryId": "<new task category ID>",
+}
+```
+
+_Response (200)_
+
+```
+{
+    status: "Success"
+}
+```
+
+_Response (401 - Unauthorized)_
+
+```
+{
+    "name": "Unauthorized",
+    "message": "<Unauthorized message>"
+}
+```
+
+_Response (404 - Not Found)_
+
+```
+{
+    "name": "NotFound",
+    "message": "Data Not Found"
+}
+```
+
+_Response (500 - Internal Server Error)_
+
+```
+{
+    "name": "InternalServerError",
+    "message": "<error messages>"
+}
+```
+
+---
+
+### PUT /tasks/:id
+
+> update a task by id
+
+_Request Header_
+
+```
+{
+    "Content-Type": "application/json",
+    "access_token": "<access token>"
+}
+```
+
+_Request Body_
+
+```
+{
+    "title": "<new task title>"
     "CategoryId": "<new task category ID>",
 }
 ```

@@ -19,5 +19,6 @@ router.get("/tasks", TaskController.getAll);
 router.post("/tasks", TaskController.addTask);
 router.patch("/tasks/:id", authorization, TaskController.changeCategory);
 router.delete("/tasks/:id", authorization, TaskController.deleleTask);
+router.put("/task/:id", authorization, TaskController.updateTask);
 
 module.exports = router;
