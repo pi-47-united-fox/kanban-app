@@ -1,0 +1,36 @@
+.category-box {
+	margin: 0.5rem;
+	border-radius: 10px;
+	height: 500px;
+}
+
+.category-row-1{
+	height: 10%;
+}
+
+.category-row-2 {
+	height: 84%;
+	overflow-y: scroll;
+}
+
+.category-row-3 {
+	height: 6%;
+}
+
+.task {
+	margin: 0px 0px 5px 0px;
+	width: 100%;
+	padding: 5px;
+	color: white;
+	border-radius: 5px;
+	font-size: 0.8em;
+	
+}
+
+.task-detail {
+	font-size: 0.7em;
+	margin: 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+}
