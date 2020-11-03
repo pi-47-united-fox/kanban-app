@@ -1,0 +1,53 @@
+.loginBox[data-v-06e9b0] {
+  box-shadow: -1px 3px 15px 0px rgba(0, 0, 0, 1);
+  border-radius: 15px;
+  width: 500px;
+  align-items: center;
+  align-self: center;
+  text-align: center;
+  margin-bottom: -20px;
+}
+.btn-google[data-v-06e9b0]{
+  width: 200px;
+  height: 70px;
+}
+.border-radius-task{
+    border-radius: 25px;
+}
+img[data-v-544854] {
+  height: 50px;
+}
+img[data-v-544854]:hover {
+  box-shadow: 0px -2px 14px -1px rgba(255, 255, 255, 1);
+}
+.regBox[data-v-544854] {
+  margin-bottom: -30px;
+  box-shadow: -1px 3px 15px 0px rgba(0, 0, 0, 1);
+  border-radius: 25px;
+  width: 500px;
+  align-items: center;
+  align-self: center;
+  text-align: center;
+}
+#redirect[data-v-544854]:hover {
+  cursor: pointer;
+}
+#editTask[data-v-077954]{
+  fill:darkslateblue;
+}
+#editTask[data-v-077954]:hover{
+  fill:burlywood;
+  color: burlywood;
+  cursor: pointer;
+}
+#deleteTask[data-v-077954]{
+  fill: red;
+}
+#deleteTask[data-v-077954]:hover{
+  fill: chocolate;
+  cursor: pointer;
+}
+.card-task[data-v-077954]:hover {
+  cursor: pointer;
+  box-shadow: -2px -1px 18px -6px rgba(161,155,161,1);
+}
