@@ -1,0 +1,25 @@
+#header-home {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.logo-form {
+    margin: auto;
+}
+
+.post-references {
+    font-size: small;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    border-bottom: 0.5px dashed;
+}
+
+i.fas {
+    margin-right: 20px;
+}
+
+.logo-form {
+    text-align: center;
+    width: 23%;
+    padding-top: 40px;
+}
